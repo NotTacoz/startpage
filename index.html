@@ -23,9 +23,15 @@
           .catch(function (error) {
             console.log("Error: " + error);
           });
-        $.getJSON("https://api.weatherapi.com/v1/current.json?key=76aa7ac854eb413c82565451211807&q=" + city, function (data) {})
+        $.getJSON(
+          "https://api.weatherapi.com/v1/current.json?key=76aa7ac854eb413c82565451211807&q=" +
+            city,
+          function (data) {}
+        )
           .done(function (data) {
-            $("#weather").text(data.current.condition.text + " " + data.current.temp_c + "°C");
+            $("#weather").text(
+              data.current.condition.text + " " + data.current.temp_c + "°C"
+            );
           })
           .fail(function (data) {});
       });
@@ -110,9 +116,33 @@
 
   <body>
     <div class="center">
-      <p class="medium" id="weather">Unknown</p>
+      <p class="medium" id="weather"></p>
       <p class="large" id="time"></p>
       <p class="medium" id="date"></p>
     </div>
+    <!-- duckduckgo search -->
+    <div>
+      <input
+        id="search"
+        type="text"
+        class="search-bar"
+        placeholder="Search with DuckDuckGo"
+        autofocus
+      />
+    </div>
+
+  <script>
+    // if enter is pressed
+    $("#search").keypress(function (e) {
+      if (e.which === 13) {
+        console.log("amogus")
+        // search with duckduckgo
+        var query = $("#search").val();
+        if (query.length > 0) {
+          window.location.href = "https://duckduckgo.com/?q=" + query;
+        }
+      }
+    });
+  </script>
   </body>
 </html>
