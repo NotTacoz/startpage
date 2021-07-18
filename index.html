@@ -8,7 +8,76 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-  <script></script>
+  <script>
+    function updateTime() {
+      $(document).ready(function () {
+        var currentTime = new Date();
+        var hours = currentTime.getHours();
+        var minutes = currentTime.getMinutes();
+        var day = currentTime.getDay();
+        var date = currentTime.getDate();
+        var month = currentTime.getMonth();
+        // convert day to text
+        var days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        var dayText = days[day];
+        // add contraction to date
+        var dateText = date + "";
+        if (date === 1) {
+          dateText = date + "st";
+        } else if (date === 2) {
+          dateText = date + "nd";
+        } else if (date === 3) {
+          dateText = date + "rd";
+        } else if (date < 21) {
+          dateText = date + "th";
+        }
+
+        // convert month to text
+        var months = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        var monthText = months[month];
+        // convert date to text
+
+        console.log(d_str);
+
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+
+        if (hours > 11) {
+          var AMPM = "PM";
+          hours -= 12;
+        } else {
+          var AMPM = "AM";
+        }
+        var d_str = dayText + ", " + dateText + " " + monthText;
+        var t_str = hours + ":" + minutes + " " + AMPM;
+        $("#time").text(t_str);
+        $("#date").text(d_str);
+      });
+    }
+    setInterval(updateTime, 500);
+  </script>
 
   <style>
     @import url(styles.css);
@@ -16,8 +85,8 @@
 
   <body>
     <div class="center">
-      <p class="large">8:00 PM</p>
-      <p class="medium">Sunday, 4th July</p>
+      <p class="large" id="time"></p>
+      <p class="medium" id="date"></p>
     </div>
   </body>
 </html>
