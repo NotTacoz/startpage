@@ -9,6 +9,28 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <script>
+    function getWeatherData() {
+      $(document).ready(async function () {
+        var city = undefined;
+        await fetch("https://ipinfo.io/json")
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (myJson) {
+            city = myJson.city;
+            console.log;
+          })
+          .catch(function (error) {
+            console.log("Error: " + error);
+          });
+        $.getJSON("https://api.weatherapi.com/v1/current.json?key=76aa7ac854eb413c82565451211807&q=" + city, function (data) {})
+          .done(function (data) {
+            $("#weather").text(data.current.condition.text + " " + data.current.temp_c + "°C");
+          })
+          .fail(function (data) {});
+      });
+    }
+
     function updateTime() {
       $(document).ready(function () {
         var currentTime = new Date();
@@ -58,7 +80,7 @@
         var monthText = months[month];
         // convert date to text
 
-        console.log(d_str);
+        // console.log(d_str);
 
         if (minutes < 10) {
           minutes = "0" + minutes;
@@ -76,7 +98,10 @@
         $("#date").text(d_str);
       });
     }
-    setInterval(updateTime, 500);
+    updateTime(); // immeditatelly runs the function, so that there is no lag
+    getWeatherData();
+    setInterval(updateTime, 1000);
+    setInterval(getWeatherData, 900000);
   </script>
 
   <style>
@@ -85,6 +110,7 @@
 
   <body>
     <div class="center">
+      <p class="medium" id="weather">Unknown</p>
       <p class="large" id="time"></p>
       <p class="medium" id="date"></p>
     </div>
