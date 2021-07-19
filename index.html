@@ -37,6 +37,18 @@
       });
     }
 
+    openSettingsTab = function () {
+      console.log("pog");
+      // if timebg is hidden
+      if ($("#timebg").css("display") == "none") {
+        $("#timebg").show();
+        $("#settings").hide();
+      } else if ($("#timebg").css("display") == "block") {
+        $("#timebg").hide();
+        $("#settings").show();
+      }
+    };
+
     function updateTime() {
       $(document).ready(function () {
         var currentTime = new Date();
@@ -92,6 +104,21 @@
           minutes = "0" + minutes;
         }
 
+        // console.log(hours);
+
+        // update bgimg based on time
+        var bgimg = "";
+        if (hours >= 6 && hours < 12) {
+          bgimg = "img/sunset.jpg";
+        } else if (hours >= 12 && hours < 18) {
+          bgimg = "img/day.jpg";
+        } else if (hours >= 18 && hours < 24) {
+          bgimg = "img/sunset.jpg";
+        } else if (hours >= 0 && hours < 6) {
+          bgimg = "img/night.jpg";
+        }
+        document.getElementById("bgimg").src = bgimg;
+
         if (hours > 11) {
           var AMPM = "PM";
           hours -= 12;
@@ -100,6 +127,7 @@
         }
         var d_str = dayText + ", " + dateText + " " + monthText;
         var t_str = hours + ":" + minutes + " " + AMPM;
+
         $("#time").text(t_str);
         $("#date").text(d_str);
       });
@@ -107,42 +135,208 @@
     updateTime(); // immeditatelly runs the function, so that there is no lag
     getWeatherData();
     setInterval(updateTime, 1000);
-    setInterval(getWeatherData, 900000);
+    setInterval(getWeatherData, 900000); // 15 minutes
+
+    var r = document.querySelector(":root");
+    r.style.setProperty("--blue", "lightblue");
   </script>
 
   <style>
-    @import url(styles.css);
+    @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+    :root {
+      --dark-bg: rgb(25, 25, 30);
+      --text-color: white;
+      --image-opacity: 0.5;
+      --bg-opacity: 0.4;
+    }
+
+    * {
+      transition: 0.4s ease-out;
+      font-family: "Roboto Mono";
+      margin: 0px;
+      padding: 0px;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-color);
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      justify-content: center;
+    }
+
+    .settings {
+      opacity: 20%;
+      width: 3rem;
+      bottom: 1rem;
+      left: 1rem;
+      position: fixed;
+    }
+
+    .settings:hover {
+      opacity: 100%;
+    }
+
+    .center {
+      /* display: flex; */
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      display: inline-block;
+    }
+
+    .large {
+      font-size: 5rem;
+    }
+
+    .medium {
+      font-size: 1.5rem;
+    }
+
+    /* search bar css */
+    .search-bar {
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 2rem;
+      margin-top: 2rem;
+      width: 32rem;
+      font-size: larger;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      border: 0px;
+      padding: 1rem;
+      transition: 0.4s ease-out;
+    }
+
+    .search-bar::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .search-bar:focus {
+      outline: 0px;
+    }
+
+    .image {
+      transition: ease-in-out 0.4s;
+      opacity: var(--image-opacity);
+      z-index: -1;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+
+    .timebg {
+      background-color: rgba(0, 0, 0, var(--bg-opacity));
+      padding: 3rem;
+      border-radius: 25px;
+    }
+
+    .slider {
+      border-radius: 0.5rem;
+      -webkit-appearance: none;
+      width: 80%;
+      height: 12px;
+      margin: 10px;
+      background: black;
+      outline: none;
+      opacity: 0.6;
+      -webkit-transition: 0.2s;
+      transition: opacity 0.2s;
+    }
+
+    .slider:hover {
+      opacity: 0.8;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: #04aa6d;
+      cursor: pointer;
+      border-radius: 1rem;
+      opacity: 100%;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 25px;
+      opacity: 100%;
+      height: 25px;
+      background: #04aa6d;
+      cursor: pointer;
+    }
   </style>
 
   <body>
-    <div class="center">
-      <p class="medium" id="weather"></p>
-      <p class="large" id="time"></p>
-      <p class="medium" id="date"></p>
+    <div class="timebg" id="timebg">
+      <div class="center">
+        <p class="medium" id="weather"></p>
+        <p class="large" id="time"></p>
+        <p class="medium" id="date"></p>
+      </div>
+      <!-- duckduckgo search -->
+      <div>
+        <input
+          id="search"
+          type="text"
+          class="search-bar"
+          placeholder="Search with DuckDuckGo"
+          autofocus
+        />
+      </div>
     </div>
-    <!-- duckduckgo search -->
-    <div>
+    <div class="timebg center" id="settings" style="display: none">
+      <p>Background Image Opacity: <span id="imageOpacitySpan"></span></p>
       <input
-        id="search"
-        type="text"
-        class="search-bar"
-        placeholder="Search with DuckDuckGo"
-        autofocus
+        type="range"
+        min="1"
+        max="100"
+        value="50"
+        class="slider"
+        id="imageOpacitySlider"
       />
+      <p>Text Background Opacity: <span id="bgOpacitySpan"></span></p>
+      <input
+        type="range"
+        min="1"
+        max="100"
+        value="40"
+        class="slider"
+        id="bgOpacitySlider"
+      />
+      <p>
+        Notes: If the weather condition isn't correct. It might be because
+        you<br />are using a VPN or the weather API is down or broken.
+      </p>
     </div>
 
-  <script>
-    // if enter is pressed
-    $("#search").keypress(function (e) {
-      if (e.which === 13) {
-        console.log("amogus")
-        // search with duckduckgo
-        var query = $("#search").val();
-        if (query.length > 0) {
-          window.location.href = "https://duckduckgo.com/?q=" + query;
+    <img src="img/day.png" id="bgimg" class="image" />
+
+    <img src="img/settings.png" class="settings" onclick="openSettingsTab()" />
+
+    <script>
+      // if enter is pressed
+      $("#search").keypress(function (e) {
+        if (e.which === 13) {
+          // console.log("amogus");
+          // search with duckduckgo
+          var query = $("#search").val();
+          if (query.length > 0) {
+            window.location.href = "https://duckduckgo.com/?q=" + query;
+          }
         }
-      }
-    });
-  </script>
+      });
+    </script>
   </body>
 </html>
