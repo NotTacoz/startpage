@@ -139,6 +139,11 @@
 
     var r = document.querySelector(":root");
     r.style.setProperty("--blue", "lightblue");
+    //set every element to be unable to be dragged
+    var elements = document.getElementsByClassName("draggable");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].setAttribute("draggable", "false");
+    }
   </script>
 
   <style>
@@ -300,7 +305,7 @@
       <p>Background Image Opacity: <span id="imageOpacitySpan"></span></p>
       <input
         type="range"
-        min="1"
+        min="0"
         max="100"
         value="50"
         class="slider"
@@ -309,7 +314,7 @@
       <p>Text Background Opacity: <span id="bgOpacitySpan"></span></p>
       <input
         type="range"
-        min="1"
+        min="0"
         max="100"
         value="40"
         class="slider"
@@ -321,11 +326,37 @@
       </p>
     </div>
 
-    <img src="img/day.png" id="bgimg" class="image" />
+    <img src="img/day.jpg" id="bgimg" class="image" />
 
     <img src="img/settings.png" class="settings" onclick="openSettingsTab()" />
 
     <script>
+      //set image opacity local storage
+      var localStorageImageOpacity = localStorage.getItem("image-opacity");
+      if (localStorageImageOpacity === null) {
+        localStorageImageOpacity = "50";
+      }
+      $("#imageOpacitySpan").text(localStorageImageOpacity);
+      //set slider opacity local storage
+      var localStorageBgOpacity = localStorage.getItem("bg-opacity");
+      if (localStorageBgOpacity === null) {
+        localStorageBgOpacity = "40";
+      }
+      $("#bgOpacitySpan").text(localStorageBgOpacity);
+      //set slider value to local storage
+      $("#imageOpacitySlider").val(localStorageImageOpacity);
+      $("#bgOpacitySlider").val(localStorageBgOpacity);
+      //set css to local storage
+
+      document.documentElement.style.setProperty(
+        "--image-opacity",
+        localStorageImageOpacity / 100
+      );
+      document.documentElement.style.setProperty(
+        "--bg-opacity",
+        localStorageBgOpacity / 100
+      );
+
       // if enter is pressed
       $("#search").keypress(function (e) {
         if (e.which === 13) {
@@ -336,6 +367,27 @@
             window.location.href = "https://duckduckgo.com/?q=" + query;
           }
         }
+      });
+      // when bgOpacitySlider is being interactted
+      $("#bgOpacitySlider").on("input", function () {
+        $("#bgOpacitySpan").text($(this).val());
+        // set css variable --bg-opacity to slider value
+        //save slider to local storage
+        localStorage.setItem("bg-opacity", $(this).val());
+        document.documentElement.style.setProperty(
+          "--bg-opacity",
+          $(this).val() / 100
+        );
+      });
+      //repeat code but for imageOpacitySlider
+      $("#imageOpacitySlider").on("input", function () {
+        $("#imageOpacitySpan").text($(this).val());
+        //save slider to local storage
+        localStorage.setItem("image-opacity", $(this).val());
+        document.documentElement.style.setProperty(
+          "--image-opacity",
+          $(this).val() / 100
+        );
       });
     </script>
   </body>
