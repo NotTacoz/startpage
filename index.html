@@ -38,7 +38,7 @@
     }
 
     openSettingsTab = function () {
-      console.log("pog");
+      // console.log("pog");
       // if timebg is hidden
       if ($("#timebg").css("display") == "none") {
         $("#timebg").show();
@@ -168,6 +168,7 @@
       display: inline-block;
       width: 1.2rem;
       height: 1.2rem;
+      left: 1rem;
     }
 
     /* Hide default HTML checkbox */
@@ -364,7 +365,7 @@
           autocomplete="off"
         />
       </div>
-      <div style="display: flex; justify-content: center">
+      <div style="display: flex; justify-content: center" id="easyTabs">
         <ul>
           <li class="medium" style="color: rgb(255, 137, 255)">SOCIAL</li>
           <!-- <li style="font-weight: bolder">-social-</li> -->
@@ -388,18 +389,86 @@
         </ul>
       </div>
     </div>
+    <div
+      class="timebg"
+      style="top: 1rem; right: 1rem; position: fixed"
+      id="todo"
+    >
+      Hi! I'm a todo list (WIP, I'm still working on it :) ).
+      <!-- <textarea style="outline: none; background-color: rgba(0, 0, 0, 0); color: white;"></textarea> -->
+    </div>
+
     <div class="timebg center" id="settings" style="display: none">
       <h1>Settings</h1>
       <!-- toggle button -->
       <div style="display: flex; justify-content: center; align-items: center">
-        <p>Stripes (why did i add this?):</p>
+        <p>Stripes:</p>
         <input
-          id="toggle"
+          id="stripestoggle"
+          type="checkbox"
+          class="toggle switch"
+          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
+          onchange="toggleStripes()"
+        />
+      </div>
+      <!-- toggle button to hide todo -->
+      <div style="display: flex; justify-content: center; align-items: center">
+        <p>Todo:</p>
+        <input
+          id="todotoggle"
+          type="checkbox"
+          class="toggle switch"
+          checked
+          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
+          onchange="toggleTodo()"
+        />
+      </div>
+      <!-- toggle button to hide weather -->
+      <div style="display: flex; justify-content: center; align-items: center">
+        <p>Weather:</p>
+        <input
+          id="weathertoggle"
+          type="checkbox"
+          class="toggle switch"
+          checked
+          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
+          onchange="toggleWeather()"
+        />
+      </div>
+      <!-- toggle button to hide date -->
+      <div style="display: flex; justify-content: center; align-items: center">
+        <p>Date:</p>
+        <input
+          id="datetoggle"
+          type="checkbox"
+          class="toggle switch"
+          checked
+          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
+          onchange="toggleDate()"
+        />
+      </div>
+      <!-- toggle button to hide time -->
+      <div style="display: flex; justify-content: center; align-items: center">
+        <p>Time:</p>
+        <input
+          id="timetoggle"
           type="checkbox"
           class="toggle switch"
           style="margin-left: 0.5rem; margin-bottom: -0.1rem"
           checked
-          onchange="toggleStripes()"
+          onchange="toggleTime()"
+        />
+      </div>
+      <!-- toggle button to hide easytabs -->
+      <div style="display: flex; justify-content: center; align-items: center">
+        <p>EasyTabs:</p>
+        <input
+          id="easytabstoggle"
+          type="checkbox"
+          class="toggle switch"
+          checked
+          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
+          onchange="toggleEasyTabs()"
         />
       </div>
       <p>Background Image Opacity: <span id="imageOpacitySpan"></span></p>
@@ -422,6 +491,7 @@
         id="bgOpacitySlider"
       />
       <h1>Change Logs</h1>
+      <p>v1.1.0 19/07/2: Added ability to toggle about almost everything! As well as a todolist which is saved onto localStorage (WIP) </p>
       <p>v1.0.0 19/07/21 Initial Release</p>
       <h1>Notes</h1>
       <p>
@@ -433,29 +503,90 @@
       <p>copyright Tacoz 2021</p>
     </div>
 
-    <img src="img/day.jpg" style="z-index: -99;" id="bgimg" class="image" />
+    <img src="img/day.jpg" style="z-index: -99" id="bgimg" class="image" />
 
     <img src="img/settings.png" class="settings" onclick="openSettingsTab()" />
 
     <script>
       //set image opacity local storage
+      // console.log(localStorage)
       var localStorageImageOpacity = localStorage.getItem("image-opacity");
       var localStorageBgEffect = localStorage.getItem("bg-effect");
-      if (localStorageBgEffect === null) {
-        localStorageBgEffect = none;
-      }
+      var localStorageBgOpacity = localStorage.getItem("bg-opacity");
+      var localStorageDate = localStorage.getItem("date");
+      var localStorageTime = localStorage.getItem("time");
+      var localStorageWeather = localStorage.getItem("weather");
+      var localStorageTodo = localStorage.getItem("todo");
+      var localStorageEasyTabs = localStorage.getItem("easyTabs");
 
+      if (localStorageBgEffect === null) {
+        localStorageBgEffect = "none";
+      }
       if (localStorageImageOpacity === null) {
         localStorageImageOpacity = "50";
       }
-      $("#imageOpacitySpan").text(localStorageImageOpacity);
-      //set slider opacity local storage
-      var localStorageBgOpacity = localStorage.getItem("bg-opacity");
       if (localStorageBgOpacity === null) {
         localStorageBgOpacity = "40";
       }
+      if (localStorageDate === null) {
+        localStorageDate = "true";
+      }
+      if (localStorageTime === null) {
+        localStorageTime = "true";
+      }
+      if (localStorageWeather === null) {
+        localStorageWeather = "true";
+      }
+      if (localStorageTodo === null) {
+        localStorageTodo = "true";
+      }
+      if (localStorageEasyTabs === null) {
+        localStorageEasyTabs = "true";
+      }
+
+      if (localStorageBgEffect === "none") {
+        $("#stripestoggle").prop("checked", false);
+      } else {
+        $("#stripestoggle").prop("checked", true); 
+      }
+      if (localStorageDate === "checked") {
+        $("#date").show();
+        $("#datetoggle").prop("checked", true);
+      } else {
+        $("#date").hide();
+        $("#datetoggle").prop("checked", false);
+      }
+      if (localStorageTime === "checked") {
+        $("#time").show();
+        $("#timetoggle").prop("checked", true);
+      } else {
+        $("#time").hide();
+        $("#timetoggle").prop("checked", false);
+      }
+      if (localStorageWeather === "checked") {
+        $("#weather").show();
+        $("#weathertoggle").prop("checked", true);
+      } else {
+        $("#weather").hide();
+        $("#weathertoggle").prop("checked", false);
+      }
+      if (localStorageTodo === "checked") {
+        $("#todo").show();
+        $("#todotoggle").prop("checked", true);
+      } else {
+        $("#todo").hide();
+        $("#todotoggle").attr("checked", false);
+      }
+      if (localStorageEasyTabs === "checked") {
+        $("#easyTabs").show();
+        $("#easytabstoggle").attr("checked", true);
+      } else {
+        $("#easyTabs").hide();
+        $("#easytabstoggle").attr("checked", false);
+      }
+      
+      $("#imageOpacitySpan").text(localStorageImageOpacity);
       $("#bgOpacitySpan").text(localStorageBgOpacity);
-      //set slider value to local storage
       $("#imageOpacitySlider").val(localStorageImageOpacity);
       $("#bgOpacitySlider").val(localStorageBgOpacity);
       //set css to local storage
@@ -506,9 +637,56 @@
         );
       });
 
+      function toggleDate() {
+        if ($("#datetoggle").is(":checked")) {
+          $("#date").show();
+          localStorage.setItem("date", "checked");
+        } else {
+          $("#date").hide();
+          localStorage.setItem("date", "false");
+        }
+      }
+
+      function toggleTodo() {
+        console.log("toggleTodo");
+        if ($("#todotoggle").is(":checked")) {
+          $("#todo").show();
+          localStorage.setItem("todo", "checked");
+        } else {
+          $("#todo").hide();
+          localStorage.setItem("todo", "false");
+        }
+      }
+      function toggleTime() {
+        if ($("#timetoggle").is(":checked")) {
+          $("#time").show();
+          localStorage.setItem("time", "checked");
+        } else {
+          $("#time").hide();
+          localStorage.setItem("time", "false");
+        }
+      }
+      function toggleEasyTabs() {
+        if ($("#easytabstoggle").is(":checked")) {
+          $("#easyTabs").show();
+          localStorage.setItem("easyTabs", "checked");
+        } else {
+          $("#easyTabs").hide();
+          localStorage.setItem("easyTabs", "false");
+        }
+      }
+      function toggleWeather() {
+        if ($("#weathertoggle").is(":checked")) {
+          $("#weather").show();
+          localStorage.setItem("weather", "checked");
+        } else {
+          $("#weather").hide();
+          localStorage.setItem("weather", "false");
+        }
+      }
       // when toggle is clicked
       function toggleStripes() {
-        if ($("#toggle").is(":checked")) {
+        if ($("#stripestoggle").is(":checked")) {
           // change css variable bg-effect to "stripes"
           document.documentElement.style.setProperty(
             "--bg-effect",
@@ -523,6 +701,7 @@
           // change css variable bg-effect to "none"
           document.documentElement.style.setProperty("--bg-effect", "none");
           //save to local storage
+          localStorage.setItem("bg-effect", "none");
         }
       }
     </script>
