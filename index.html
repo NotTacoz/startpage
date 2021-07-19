@@ -153,6 +153,7 @@
       --text-color: white;
       --image-opacity: 0.5;
       --bg-opacity: 0.4;
+      --bg-effect: none;
     }
 
     * {
@@ -162,7 +163,22 @@
       padding: 0px;
     }
 
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
     body {
+      background: var(--bg-effect);
       background-color: var(--dark-bg);
       color: var(--text-color);
       width: 100%;
@@ -308,9 +324,25 @@
       -webkit-border-radius: 100px;
     }
     ::-webkit-scrollbar-thumb:vertical:active {
-      background: rgba(0, 0, 0, 0.61); /* Some darker color when you click it */
+      background: rgba(0, 0, 0, 0.6); /* Some darker color when you click it */
       border-radius: 100px;
       -webkit-border-radius: 100px;
+    }
+    /* ul remove styles */
+    ul {
+      list-style: none;
+      margin: 1rem;
+    }
+    a {
+      transition: ease-in 0.1s;
+      color: var(--text-color);
+      text-decoration: none;
+      font-style: normal;
+      opacity: 0.6;
+    }
+    a:hover {
+      opacity: 1;
+      font-weight: bold;
     }
   </style>
 
@@ -332,10 +364,46 @@
           autocomplete="off"
         />
       </div>
+      <div style="display: flex; justify-content: center">
+        <ul>
+          <li class="medium" style="color: rgb(255, 137, 255)">SOCIAL</li>
+          <!-- <li style="font-weight: bolder">-social-</li> -->
+          <li><a href="https://discord.com/app">discord</a></li>
+          <li><a href="https://youtube.com/">youtube</a></li>
+          <li><a href="https://gmail.com/">gmail</a></li>
+          <li><a href="https://reddit.com/">reddit</a></li>
+          <li><a href="https://twitter.com/">twitter</a></li>
+        </ul>
+        <ul>
+          <li class="medium" style="color: rgb(170, 255, 137)">SCHOOL</li>
+          <li><a href="https://connect.det.wa.edu.au/">connect</a></li>
+          <li>
+            <a href="https://outlook.office365.com/mail/inbox">outlook</a>
+          </li>
+        </ul>
+        <ul>
+          <li class="medium" style="color: rgb(137, 237, 255)">TECH</li>
+          <li><a href="https://github.com/">github</a></li>
+          <li><a href="https://stackoverflow.com/">stack</a></li>
+        </ul>
+      </div>
     </div>
     <div class="timebg center" id="settings" style="display: none">
       <h1>Settings</h1>
+      <!-- toggle button -->
+      <div style="display: flex; justify-content: center; align-items: center">
+        <p>Stripes (why did i add this?):</p>
+        <input
+          id="toggle"
+          type="checkbox"
+          class="toggle switch"
+          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
+          checked
+          onchange="toggleStripes()"
+        />
+      </div>
       <p>Background Image Opacity: <span id="imageOpacitySpan"></span></p>
+      <!-- slider -->
       <input
         type="range"
         min="0"
@@ -357,20 +425,26 @@
       <p>v1.0.0 19/07/21 Initial Release</p>
       <h1>Notes</h1>
       <p>
-        If the weather condition isn't correct. It might be because you are using a VPN or the weather API is down or broken.
+        If the weather condition isn't correct. It might be because you are
+        using a VPN or the weather API is down or broken.
         <br />
-        The background image can change according to the time of the
-        day!
+        The background image can change according to the time of the day!
       </p>
+      <p>copyright Tacoz 2021</p>
     </div>
 
-    <img src="img/day.jpg" id="bgimg" class="image" />
+    <img src="img/day.jpg" style="z-index: -99;" id="bgimg" class="image" />
 
     <img src="img/settings.png" class="settings" onclick="openSettingsTab()" />
 
     <script>
       //set image opacity local storage
       var localStorageImageOpacity = localStorage.getItem("image-opacity");
+      var localStorageBgEffect = localStorage.getItem("bg-effect");
+      if (localStorageBgEffect === null) {
+        localStorageBgEffect = none;
+      }
+
       if (localStorageImageOpacity === null) {
         localStorageImageOpacity = "50";
       }
@@ -393,6 +467,10 @@
       document.documentElement.style.setProperty(
         "--bg-opacity",
         localStorageBgOpacity / 100
+      );
+      document.documentElement.style.setProperty(
+        "--bg-effect",
+        localStorageBgEffect
       );
 
       // if enter is pressed
@@ -427,6 +505,26 @@
           $(this).val() / 100
         );
       });
+
+      // when toggle is clicked
+      function toggleStripes() {
+        if ($("#toggle").is(":checked")) {
+          // change css variable bg-effect to "stripes"
+          document.documentElement.style.setProperty(
+            "--bg-effect",
+            "repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) 50px, rgba(0, 0, 0, 0.4) 50px, rgba(0, 0, 0, 0.4) 100px"
+          );
+          // save to local storage
+          localStorage.setItem(
+            "bg-effect",
+            "repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) 50px, rgba(0, 0, 0, 0.4) 50px, rgba(0, 0, 0, 0.4) 100px"
+          );
+        } else {
+          // change css variable bg-effect to "none"
+          document.documentElement.style.setProperty("--bg-effect", "none");
+          //save to local storage
+        }
+      }
     </script>
   </body>
 </html>
