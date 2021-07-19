@@ -281,6 +281,37 @@
       background: #04aa6d;
       cursor: pointer;
     }
+    #settings {
+      overflow: auto;
+      max-width: 40%;
+      max-height: 70%;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px; /* 1px wider than Lion. */
+      /* This is more usable for users trying to click it. */
+      background-color: rgba(0, 0, 0, 0);
+      border-radius: 100px;
+      -webkit-border-radius: 100px;
+    }
+    /* hover effect for both scrollbar area, and scrollbar 'thumb' */
+    ::-webkit-scrollbar:hover {
+      background-color: rgba(0, 0, 0, 0.09);
+    }
+
+    /* The scrollbar 'thumb' ...that marque oval shape in a scrollbar */
+    ::-webkit-scrollbar-thumb:vertical {
+      /* This is the EXACT color of Mac OS scrollbars. 
+     Yes, I pulled out digital color meter */
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 100px;
+      -webkit-border-radius: 100px;
+    }
+    ::-webkit-scrollbar-thumb:vertical:active {
+      background: rgba(0, 0, 0, 0.61); /* Some darker color when you click it */
+      border-radius: 100px;
+      -webkit-border-radius: 100px;
+    }
   </style>
 
   <body>
@@ -298,10 +329,12 @@
           class="search-bar"
           placeholder="Search with DuckDuckGo"
           autofocus
+          autocomplete="off"
         />
       </div>
     </div>
     <div class="timebg center" id="settings" style="display: none">
+      <h1>Settings</h1>
       <p>Background Image Opacity: <span id="imageOpacitySpan"></span></p>
       <input
         type="range"
@@ -320,9 +353,14 @@
         class="slider"
         id="bgOpacitySlider"
       />
+      <h1>Change Logs</h1>
+      <p>v1.0.0 19/07/21 Initial Release</p>
+      <h1>Notes</h1>
       <p>
-        Notes: If the weather condition isn't correct. It might be because
-        you<br />are using a VPN or the weather API is down or broken.
+        If the weather condition isn't correct. It might be because you are using a VPN or the weather API is down or broken.
+        <br />
+        The background image can change according to the time of the
+        day!
       </p>
     </div>
 
