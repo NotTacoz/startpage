@@ -154,6 +154,8 @@
       --image-opacity: 0.5;
       --bg-opacity: 0.4;
       --bg-effect: none;
+      --font-size-large: 5rem;
+      --font-size-medium: 1.5rem;
     }
 
     * {
@@ -215,17 +217,17 @@
     }
 
     .large {
-      font-size: 5rem;
+      font-size: var(--font-size-large);
     }
 
     .medium {
-      font-size: 1.5rem;
+      font-size: var(--font-size-medium);
     }
 
     /* search bar css */
     .search-bar {
       color: var(--text-color);
-      display: flex;
+      display: fixed;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -348,16 +350,16 @@
   </style>
 
   <body>
-    <div class="timebg" id="timebg">
+    <div class="timebg center" id="timebg">
       <div class="center">
         <p class="medium" id="weather"></p>
         <p class="large" id="time"></p>
         <p class="medium" id="date"></p>
       </div>
       <!-- duckduckgo search -->
-      <div>
+      <div class="center" id=""style="align-items: center;">
         <input
-          id="search"
+          id="searchBar"
           type="text"
           class="search-bar"
           placeholder="Search with DuckDuckGo"
@@ -455,8 +457,8 @@
           type="checkbox"
           class="toggle switch"
           style="margin-left: 0.5rem; margin-bottom: -0.1rem"
-          checked
           onchange="toggleTime()"
+          checked
         />
       </div>
       <!-- toggle button to hide easytabs -->
@@ -466,9 +468,21 @@
           id="easytabstoggle"
           type="checkbox"
           class="toggle switch"
-          checked
           style="margin-left: 0.5rem; margin-bottom: -0.1rem"
           onchange="toggleEasyTabs()"
+          checked
+        />
+      </div>
+      <!-- toggle button to hide searchbar -->
+      <div style="display: flex; justify-content: center; align-items: center">
+        <p>SearchBar:</p>
+        <input
+          id="searchbartoggle"
+          type="checkbox"
+          class="toggle switch"
+          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
+          onchange="toggleSearchBar()"
+          checked
         />
       </div>
       <p>Background Image Opacity: <span id="imageOpacitySpan"></span></p>
@@ -491,8 +505,9 @@
         id="bgOpacitySlider"
       />
       <h1>Change Logs</h1>
-      <p>v1.1.0 19/07/2: Added ability to toggle about almost everything! As well as a todolist which is saved onto localStorage (WIP) </p>
-      <p>v1.0.0 19/07/21 Initial Release</p>
+      <p>v1.1.1 19/07/21: Bug Fixes: Default Funkiness fixed (i think)</p>
+      <p>v1.1.0 19/07/21: Added ability to toggle about almost everything! As well as a todolist which is saved onto localStorage (WIP) </p>
+      <p>v1.0.0 19/07/21: Initial Release</p>
       <h1>Notes</h1>
       <p>
         If the weather condition isn't correct. It might be because you are
@@ -518,6 +533,7 @@
       var localStorageWeather = localStorage.getItem("weather");
       var localStorageTodo = localStorage.getItem("todo");
       var localStorageEasyTabs = localStorage.getItem("easyTabs");
+      var localStorageSearchBar = localStorage.getItem("searchBar");
 
       if (localStorageBgEffect === null) {
         localStorageBgEffect = "none";
@@ -529,19 +545,22 @@
         localStorageBgOpacity = "40";
       }
       if (localStorageDate === null) {
-        localStorageDate = "true";
+        localStorageDate = "checked";
       }
       if (localStorageTime === null) {
-        localStorageTime = "true";
+        localStorageTime = "checked";
       }
       if (localStorageWeather === null) {
-        localStorageWeather = "true";
+        localStorageWeather = "checked";
       }
       if (localStorageTodo === null) {
-        localStorageTodo = "true";
+        localStorageTodo = "false";
       }
       if (localStorageEasyTabs === null) {
-        localStorageEasyTabs = "true";
+        localStorageEasyTabs = "checked";
+      }
+      if (localStorageSearchBar === null) {
+        localStorageSearchBar = "checked";
       }
 
       if (localStorageBgEffect === "none") {
@@ -584,6 +603,13 @@
         $("#easyTabs").hide();
         $("#easytabstoggle").attr("checked", false);
       }
+      if (localStorageSearchBar === "checked") {
+        $("#searchBar").show();
+        $("#searchbartoggle").attr("checked", true);
+      } else {
+        $("#searchBar").hide();
+        $("#searchbartoggle").attr("checked", false);
+      }
       
       $("#imageOpacitySpan").text(localStorageImageOpacity);
       $("#bgOpacitySpan").text(localStorageBgOpacity);
@@ -605,11 +631,11 @@
       );
 
       // if enter is pressed
-      $("#search").keypress(function (e) {
+      $("#searchBar").keypress(function (e) {
         if (e.which === 13) {
           // console.log("amogus");
           // search with duckduckgo
-          var query = $("#search").val();
+          var query = $("#searchBar").val();
           if (query.length > 0) {
             window.location.href = "https://duckduckgo.com/?q=" + query;
           }
@@ -646,7 +672,15 @@
           localStorage.setItem("date", "false");
         }
       }
-
+      function toggleSearchBar() {
+        if ($("#searchtoggle").is(":checked")) {
+          $("#searchBar").show();
+          localStorage.setItem("searchbar", "checked");
+        } else {
+          $("#searchBar").hide();
+          localStorage.setItem("searchbar", "false");
+        }
+      }
       function toggleTodo() {
         console.log("toggleTodo");
         if ($("#todotoggle").is(":checked")) {
