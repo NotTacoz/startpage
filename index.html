@@ -108,18 +108,20 @@
 
         // update bgimg based on time
         var bgimg = "";
-        if (hours >= 6 && hours < 12) {
+        if (hours >= 7 && hours < 9) {
           bgimg = "img/sunset.jpg";
-        } else if (hours >= 12 && hours < 18) {
+        } else if (hours >= 9 && hours < 18) {
           bgimg = "img/day.jpg";
-        } else if (hours >= 18 && hours < 24) {
+        } else if (hours >= 18 && hours < 21) {
           bgimg = "img/sunset.jpg";
+        } else if (hours >= 21 && hours < 24) {
+          bgimg = "img/night.jpg";
         } else if (hours >= 0 && hours < 6) {
           bgimg = "img/night.jpg";
         }
         document.getElementById("bgimg").src = bgimg;
 
-        if (hours > 11) {
+        if (hours > 12) {
           var AMPM = "PM";
           hours -= 12;
         } else {
@@ -147,20 +149,24 @@
   </script>
 
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
     :root {
       --dark-bg: rgb(25, 25, 30);
       --text-color: white;
       --image-opacity: 0.5;
       --bg-opacity: 0.4;
       --bg-effect: none;
-      --font-size-large: 5rem;
-      --font-size-medium: 1.5rem;
+      --font-size: 1rem;
+      --font-weight: 400;
+      --font-size-large: calc(5 * var(--font-size));
+      --font-size-medium: calc(1.5 * var(--font-size));
     }
 
     * {
-      transition: 0.4s ease-out;
+      /* transition: 0.4s ease-out; */
       font-family: "Roboto Mono";
+      font-weight: var(--font-weight);
+      font-size: var(--font-size);
       margin: 0px;
       padding: 0px;
     }
@@ -239,7 +245,7 @@
       border-radius: 10px;
       border: 0px;
       padding: 1rem;
-      transition: 0.4s ease-out;
+      /* transition: 0.4s ease-out; */
     }
 
     .search-bar::placeholder {
@@ -251,7 +257,7 @@
     }
 
     .image {
-      transition: ease-in-out 0.4s;
+      /* transition: ease-in-out 0.4s; */
       opacity: var(--image-opacity);
       z-index: -1;
       position: absolute;
@@ -415,7 +421,9 @@
           resize: none;
           background-color: rgba(0, 0, 0, 0);
           color: white;
-        " id="todolist"></textarea>
+        "
+        id="todolist"
+      ></textarea>
     </div>
 
     <div class="timebg center" id="settings" style="display: none">
@@ -423,9 +431,13 @@
       <!-- toggle button -->
       <div style="display: flex; justify-content: center; align-items: center">
         <p>Stripes:</p>
-        <input id="stripestoggle" type="checkbox" class="toggle switch"
-        style="margin-left: 0.5rem; margin-bottom: -0.1rem"
-        onchange="toggleStripes()" />
+        <input
+          id="stripestoggle"
+          type="checkbox"
+          class="toggle switch"
+          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
+          onchange="toggleStripes()"
+        />
       </div>
       <!-- toggle button to hide todo -->
       <div style="display: flex; justify-content: center; align-items: center">
@@ -518,8 +530,30 @@
         class="slider"
         id="bgOpacitySlider"
       />
+      <p>Text Font Size: <span id="fontSizeSpan"></span></p>
+      <input
+        type="range"
+        min="7"
+        max="15"
+        value="10"
+        class="slider"
+        id="fontSizeSlider"
+      />
+      <p>Text Font Weight: <span id="fontWeightSpan"></span></p>
+      <input
+        type="range"
+        min="100"
+        max="900"
+        value="400"
+        class="slider"
+        id="fontWeightSlider"
+        step="100"
+      />
       <h1>Change Logs</h1>
-      <p>v1.1.2 20/07/21: Bug Fixes: Search Bar Toggle, ToDo list now saves to local storage!</p>
+      <p>
+        v1.1.2 20/07/21: Bug Fixes: Search Bar Toggle, ToDo list now saves to
+        local storage!
+      </p>
       <p>v1.1.1 19/07/21: Bug Fixes: Default Funkiness fixed (i think)</p>
       <p>
         v1.1.0 19/07/21: Added ability to toggle about almost everything! As
@@ -528,10 +562,12 @@
       <p>v1.0.0 19/07/21: Initial Release</p>
       <h1>Notes</h1>
       <p>
-        If the weather condition isn't correct. It might be because you are
+        - View at 110-125% Size for best experience.
+        <br />
+        - If the weather condition isn't correct. It might be because you are
         using a VPN or the weather API is down or broken.
         <br />
-        The background image can change according to the time of the day!
+        - The background image can change according to the time of the day!
       </p>
       <p>copyright Tacoz 2021</p>
     </div>
@@ -552,6 +588,8 @@
       var localStorageTodo = localStorage.getItem("todo");
       var localStorageEasyTabs = localStorage.getItem("easyTabs");
       var localStorageSearchBar = localStorage.getItem("searchBar");
+      var localStorageFontSize = localStorage.getItem("font-size");
+      var localStorageFontWeight = localStorage.getItem("font-weight");
 
       if (localStorageBgEffect === null) {
         localStorageBgEffect = "none";
@@ -579,6 +617,12 @@
       }
       if (localStorageSearchBar === null) {
         localStorageSearchBar = "checked";
+      }
+      if (localStorageFontSize === null) {
+        localStorageFontSize = "10";
+      }
+      if (localStorageFontWeight === null) {
+        localStorageFontWeight = "400";
       }
 
       if (localStorageBgEffect === "none") {
@@ -633,6 +677,11 @@
       $("#bgOpacitySpan").text(localStorageBgOpacity);
       $("#imageOpacitySlider").val(localStorageImageOpacity);
       $("#bgOpacitySlider").val(localStorageBgOpacity);
+      $("#fontSizeSpan").text(localStorageFontSize + "rem");
+      $("#fontWeightSpan").text(localStorageFontWeight);
+      $("#fontSizeSlider").val(localStorageFontSize);
+      $("#fontWeightSlider").val(localStorageFontWeight);
+
       //set css to local storage
 
       document.documentElement.style.setProperty(
@@ -642,6 +691,14 @@
       document.documentElement.style.setProperty(
         "--bg-opacity",
         localStorageBgOpacity / 100
+      );
+      document.documentElement.style.setProperty(
+        "--font-size",
+        localStorageFontSize / 10 + "rem"
+      );
+      document.documentElement.style.setProperty(
+        "--font-weight",
+        localStorageFontWeight
       );
       document.documentElement.style.setProperty(
         "--bg-effect",
@@ -659,7 +716,7 @@
           }
         }
       });
-      // when bgOpacitySlider is being interactted
+      // when bgOpacitySlider is being interacted
       $("#bgOpacitySlider").on("input", function () {
         $("#bgOpacitySpan").text($(this).val());
         // set css variable --bg-opacity to slider value
@@ -669,8 +726,8 @@
           "--bg-opacity",
           $(this).val() / 100
         );
-      });
-      //repeat code but for imageOpacitySlider
+      }); 
+      // when imageOpacitySlider is being interacted
       $("#imageOpacitySlider").on("input", function () {
         $("#imageOpacitySpan").text($(this).val());
         //save slider to local storage
@@ -680,6 +737,27 @@
           $(this).val() / 100
         );
       });
+      // when fontSizeSlider is being interacted
+      $("#fontSizeSlider").on("input", function () {
+        $("#fontSizeSpan").text($(this).val());
+        //save slider to local storage
+        localStorage.setItem("font-size", $(this).val());
+        document.documentElement.style.setProperty(
+          "--font-size",
+          $(this).val() / 10 + "rem"
+        );
+      });
+      // when fontWeightSlider is being interacted
+      $("#fontWeightSlider").on("input", function () {
+        $("#fontWeightSpan").text($(this).val());
+        //save slider to local storage
+        localStorage.setItem("font-weight", $(this).val());
+        document.documentElement.style.setProperty(
+          "--font-weight",
+          $(this).val()
+        );
+      });
+      
 
       // save todolist to local storage when edited
       $("#todolist").on("input", function () {
