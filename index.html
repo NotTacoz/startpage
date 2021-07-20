@@ -357,7 +357,7 @@
         <p class="medium" id="date"></p>
       </div>
       <!-- duckduckgo search -->
-      <div class="center" id=""style="align-items: center;">
+      <div class="center" id="" style="align-items: center">
         <input
           id="searchBar"
           type="text"
@@ -393,11 +393,29 @@
     </div>
     <div
       class="timebg"
-      style="top: 1rem; right: 1rem; position: fixed"
+      style="
+        top: 1rem;
+        right: 1rem;
+        position: fixed;
+        width: 22%;
+        padding: 1.5rem;
+        max-height: 100%;
+        height: 40%;
+      "
       id="todo"
     >
-      Hi! I'm a todo list (WIP, I'm still working on it :) ).
-      <!-- <textarea style="outline: none; background-color: rgba(0, 0, 0, 0); color: white;"></textarea> -->
+      <!-- Hi! I'm a todo list (WIP, I'm still working on it :) ). -->
+      <textarea
+        style="
+          overflow: auto;
+          border: none;
+          outline: none;
+          width: 100%;
+          height: 100%;
+          resize: none;
+          background-color: rgba(0, 0, 0, 0);
+          color: white;
+        " id="todolist"></textarea>
     </div>
 
     <div class="timebg center" id="settings" style="display: none">
@@ -405,13 +423,9 @@
       <!-- toggle button -->
       <div style="display: flex; justify-content: center; align-items: center">
         <p>Stripes:</p>
-        <input
-          id="stripestoggle"
-          type="checkbox"
-          class="toggle switch"
-          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
-          onchange="toggleStripes()"
-        />
+        <input id="stripestoggle" type="checkbox" class="toggle switch"
+        style="margin-left: 0.5rem; margin-bottom: -0.1rem"
+        onchange="toggleStripes()" />
       </div>
       <!-- toggle button to hide todo -->
       <div style="display: flex; justify-content: center; align-items: center">
@@ -505,9 +519,12 @@
         id="bgOpacitySlider"
       />
       <h1>Change Logs</h1>
-      <p>v1.1.2 20/07/21: Bug Fixes: Search Bar Toggle</p>
+      <p>v1.1.2 20/07/21: Bug Fixes: Search Bar Toggle, ToDo list now saves to local storage!</p>
       <p>v1.1.1 19/07/21: Bug Fixes: Default Funkiness fixed (i think)</p>
-      <p>v1.1.0 19/07/21: Added ability to toggle about almost everything! As well as a todolist which is saved onto localStorage (WIP) </p>
+      <p>
+        v1.1.0 19/07/21: Added ability to toggle about almost everything! As
+        well as a todolist which is saved onto localStorage (WIP)
+      </p>
       <p>v1.0.0 19/07/21: Initial Release</p>
       <h1>Notes</h1>
       <p>
@@ -567,7 +584,7 @@
       if (localStorageBgEffect === "none") {
         $("#stripestoggle").prop("checked", false);
       } else {
-        $("#stripestoggle").prop("checked", true); 
+        $("#stripestoggle").prop("checked", true);
       }
       if (localStorageDate === "checked") {
         $("#date").show();
@@ -611,7 +628,7 @@
         $("#searchBar").hide();
         $("#searchbartoggle").attr("checked", false);
       }
-      
+
       $("#imageOpacitySpan").text(localStorageImageOpacity);
       $("#bgOpacitySpan").text(localStorageBgOpacity);
       $("#imageOpacitySlider").val(localStorageImageOpacity);
@@ -663,6 +680,21 @@
           $(this).val() / 100
         );
       });
+
+      // save todolist to local storage when edited
+      $("#todolist").on("input", function () {
+        localStorage.setItem("todolist", $(this).val());
+      });
+      //get todolist from local storage
+      var localStorageTodolist = localStorage.getItem("todolist");
+      if (localStorageTodolist === null) {
+        localStorageTodolist = "Todo list (Click on me): ";
+      }
+      $("#todolist").val(localStorageTodolist);
+      //set todolist to textarea
+      $("#todolist").focus();
+      //set todolist to textarea
+      $("#todolist").blur();
 
       function toggleDate() {
         if ($("#datetoggle").is(":checked")) {
