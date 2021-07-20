@@ -505,6 +505,7 @@
         id="bgOpacitySlider"
       />
       <h1>Change Logs</h1>
+      <p>v1.1.2 20/07/21: Bug Fixes: Search Bar Toggle</p>
       <p>v1.1.1 19/07/21: Bug Fixes: Default Funkiness fixed (i think)</p>
       <p>v1.1.0 19/07/21: Added ability to toggle about almost everything! As well as a todolist which is saved onto localStorage (WIP) </p>
       <p>v1.0.0 19/07/21: Initial Release</p>
@@ -673,12 +674,12 @@
         }
       }
       function toggleSearchBar() {
-        if ($("#searchtoggle").is(":checked")) {
+        if ($("#searchbartoggle").is(":checked")) {
           $("#searchBar").show();
-          localStorage.setItem("searchbar", "checked");
+          localStorage.setItem("searchBar", "checked");
         } else {
           $("#searchBar").hide();
-          localStorage.setItem("searchbar", "false");
+          localStorage.setItem("searchBar", "false");
         }
       }
       function toggleTodo() {
