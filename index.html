@@ -128,11 +128,11 @@
         var bgimg = "";
         if (hours >= 7 && hours < 9) {
           bgimg = "img/sunset.jpg";
-        } else if (hours >= 9 && hours < 18) {
+        } else if (hours >= 9 && hours < 17) {
           bgimg = "img/day.jpg";
-        } else if (hours >= 18 && hours < 21) {
+        } else if (hours >= 17 && hours < 18) {
           bgimg = "img/sunset.jpg";
-        } else if (hours >= 21 && hours < 24) {
+        } else if (hours >= 18 && hours < 24) {
           bgimg = "img/night.jpg";
         } else if (hours >= 0 && hours < 6) {
           bgimg = "img/night.jpg";
@@ -402,7 +402,7 @@
           <li><a href="https://twitter.com/">twitter</a></li>
         </ul>
         <ul>
-          <li class="medium" style="color: rgb(255, 137, 255)">MISC</li>
+          <li class="medium" style="color: rgb(255, 137, 137)">MISC</li>
           <!-- <li style="font-weight: bolder">-social-</li> -->
           <li><a href="https://twitch.tv">twitch</a></li>
           <li><a href="https://youtube.com/">youtube</a></li>
@@ -413,6 +413,10 @@
           <li><a href="https://connect.det.wa.edu.au/">connect</a></li>
           <li>
             <a href="https://outlook.office365.com/mail/inbox">outlook</a>
+          </li>
+          <li><a href="https://mathspace.co/student/">Mathspace</a></li>
+          <li>
+            <a href="https://www.educationperfect.com/app/#/dashboard">EP</a>
           </li>
         </ul>
         <ul>
@@ -574,6 +578,16 @@
         id="fontWeightSlider"
         step="100"
       />
+      <!-- input selection box change browsrs -->
+      <div style="display: flex; justify-content: center; align-items: center">
+        <p>Browser:</p>
+        <select id="browser">
+          <option value="Google">Google</option>
+          <option value="Yandex">Yandex</option>
+          <option value="Bing">Bing</option>
+          <option value="DuckDuckGo">DuckDuckGo</option>
+        </select>
+      </div>
       <h1>Change Logs</h1>
       <p>
         v1.1.3 20/07/21: Added More Settings to customize font size and width!
@@ -629,6 +643,7 @@
       var localStorageSearchBar = localStorage.getItem("searchBar");
       var localStorageFontSize = localStorage.getItem("font-size");
       var localStorageFontWeight = localStorage.getItem("font-weight");
+      var browser = localStorage.getItem("browser");
 
       if (localStorageBgEffect === null) {
         localStorageBgEffect = "none";
@@ -662,6 +677,9 @@
       }
       if (localStorageFontWeight === null) {
         localStorageFontWeight = "400";
+      }
+      if (browser === null) {
+        browser = "chrome";
       }
 
       if (localStorageBgEffect === "none") {
@@ -711,6 +729,50 @@
         $("#searchBar").hide();
         $("#searchbartoggle").attr("checked", false);
       }
+      var searchQuery = "";
+      if (browser === "Google") {
+        // set searchBar placeholder to chrome
+        $("#searchBar").attr("placeholder", "Search with Google");
+        //set browser selected to Google
+        $("#browser").val("Google");
+        searchQuery = "https://google.com/search?q=";
+      } else if (browser === "Bing") {
+        // set searchBar placeholder to edge
+        $("#browser").val("Bing");
+        $("#searchBar").attr("placeholder", "Search with Bing");
+        searchQuery = "https://bing.com/?q=";
+      } else if (browser === "DuckDuckGo") {
+        // set searchBar placeholder to duckduckgo
+        $("#browser").val("DuckDuckGo");
+        $("#searchBar").attr("placeholder", "Search with DuckDuckGo");
+        searchQuery = "https://duckduckgo.com/?q=";
+      } else if (browser === "Yandex") {
+        // set searchBar placeholder to yandex
+        $("#browser").val("Yandex");
+        $("#searchBar").attr("placeholder", "Search with Yandex");
+        searchQuery = "https://yandex.com/?q=";
+      }
+
+      //if browser selection changes
+      $("#browser").on("change", function () {
+        // get the selected option
+        var selectedOption = $(this).find("option:selected");
+        // get the value of the selected option
+        var selectedValue = selectedOption.val();
+        console.log(selectedValue);
+        localStorage.setItem("browser", selectedValue);
+        if (
+          selectedValue === "Bing" ||
+          selectedValue === "DuckDuckGo" ||
+          selectedValue === "Yandex"
+        ) {
+          $("#searchBar").attr("placeholder", "Search with " + selectedValue);
+          searchQuery = "https://" + selectedValue + ".com/?q=";
+        } else {
+          $("#searchBar").attr("placeholder", "Search with Google");
+          searchQuery = "https://google.com/search?q=";
+        }
+      });
 
       $("#imageOpacitySpan").text(localStorageImageOpacity);
       $("#bgOpacitySpan").text(localStorageBgOpacity);
@@ -751,7 +813,7 @@
           // search with duckduckgo
           var query = $("#searchBar").val();
           if (query.length > 0) {
-            window.location.href = "https://duckduckgo.com/?q=" + query;
+            window.location.href = searchQuery + query;
           }
         }
       });
@@ -887,7 +949,6 @@
           localStorage.setItem("bg-effect", "none");
         }
       }
-      
     </script>
   </body>
 </html>
