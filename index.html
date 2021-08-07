@@ -326,7 +326,7 @@
     }
     #settings {
       overflow: auto;
-      max-width: 40%;
+      width: 40%;
       max-height: 70%;
     }
 
@@ -458,6 +458,30 @@
 
     <div class="timebg center" id="settings" style="display: none">
       <h1 class="medium">Settings</h1>
+
+      <!-- background selector -->
+      <div style="display: flex; justify-content: center; align-items: center">
+        <p>Background:</p>
+        <select id="wallpaper">
+          <option value="dynamic">Dynamic</option>
+          <option value="day">Day</option>
+          <option value="night">Night</option>
+          <option value="sunset">Sunset</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+
+      <!-- custom background -->
+      <div
+        id="custombgselector"
+        style="display: flex; justify-content: center; align-items: center"
+      >
+        <p>Upload bg:</p>
+        <!-- upload image -->
+        <input id="custombg" type="file" accept="image/*" />
+        <!-- preview -->
+        <div id="custombgpreview"></div>
+      </div>
 
       <!-- toggle button -->
       <div style="display: flex; justify-content: center; align-items: center">
@@ -600,6 +624,34 @@
       id="bgimg"
       class="image"
     />
+    <img
+      src="img/day.jpg"
+      alt="day.jpg"
+      style="z-index: -99"
+      id="day"
+      class="image"
+    />
+    <img
+      src="img/night.jpg"
+      alt="night.jpg"
+      style="z-index: -99"
+      id="night"
+      class="image"
+    />
+    <img
+      src="img/sunset.jpg"
+      alt="night.jpg"
+      style="z-index: -99"
+      id="sunset"
+      class="image"
+    />
+    <img
+      src=""
+      alt="custom.jpg"
+      style="z-index: -99"
+      id="custombgimg"
+      class="image"
+    />
 
     <img
       src="img/settings.png"
@@ -609,7 +661,6 @@
     />
 
     <script>
-      //set image opacity local storage
       // console.log(localStorage)
       var localStorageImageOpacity = localStorage.getItem("image-opacity");
       var localStorageBgEffect = localStorage.getItem("bg-effect");
@@ -623,6 +674,7 @@
       var localStorageFontSize = localStorage.getItem("font-size");
       var localStorageFontWeight = localStorage.getItem("font-weight");
       var browser = localStorage.getItem("browser");
+      var localStorageBackground = localStorage.getItem("wallpaper");
 
       if (localStorageBgEffect === null) {
         localStorageBgEffect = "none";
@@ -659,6 +711,9 @@
       }
       if (browser === null) {
         browser = "Google";
+      }
+      if (localStorageBackground === null) {
+        localStorageBackground = "dynamic";
       }
 
       if (localStorageBgEffect === "none") {
@@ -708,6 +763,34 @@
         $("#searchBar").hide();
         $("#searchbartoggle").attr("checked", false);
       }
+
+      $("#custombgselector").hide();
+      $("#custombgimg").hide();
+      $("#day").hide();
+      $("#night").hide();
+      $("#sunset").hide();
+      $("#bgimg").hide();
+      if (localStorageBackground === "dynamic") {
+        $("#wallpaper").val("dynamic");
+        $("#bgimg").show();
+      } else if (localStorageBackground === "day") {
+        $("#wallpaper").val("day");
+        $("#day").show();
+      } else if (localStorageBackground === "night") {
+        $("#wallpaper").val("night");
+        $("#night").show();
+      } else if (localStorageBackground === "sunset") {
+        $("#wallpaper").val("sunset");
+        $("#sunset").show();
+      } else if (localStorageBackground === "custom") {
+        $("#wallpaper").val("custom");
+        $("#custombgselector").show();
+        $("#custombgimg").show();
+        // set custombgimg src to localStorage
+        document.getElementById("custombgimg").src =
+          localStorage.getItem("custombg");
+      }
+
       var searchQuery = "";
       if (browser === "Google") {
         // set searchBar placeholder to chrome
@@ -738,7 +821,7 @@
         var selectedOption = $(this).find("option:selected");
         // get the value of the selected option
         var selectedValue = selectedOption.val();
-        console.log(selectedValue);
+        // console.log(selectedValue);
         localStorage.setItem("browser", selectedValue);
         if (
           selectedValue === "Bing" ||
@@ -751,6 +834,46 @@
           $("#searchBar").attr("placeholder", "Search with Google");
           searchQuery = "https://google.com/search?q=";
         }
+      });
+
+      //if background selection changes
+      $("#wallpaper").on("change", function () {
+        // get the selected option
+        var selectedOption = $(this).find("option:selected");
+        // get the value of the selected option
+        var selectedValue = selectedOption.val();
+        // console.log(selectedValue);
+        localStorage.setItem("wallpaper", selectedValue);
+        $("#custombgselector").hide();
+        $("#custombgimg").hide();
+        $("#day").hide();
+        $("#night").hide();
+        $("#sunset").hide();
+        $("#bgimg").hide();
+        if (selectedValue === "dynamic") {
+          $("#bgimg").show();
+        } else if (selectedValue === "day") {
+          $("#day").show();
+        } else if (selectedValue === "night") {
+          $("#night").show();
+        } else if (selectedValue === "sunset") {
+          $("#sunset").show();
+        } else if (selectedValue === "custom") {
+          $("#custombgselector").show();
+          $("#custombgimg").show();
+        }
+      });
+
+      //if custombg selection changes
+      $("#custombg").on("change", function () {
+        //upload file to localstorage
+        var file = $("#custombg")[0].files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          localStorage.setItem("custombg", e.target.result);
+          document.getElementById("custombgimg").src = e.target.result;
+        };
+        reader.readAsDataURL(file);
       });
 
       $("#imageOpacitySpan").text(localStorageImageOpacity);

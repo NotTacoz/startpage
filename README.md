@@ -1,5 +1,5 @@
 # Clean & Minimalistic Startpage
-(Made for Firefox and Chrome)
+(Made for Firefox and Chromium)
 
 ## CHROMIUM
 How to install
@@ -9,4 +9,4 @@ How to install
 4. Enjoy :)
 
 ## FIREFOX
-google it lulw
+[Wikihow Article](https://www.wikihow.com/Change-your-Start-Page-on-Mozilla-Firefox)
