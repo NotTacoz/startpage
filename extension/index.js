@@ -26,9 +26,10 @@ function getWeatherData() {
     });
 }
 
-// document.getElementById("settingsbtnimg").addEventListener("click", openSettingsTab);
+// if id settingsbtnimg is clicked, openSettingsTab
+$("#settingsbtnimg").click(openSettingsTab);
 
-openSettingsTab = function () {
+function openSettingsTab() {
     // console.log("pog");
     // if timebg is hidden
     if ($("#timebg").css("display") == "none") {
@@ -454,6 +455,7 @@ $("#todolist").focus();
 //set todolist to textarea
 $("#todolist").blur();
 
+$("#datetoggle").click(toggleDate);
 function toggleDate() {
     if ($("#datetoggle").is(":checked")) {
         $("#date").show();
@@ -463,6 +465,7 @@ function toggleDate() {
         localStorage.setItem("date", "false");
     }
 }
+$("#searchbartoggle").click(toggleSearchBar);
 function toggleSearchBar() {
     if ($("#searchbartoggle").is(":checked")) {
         $("#searchBar").show();
@@ -472,6 +475,8 @@ function toggleSearchBar() {
         localStorage.setItem("searchBar", "false");
     }
 }
+// if todotoggle is clicked
+$("#todotoggle").click(toggleTodo);
 function toggleTodo() {
     console.log("toggleTodo");
     if ($("#todotoggle").is(":checked")) {
@@ -482,6 +487,7 @@ function toggleTodo() {
         localStorage.setItem("todo", "false");
     }
 }
+$("#timetoggle").click(toggleTime);
 function toggleTime() {
     if ($("#timetoggle").is(":checked")) {
         $("#time").show();
@@ -491,6 +497,7 @@ function toggleTime() {
         localStorage.setItem("time", "false");
     }
 }
+$("#easytabstoggle").click(toggleEasyTabs);
 function toggleEasyTabs() {
     if ($("#easytabstoggle").is(":checked")) {
         $("#easyTabs").show();
@@ -500,6 +507,7 @@ function toggleEasyTabs() {
         localStorage.setItem("easyTabs", "false");
     }
 }
+$("#weathertoggle").click(toggleWeather);
 function toggleWeather() {
     if ($("#weathertoggle").is(":checked")) {
         $("#weather").show();
@@ -509,7 +517,8 @@ function toggleWeather() {
         localStorage.setItem("weather", "false");
     }
 }
-// when toggle is clicked
+// when stripestoggle is clicked
+$("#stripestoggle").click(toggleStripes);
 function toggleStripes() {
     if ($("#stripestoggle").is(":checked")) {
         // change css variable bg-effect to "stripes"
