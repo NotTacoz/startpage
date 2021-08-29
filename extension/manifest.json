@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+
+  "name": "new tab",
+  "description": "new tab page",
+  "version": "1.0",
+
+  "content_security_policy": "script-src 'self' 'sha256-WOdSzz11/3cpqOdrm89LBL2UPwEU9EhbDtMy2OciEhs=' https://ajax.googleapis.com/; object-src 'self'",
+
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": ["bookmarks"]
+}
