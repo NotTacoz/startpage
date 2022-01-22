@@ -1,130 +1,723 @@
 function getWeatherData() {
-    $(document).ready(async function () {
-        var city = undefined;
-        await fetch("https://ipinfo.io/json")
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (myJson) {
-                city = myJson.city;
-                console.log;
-            })
-            .catch(function (error) {
-                console.log("Error: " + error);
-            });
-        $.getJSON(
-            "https://api.weatherapi.com/v1/current.json?key=76aa7ac854eb413c82565451211807&q=" +
-            city,
-            function (data) { }
-        )
-            .done(function (data) {
-                $("#weather").text(
-                    data.current.condition.text + " " + data.current.temp_c + "°C"
-                );
-            })
-            .fail(function (data) { });
-    });
+  $(document).ready(async function () {
+    var city = undefined;
+    await fetch("https://ipinfo.io/json")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (myJson) {
+        city = myJson.city;
+        console.log;
+      })
+      .catch(function (error) {
+        console.log("Error: " + error);
+      });
+    $.getJSON(
+      "https://api.weatherapi.com/v1/current.json?key=76aa7ac854eb413c82565451211807&q=" +
+        city,
+      function (data) {}
+    )
+      .done(function (data) {
+        $("#weather").text(
+          data.current.condition.text + " " + data.current.temp_c + "°C"
+        );
+      })
+      .fail(function (data) {});
+  });
 }
+
+function getStorage(item, unset) {
+  return localStorage.getItem(item) ?? unset;
+}
+
+function Subject(name, start, finish) {
+  this.name = name;
+  this.start = start;
+  this.finish = finish;
+}
+
+function hourMinuteToNumber(hour, minute, second = 0) {
+  return hour * 3600 + minute * 60 + second;
+}
+
+// function to convert second into hour, minute and second array
+function convertSeconds(s) {
+  var h = Math.floor(s / 3600);
+  var m = Math.floor((s % 3600) / 60);
+  var s = s % 60;
+  return [h, m, s];
+}
+
+const timetable = [
+  [], // Sunday
+  [
+    new Subject(
+      "Before School",
+      hourMinuteToNumber(0, 0),
+      hourMinuteToNumber(8, 45)
+    ),
+    new Subject(
+      "Advocacy",
+      hourMinuteToNumber(8, 45),
+      hourMinuteToNumber(9, 00)
+    ),
+    new Subject(
+      getStorage("subMonA1", "Period 1"),
+      hourMinuteToNumber(9, 0),
+      hourMinuteToNumber(9, 55)
+    ),
+    new Subject(
+      getStorage("subMonA2", "Period 2"),
+      hourMinuteToNumber(9, 55),
+      hourMinuteToNumber(10, 50)
+    ),
+    new Subject(
+      "Recess",
+      hourMinuteToNumber(10, 50),
+      hourMinuteToNumber(11, 15)
+    ),
+    new Subject(
+      getStorage("subMonA3", "Period 3"),
+      hourMinuteToNumber(11, 15),
+      hourMinuteToNumber(12, 10)
+    ),
+    new Subject(
+      getStorage("subMonA4", "Period 4"),
+      hourMinuteToNumber(12, 10),
+      hourMinuteToNumber(13, 05)
+    ),
+    new Subject(
+      "Lunch",
+      hourMinuteToNumber(13, 05),
+      hourMinuteToNumber(13, 40)
+    ),
+    new Subject(
+      getStorage("subMonA5", "Period 5"),
+      hourMinuteToNumber(13, 40),
+      hourMinuteToNumber(14, 35)
+    ),
+    new Subject(
+      getStorage("subMonA6", "Period 6"),
+      hourMinuteToNumber(14, 35),
+      hourMinuteToNumber(15, 30)
+    ),
+    new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
+  ], // Monday
+  [
+    new Subject(
+      "Before School",
+      hourMinuteToNumber(0, 0),
+      hourMinuteToNumber(8, 45)
+    ),
+    new Subject(
+      getStorage("subTueA1", "Period 1"),
+      hourMinuteToNumber(8, 45),
+      hourMinuteToNumber(9, 40)
+    ),
+    new Subject(
+      getStorage("subTueA2", "Period 2"),
+      hourMinuteToNumber(9, 40),
+      hourMinuteToNumber(10, 35)
+    ),
+    new Subject(
+      "Recess",
+      hourMinuteToNumber(10, 35),
+      hourMinuteToNumber(10, 55)
+    ),
+    new Subject(
+      getStorage("subTueA3", "Period 3"),
+      hourMinuteToNumber(10, 55),
+      hourMinuteToNumber(11, 50)
+    ),
+    new Subject(
+      getStorage("subTueA4", "Mod Time"),
+      hourMinuteToNumber(11, 50),
+      hourMinuteToNumber(12, 45)
+    ),
+    new Subject(
+      "Lunch",
+      hourMinuteToNumber(12, 45),
+      hourMinuteToNumber(13, 25)
+    ),
+    new Subject(
+      getStorage("subTueA5", "Period 5"),
+      hourMinuteToNumber(13, 25),
+      hourMinuteToNumber(14, 20)
+    ),
+    new Subject(
+      getStorage("subTueA6", "Period 6"),
+      hourMinuteToNumber(14, 20),
+      hourMinuteToNumber(15, 15)
+    ),
+    new Subject("Home", hourMinuteToNumber(15, 15), hourMinuteToNumber(16, 00)),
+  ], // Tuesday
+  [
+    new Subject(
+      "Before School",
+      hourMinuteToNumber(0, 0),
+      hourMinuteToNumber(8, 45)
+    ),
+    new Subject(
+      getStorage("subWedA1", "Period 1"),
+      hourMinuteToNumber(8, 45),
+      hourMinuteToNumber(9, 40)
+    ),
+    new Subject(
+      getStorage("subWedA2", "Period 2"),
+      hourMinuteToNumber(9, 40),
+      hourMinuteToNumber(10, 35)
+    ),
+    new Subject(
+      "Recess",
+      hourMinuteToNumber(10, 35),
+      hourMinuteToNumber(10, 55)
+    ),
+    new Subject(
+      getStorage("subWedA3", "Period 3"),
+      hourMinuteToNumber(10, 55),
+      hourMinuteToNumber(11, 50)
+    ),
+    new Subject(
+      getStorage("subWedA4", "Period 4"),
+      hourMinuteToNumber(11, 50),
+      hourMinuteToNumber(12, 45)
+    ),
+    new Subject(
+      "Lunch",
+      hourMinuteToNumber(12, 45),
+      hourMinuteToNumber(13, 25)
+    ),
+    new Subject(
+      getStorage("subWedA5", "Period 5"),
+      hourMinuteToNumber(13, 25),
+      hourMinuteToNumber(14, 20)
+    ),
+    new Subject(
+      getStorage("subWedA6", "Period 6"),
+      hourMinuteToNumber(14, 20),
+      hourMinuteToNumber(15, 15)
+    ),
+    new Subject("Home", hourMinuteToNumber(15, 15), hourMinuteToNumber(16, 00)),
+  ], // Wednesday
+  [
+    new Subject(
+      "Before School",
+      hourMinuteToNumber(0, 0),
+      hourMinuteToNumber(8, 45)
+    ),
+    new Subject(
+      getStorage("subThuA1", "Period 1"),
+      hourMinuteToNumber(8, 45),
+      hourMinuteToNumber(9, 40)
+    ),
+    new Subject(
+      getStorage("subThuA2", "Period 2"),
+      hourMinuteToNumber(9, 40),
+      hourMinuteToNumber(10, 35)
+    ),
+    new Subject(
+      "Recess",
+      hourMinuteToNumber(10, 35),
+      hourMinuteToNumber(10, 55)
+    ),
+    new Subject(
+      getStorage("subThuA3", "Period 3"),
+      hourMinuteToNumber(10, 55),
+      hourMinuteToNumber(11, 50)
+    ),
+    new Subject(
+      "Advocacy",
+      hourMinuteToNumber(11, 50),
+      hourMinuteToNumber(12, 30)
+    ),
+    new Subject(
+      "Lunch",
+      hourMinuteToNumber(12, 30),
+      hourMinuteToNumber(13, 10)
+    ),
+    new Subject(
+      getStorage("subThuA5", "Period 5"),
+      hourMinuteToNumber(13, 10),
+      hourMinuteToNumber(14, 05)
+    ),
+    new Subject(
+      getStorage("subThuA6", "Period 6"),
+      hourMinuteToNumber(14, 05),
+      hourMinuteToNumber(15, 00)
+    ),
+    new Subject("Home", hourMinuteToNumber(15, 00), hourMinuteToNumber(16, 00)),
+  ], // Thursday
+  [
+    new Subject(
+      "Before School",
+      hourMinuteToNumber(0, 0),
+      hourMinuteToNumber(8, 45)
+    ),
+    new Subject(
+      getStorage("subFriA1", "Period 1"),
+      hourMinuteToNumber(9, 0),
+      hourMinuteToNumber(9, 55)
+    ),
+    new Subject(
+      getStorage("subFriA2", "Period 2"),
+      hourMinuteToNumber(9, 55),
+      hourMinuteToNumber(10, 50)
+    ),
+    new Subject(
+      "Recess",
+      hourMinuteToNumber(10, 50),
+      hourMinuteToNumber(11, 15)
+    ),
+    new Subject(
+      getStorage("subFriA3", "Period 3"),
+      hourMinuteToNumber(11, 15),
+      hourMinuteToNumber(12, 10)
+    ),
+    new Subject(
+      getStorage("subFriA4", "Period 4"),
+      hourMinuteToNumber(12, 10),
+      hourMinuteToNumber(13, 05)
+    ),
+    new Subject(
+      "Lunch",
+      hourMinuteToNumber(13, 05),
+      hourMinuteToNumber(13, 40)
+    ),
+    new Subject(
+      getStorage("subFriA5", "Period 5"),
+      hourMinuteToNumber(13, 40),
+      hourMinuteToNumber(14, 35)
+    ),
+    new Subject(
+      getStorage("subFriA6", "Period 6"),
+      hourMinuteToNumber(14, 35),
+      hourMinuteToNumber(15, 30)
+    ),
+    new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
+  ], // Friday
+  [], // Saturday
+
+  [], // Sunday
+  [
+    new Subject(
+      "Before School",
+      hourMinuteToNumber(0, 0),
+      hourMinuteToNumber(8, 45)
+    ),
+    new Subject(
+      "Advocacy",
+      hourMinuteToNumber(8, 45),
+      hourMinuteToNumber(9, 00)
+    ),
+    new Subject(
+      getStorage("subMonB1", "Period 1"),
+      hourMinuteToNumber(9, 0),
+      hourMinuteToNumber(9, 55)
+    ),
+    new Subject(
+      getStorage("subMonB2", "Period 2"),
+      hourMinuteToNumber(9, 55),
+      hourMinuteToNumber(10, 50)
+    ),
+    new Subject(
+      "Recess",
+      hourMinuteToNumber(10, 50),
+      hourMinuteToNumber(11, 15)
+    ),
+    new Subject(
+      getStorage("subMonB3", "Period 3"),
+      hourMinuteToNumber(11, 15),
+      hourMinuteToNumber(12, 10)
+    ),
+    new Subject(
+      getStorage("subMonB4", "Period 4"),
+      hourMinuteToNumber(12, 10),
+      hourMinuteToNumber(13, 05)
+    ),
+    new Subject(
+      "Lunch",
+      hourMinuteToNumber(13, 05),
+      hourMinuteToNumber(13, 40)
+    ),
+    new Subject(
+      getStorage("subMonB5", "Period 5"),
+      hourMinuteToNumber(13, 40),
+      hourMinuteToNumber(14, 35)
+    ),
+    new Subject(
+      getStorage("subMonB6", "Period 6"),
+      hourMinuteToNumber(14, 35),
+      hourMinuteToNumber(15, 30)
+    ),
+    new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
+  ], // Monday
+  [
+    new Subject(
+      "Before School",
+      hourMinuteToNumber(0, 0),
+      hourMinuteToNumber(8, 45)
+    ),
+    new Subject(
+      getStorage("subTueB1", "Period 1"),
+      hourMinuteToNumber(8, 45),
+      hourMinuteToNumber(9, 40)
+    ),
+    new Subject(
+      getStorage("subTueB2", "Period 2"),
+      hourMinuteToNumber(9, 40),
+      hourMinuteToNumber(10, 35)
+    ),
+    new Subject(
+      "Recess",
+      hourMinuteToNumber(10, 35),
+      hourMinuteToNumber(10, 55)
+    ),
+    new Subject(
+      getStorage("subTueB3", "Period 3"),
+      hourMinuteToNumber(10, 55),
+      hourMinuteToNumber(11, 50)
+    ),
+    new Subject(
+      getStorage("subTueB4", "Mod Time"),
+      hourMinuteToNumber(11, 50),
+      hourMinuteToNumber(12, 45)
+    ),
+    new Subject(
+      "Lunch",
+      hourMinuteToNumber(12, 45),
+      hourMinuteToNumber(13, 25)
+    ),
+    new Subject(
+      getStorage("subTueB5", "Period 5"),
+      hourMinuteToNumber(13, 25),
+      hourMinuteToNumber(14, 20)
+    ),
+    new Subject(
+      getStorage("subTueB6", "Period 6"),
+      hourMinuteToNumber(14, 20),
+      hourMinuteToNumber(15, 15)
+    ),
+    new Subject("Home", hourMinuteToNumber(15, 15), hourMinuteToNumber(16, 00)),
+  ], // Tuesday
+  [
+    new Subject(
+      "Before School",
+      hourMinuteToNumber(0, 0),
+      hourMinuteToNumber(8, 45)
+    ),
+    new Subject(
+      getStorage("subWedB1", "Period 1"),
+      hourMinuteToNumber(8, 45),
+      hourMinuteToNumber(9, 40)
+    ),
+    new Subject(
+      getStorage("subWedB2", "Period 2"),
+      hourMinuteToNumber(9, 40),
+      hourMinuteToNumber(10, 35)
+    ),
+    new Subject(
+      "Recess",
+      hourMinuteToNumber(10, 35),
+      hourMinuteToNumber(10, 55)
+    ),
+    new Subject(
+      getStorage("subWedB3", "Period 3"),
+      hourMinuteToNumber(10, 55),
+      hourMinuteToNumber(11, 50)
+    ),
+    new Subject(
+      getStorage("subWedB4", "Period 4"),
+      hourMinuteToNumber(11, 50),
+      hourMinuteToNumber(12, 45)
+    ),
+    new Subject(
+      "Lunch",
+      hourMinuteToNumber(12, 45),
+      hourMinuteToNumber(13, 25)
+    ),
+    new Subject(
+      getStorage("subWedB5", "Period 5"),
+      hourMinuteToNumber(13, 25),
+      hourMinuteToNumber(14, 20)
+    ),
+    new Subject(
+      getStorage("subWedB6", "Period 6"),
+      hourMinuteToNumber(14, 20),
+      hourMinuteToNumber(15, 15)
+    ),
+    new Subject("Home", hourMinuteToNumber(15, 15), hourMinuteToNumber(16, 00)),
+  ], // Wednesday
+  [
+    new Subject(
+      "Before School",
+      hourMinuteToNumber(0, 0),
+      hourMinuteToNumber(8, 45)
+    ),
+    new Subject(
+      getStorage("subThuB1", "Period 1"),
+      hourMinuteToNumber(8, 45),
+      hourMinuteToNumber(9, 40)
+    ),
+    new Subject(
+      getStorage("subThuB2", "Period 2"),
+      hourMinuteToNumber(9, 40),
+      hourMinuteToNumber(10, 35)
+    ),
+    new Subject(
+      "Recess",
+      hourMinuteToNumber(10, 35),
+      hourMinuteToNumber(10, 55)
+    ),
+    new Subject(
+      getStorage("subThuB3", "Period 3"),
+      hourMinuteToNumber(10, 55),
+      hourMinuteToNumber(11, 50)
+    ),
+    new Subject(
+      "Advocacy",
+      hourMinuteToNumber(11, 50),
+      hourMinuteToNumber(12, 30)
+    ),
+    new Subject(
+      "Lunch",
+      hourMinuteToNumber(12, 30),
+      hourMinuteToNumber(13, 10)
+    ),
+    new Subject(
+      getStorage("subThuA5", "Period 5"),
+      hourMinuteToNumber(13, 10),
+      hourMinuteToNumber(14, 05)
+    ),
+    new Subject(
+      getStorage("subThuA6", "Period 6"),
+      hourMinuteToNumber(14, 05),
+      hourMinuteToNumber(15, 00)
+    ),
+    new Subject("Home", hourMinuteToNumber(15, 00), hourMinuteToNumber(16, 00)),
+  ], // Thursday
+  [
+    new Subject(
+      "Before School",
+      hourMinuteToNumber(0, 0),
+      hourMinuteToNumber(8, 45)
+    ),
+    new Subject(
+      getStorage("subFriB1", "Period 1"),
+      hourMinuteToNumber(9, 0),
+      hourMinuteToNumber(9, 55)
+    ),
+    new Subject(
+      getStorage("subFriB2", "Period 2"),
+      hourMinuteToNumber(9, 55),
+      hourMinuteToNumber(10, 50)
+    ),
+    new Subject(
+      "Recess",
+      hourMinuteToNumber(10, 50),
+      hourMinuteToNumber(11, 15)
+    ),
+    new Subject(
+      getStorage("subFriB3", "Period 3"),
+      hourMinuteToNumber(11, 15),
+      hourMinuteToNumber(12, 10)
+    ),
+    new Subject(
+      getStorage("subFriB4", "Period 4"),
+      hourMinuteToNumber(12, 10),
+      hourMinuteToNumber(13, 05)
+    ),
+    new Subject(
+      "Lunch",
+      hourMinuteToNumber(13, 05),
+      hourMinuteToNumber(13, 40)
+    ),
+    new Subject(
+      getStorage("subFriB5", "Period 5"),
+      hourMinuteToNumber(13, 40),
+      hourMinuteToNumber(14, 35)
+    ),
+    new Subject(
+      getStorage("subFriB6", "Period 6"),
+      hourMinuteToNumber(14, 35),
+      hourMinuteToNumber(15, 30)
+    ),
+    new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
+  ], // Friday
+  [], // Saturday
+];
+
+function updateTimetable() {
+  // remember to add week 1 week 2 bullshit
+  // get current time
+  var currentTime = new Date();
+  var nowStamp = hourMinuteToNumber(
+    currentTime.getHours(),
+    currentTime.getMinutes(),
+    currentTime.getSeconds()
+  );
+  // get current day
+  const currentDay = currentTime.getDay();
+
+  nowStamp = hourMinuteToNumber(13, 4, 2);
+
+  if (currentDay == 0) {
+    currentDay == 7;
+  }
+
+  if (currentDay == 6 || currentDay == 7) {
+    // weekend
+    document.getElementById("nextSubject").innerHTML = "Nothing! 🥳";
+  } else {
+    // weekday
+    var starts = [];
+    var ends = [];
+    // for every subject in day
+    for (let j = 0; j < timetable[currentDay].length; j++) {
+      // get start
+      const start = timetable[currentDay][j].start;
+      // append start to times
+      starts.push(start);
+      // get end
+      const end = timetable[currentDay][j].finish;
+      // append end to times
+      ends.push(end);
+    }
+    console.log(timetable, starts, ends);
+    var closest = starts.reduce(function (prev, curr) {
+      return Math.abs(curr - nowStamp) < Math.abs(prev - nowStamp)
+        ? curr
+        : prev;
+    });
+    console.log(closest, ends.indexOf(closest) + 1);
+    if (closest < nowStamp) {
+      closest = ends[ends.indexOf(closest) + 1];
+    }
+    if (ends.indexOf(closest) >= 10) {
+      console.log(ends.indexOf(closest));
+      document.getElementById("nextSubject").innerHTML = "Nothing! 🥳";
+    } else {
+      var subjectName = timetable[currentDay][starts.indexOf(closest)].name;
+      var subjectStart = convertSeconds(closest - nowStamp);
+      if (subjectStart[0] == "0") {
+        subjectStartString =
+          subjectStart[1] + " minutes " + subjectStart[2] + " seconds";
+        if (subjectStart[1] == "0") {
+          subjectStartString = subjectStart[2] + " seconds";
+        } else if (subjectStart[1] == "1") {
+          subjectStartString =
+            subjectStart[1] + " minute " + subjectStart[2] + " seconds";
+        }
+
+        console.log(subjectStart, subjectStartString);
+
+        document.getElementById("nextSubject").innerHTML =
+          subjectName + " in " + subjectStartString;
+      }
+    }
+  }
+}
+
+updateTimetable();
 
 // if id settingsbtnimg is clicked, openSettingsTab
 $("#settingsbtnimg").click(openSettingsTab);
 
 function openSettingsTab() {
-    // console.log("pog");
-    // if timebg is hidden
-    if ($("#timebg").css("display") == "none") {
-        $("#timebg").show();
-        $("#settings").hide();
-    } else if ($("#timebg").css("display") == "block") {
-        $("#timebg").hide();
-        $("#settings").show();
-    }
-};
+  // console.log("pog");
+  // if timebg is hidden
+  if ($("#timebg").css("display") == "none") {
+    $("#timebg").show();
+    $("#settings").hide();
+  } else if ($("#timebg").css("display") == "block") {
+    $("#timebg").hide();
+    $("#settings").show();
+  }
+}
 
 function updateTime() {
-    $(document).ready(function () {
-        var currentTime = new Date();
-        var hours = currentTime.getHours();
-        var minutes = currentTime.getMinutes();
-        var day = currentTime.getDay();
-        var date = currentTime.getDate();
-        var month = currentTime.getMonth();
-        // convert day to text
-        var days = [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-        ];
-        var dayText = days[day];
-        // add contraction to date
-        var dateText = date + "";
-        if (date === 1) {
-            dateText = date + "st";
-        } else if (date === 2) {
-            dateText = date + "nd";
-        } else if (date === 3) {
-            dateText = date + "rd";
-        } else if (date < 21) {
-            dateText = date + "th";
-        }
+  $(document).ready(function () {
+    var currentTime = new Date();
+    var hours = currentTime.getHours();
+    var minutes = currentTime.getMinutes();
+    var day = currentTime.getDay();
+    var date = currentTime.getDate();
+    var month = currentTime.getMonth();
+    // convert day to text
+    var days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    var dayText = days[day];
+    // add contraction to date
+    var dateText = date + "";
+    if (date === 1) {
+      dateText = date + "st";
+    } else if (date === 2) {
+      dateText = date + "nd";
+    } else if (date === 3) {
+      dateText = date + "rd";
+    } else if (date < 21) {
+      dateText = date + "th";
+    }
 
-        // convert month to text
-        var months = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-        ];
-        var monthText = months[month];
-        // convert date to text
+    // convert month to text
+    var months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    var monthText = months[month];
+    // convert date to text
 
-        // console.log(d_str);
+    // console.log(d_str);
 
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
 
-        // console.log(hours);
+    // console.log(hours);
 
-        // update bgimg based on time
-        var bgimg = "";
-        if (hours >= 7 && hours < 9) {
-            bgimg = "img/sunset.jpg";
-        } else if (hours >= 9 && hours < 17) {
-            bgimg = "img/day.jpg";
-        } else if (hours >= 17 && hours < 18) {
-            bgimg = "img/sunset.jpg";
-        } else if (hours >= 18 && hours < 24) {
-            bgimg = "img/night.jpg";
-        } else if (hours >= 0 && hours < 6) {
-            bgimg = "img/night.jpg";
-        }
-        document.getElementById("bgimg").src = bgimg;
+    // update bgimg based on time
+    var bgimg = "";
+    if (hours >= 7 && hours < 9) {
+      bgimg = "img/sunset.jpg";
+    } else if (hours >= 9 && hours < 17) {
+      bgimg = "img/day.jpg";
+    } else if (hours >= 17 && hours < 18) {
+      bgimg = "img/sunset.jpg";
+    } else if (hours >= 18 && hours < 24) {
+      bgimg = "img/night.jpg";
+    } else if (hours >= 0 && hours < 6) {
+      bgimg = "img/night.jpg";
+    }
+    document.getElementById("bgimg").src = bgimg;
 
-        if (hours > 12) {
-            var AMPM = "PM";
-            hours -= 12;
-        } else {
-            var AMPM = "AM";
-        }
-        var d_str = dayText + ", " + dateText + " " + monthText;
-        var t_str = hours + ":" + minutes + " " + AMPM;
+    if (hours > 12) {
+      var AMPM = "PM";
+      hours -= 12;
+    } else {
+      var AMPM = "AM";
+    }
+    var d_str = dayText + ", " + dateText + " " + monthText;
+    var t_str = hours + ":" + minutes + " " + AMPM;
 
-        $("#time").text(t_str);
-        $("#date").text(d_str);
-    });
+    $("#time").text(t_str);
+    $("#date").text(d_str);
+  });
 }
 updateTime(); // immeditatelly runs the function, so that there is no lag
 getWeatherData();
@@ -136,9 +729,57 @@ r.style.setProperty("--blue", "lightblue");
 //set every element to be unable to be dragged
 var elements = document.getElementsByClassName("draggable");
 for (var i = 0; i < elements.length; i++) {
-    elements[i].setAttribute("draggable", "false");
+  elements[i].setAttribute("draggable", "false");
 }
 
+for (weekID of ["A", "B"]) {
+  for (day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]) {
+    let dayTitle = document.createElement("div");
+    dayTitle.classList.add("evenperfecter");
+    dayTitle.innerHTML = `${
+      ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"][day]
+    } ${weekID}`;
+    document.getElementById("timetableInputHolder").appendChild(dayTitle);
+    let theflexbox = document.createElement("div");
+    theflexbox.classList.add("flexboxlol");
+    for (period of [1, 2, 3, 4, 5, 6]) {
+      let inputHolder = document.createElement("div");
+      let label = document.createElement("label");
+      let input = document.createElement("input");
+      // label.innerText = `${period}: `;
+      input.value = getStorage(
+        `sub${["Mon", "Tue", "Wed", "Thu", "Fri"][day]}${weekID}${period}`,
+        `Period ${period}`
+      );
+      if (day == 3 && period == 4) {
+        input.value = "Advocacy";
+        input.disabled = true;
+      }
+      let val = `sub${
+        ["Mon", "Tue", "Wed", "Thu", "Fri"][day]
+      }${weekID}${period}`;
+      input.addEventListener("keyup", function () {
+        // console.log(val);
+        localStorage.setItem(val, this.value);
+      });
+      inputHolder.appendChild(label);
+      inputHolder.appendChild(input);
+      input.classList.add(
+        "reallytinyimeanabsolutelymicroscopicyouwillneedamagnifyingglasstoseethis"
+      );
+      theflexbox.appendChild(inputHolder);
+    }
+    theflexbox.classList.add(
+      "reallytinyimeanabsolutelymicroscopicyouwillneedamagnifyingglasstoseethis"
+    );
+    document.getElementById("timetableInputHolder").appendChild(theflexbox);
+  }
+  let br = document.createElement("br");
+  document.getElementById("timetableInputHolder").appendChild(br);
+  br.classList.add(
+    "reallytinyimeanabsolutelymicroscopicyouwillneedamagnifyingglasstoseethis"
+  );
+}
 
 // console.log(localStorage)
 var localStorageImageOpacity = localStorage.getItem("image-opacity");
@@ -156,91 +797,91 @@ var browser = localStorage.getItem("browser");
 var localStorageBackground = localStorage.getItem("wallpaper");
 
 if (localStorageBgEffect === null) {
-    localStorageBgEffect = "none";
+  localStorageBgEffect = "none";
 }
 if (localStorageImageOpacity === null) {
-    localStorageImageOpacity = "50";
+  localStorageImageOpacity = "50";
 }
 if (localStorageBgOpacity === null) {
-    localStorageBgOpacity = "40";
+  localStorageBgOpacity = "40";
 }
 if (localStorageDate === null) {
-    localStorageDate = "checked";
+  localStorageDate = "checked";
 }
 if (localStorageTime === null) {
-    localStorageTime = "checked";
+  localStorageTime = "checked";
 }
 if (localStorageWeather === null) {
-    localStorageWeather = "checked";
+  localStorageWeather = "checked";
 }
 if (localStorageTodo === null) {
-    localStorageTodo = "false";
+  localStorageTodo = "false";
 }
 if (localStorageEasyTabs === null) {
-    localStorageEasyTabs = "checked";
+  localStorageEasyTabs = "checked";
 }
 if (localStorageSearchBar === null) {
-    localStorageSearchBar = "checked";
+  localStorageSearchBar = "checked";
 }
 if (localStorageFontSize === null) {
-    localStorageFontSize = "10";
+  localStorageFontSize = "10";
 }
 if (localStorageFontWeight === null) {
-    localStorageFontWeight = "400";
+  localStorageFontWeight = "400";
 }
 if (browser === null) {
-    browser = "Google";
+  browser = "Google";
 }
 if (localStorageBackground === null) {
-    localStorageBackground = "dynamic";
+  localStorageBackground = "dynamic";
 }
 
 if (localStorageBgEffect === "none") {
-    $("#stripestoggle").prop("checked", false);
+  $("#stripestoggle").prop("checked", false);
 } else {
-    $("#stripestoggle").prop("checked", true);
+  $("#stripestoggle").prop("checked", true);
 }
 if (localStorageDate === "checked") {
-    $("#date").show();
-    $("#datetoggle").prop("checked", true);
+  $("#date").show();
+  $("#datetoggle").prop("checked", true);
 } else {
-    $("#date").hide();
-    $("#datetoggle").prop("checked", false);
+  $("#date").hide();
+  $("#datetoggle").prop("checked", false);
 }
 if (localStorageTime === "checked") {
-    $("#time").show();
-    $("#timetoggle").prop("checked", true);
+  $("#time").show();
+  $("#timetoggle").prop("checked", true);
 } else {
-    $("#time").hide();
-    $("#timetoggle").prop("checked", false);
+  $("#time").hide();
+  $("#timetoggle").prop("checked", false);
 }
 if (localStorageWeather === "checked") {
-    $("#weather").show();
-    $("#weathertoggle").prop("checked", true);
+  $("#weather").show();
+  $("#weathertoggle").prop("checked", true);
 } else {
-    $("#weather").hide();
-    $("#weathertoggle").prop("checked", false);
+  $("#weather").hide();
+  $("#weathertoggle").prop("checked", false);
 }
 if (localStorageTodo === "checked") {
-    $("#todo").show();
-    $("#todotoggle").prop("checked", true);
+  $("#todo").show();
+  $("#todotoggle").prop("checked", true);
 } else {
-    $("#todo").hide();
-    $("#todotoggle").attr("checked", false);
+  $("#todo").hide();
+  $("#todotoggle").attr("checked", false);
 }
 if (localStorageEasyTabs === "checked") {
-    $("#easyTabs").show();
-    $("#easytabstoggle").attr("checked", true);
+  $("#easyTabs").show();
+  $("#easytabstoggle").attr("checked", true);
 } else {
-    $("#easyTabs").hide();
-    $("#easytabstoggle").attr("checked", false);
+  $("#easyTabs").hide();
+  $("#easytabstoggle").attr("checked", false);
 }
 if (localStorageSearchBar === "checked") {
-    $("#searchBar").show();
-    $("#searchbartoggle").attr("checked", true);
+  $("#searchBar").show();
+  $("#searchbartoggle").attr("checked", true);
 } else {
-    $("#searchBar").hide();
-    $("#searchbartoggle").attr("checked", false);
+  $("#searchBar").hide();
+  $("#searchbartoggle").attr("checked", false);
 }
 
 $("#custombgselector").hide();
@@ -250,109 +891,108 @@ $("#night").hide();
 $("#sunset").hide();
 $("#bgimg").hide();
 if (localStorageBackground === "dynamic") {
-    $("#wallpaper").val("dynamic");
-    $("#bgimg").show();
+  $("#wallpaper").val("dynamic");
+  $("#bgimg").show();
 } else if (localStorageBackground === "day") {
-    $("#wallpaper").val("day");
-    $("#day").show();
+  $("#wallpaper").val("day");
+  $("#day").show();
 } else if (localStorageBackground === "night") {
-    $("#wallpaper").val("night");
-    $("#night").show();
+  $("#wallpaper").val("night");
+  $("#night").show();
 } else if (localStorageBackground === "sunset") {
-    $("#wallpaper").val("sunset");
-    $("#sunset").show();
+  $("#wallpaper").val("sunset");
+  $("#sunset").show();
 } else if (localStorageBackground === "custom") {
-    $("#wallpaper").val("custom");
-    $("#custombgselector").show();
-    $("#custombgimg").show();
-    // set custombgimg src to localStorage
-    document.getElementById("custombgimg").src =
-        localStorage.getItem("custombg");
+  $("#wallpaper").val("custom");
+  $("#custombgselector").show();
+  $("#custombgimg").show();
+  // set custombgimg src to localStorage
+  document.getElementById("custombgimg").src = localStorage.getItem("custombg");
 }
 
 var searchQuery = "";
 if (browser === "Google") {
-    // set searchBar placeholder to chrome
-    $("#searchBar").attr("placeholder", "Search with Google");
-    //set browser selected to Google
-    $("#browser").val("Google");
-    searchQuery = "https://google.com/search?q=";
+  // set searchBar placeholder to chrome
+  $("#searchBar").attr("placeholder", "Search with Google");
+  //set browser selected to Google
+  $("#browser").val("Google");
+  searchQuery = "https://google.com/search?q=";
 } else if (browser === "Bing") {
-    // set searchBar placeholder to edge
-    $("#browser").val("Bing");
-    $("#searchBar").attr("placeholder", "Search with Bing");
-    searchQuery = "https://bing.com/?q=";
+  // set searchBar placeholder to edge
+  $("#browser").val("Bing");
+  $("#searchBar").attr("placeholder", "Search with Bing");
+  searchQuery = "https://bing.com/?q=";
 } else if (browser === "DuckDuckGo") {
-    // set searchBar placeholder to duckduckgo
-    $("#browser").val("DuckDuckGo");
-    $("#searchBar").attr("placeholder", "Search with DuckDuckGo");
-    searchQuery = "https://duckduckgo.com/?q=";
+  // set searchBar placeholder to duckduckgo
+  $("#browser").val("DuckDuckGo");
+  $("#searchBar").attr("placeholder", "Search with DuckDuckGo");
+  searchQuery = "https://duckduckgo.com/?q=";
 } else if (browser === "Yandex") {
-    // set searchBar placeholder to yandex
-    $("#browser").val("Yandex");
-    $("#searchBar").attr("placeholder", "Search with Yandex");
-    searchQuery = "https://yandex.com/?q=";
+  // set searchBar placeholder to yandex
+  $("#browser").val("Yandex");
+  $("#searchBar").attr("placeholder", "Search with Yandex");
+  searchQuery = "https://yandex.com/?q=";
 }
 
 //if browser selection changes
 $("#browser").on("change", function () {
-    // get the selected option
-    var selectedOption = $(this).find("option:selected");
-    // get the value of the selected option
-    var selectedValue = selectedOption.val();
-    // console.log(selectedValue);
-    localStorage.setItem("browser", selectedValue);
-    if (
-        selectedValue === "Bing" ||
-        selectedValue === "DuckDuckGo" ||
-        selectedValue === "Yandex"
-    ) {
-        $("#searchBar").attr("placeholder", "Search with " + selectedValue);
-        searchQuery = "https://" + selectedValue + ".com/?q=";
-    } else {
-        $("#searchBar").attr("placeholder", "Search with Google");
-        searchQuery = "https://google.com/search?q=";
-    }
+  // get the selected option
+  var selectedOption = $(this).find("option:selected");
+  // get the value of the selected option
+  var selectedValue = selectedOption.val();
+  // console.log(selectedValue);
+  localStorage.setItem("browser", selectedValue);
+  if (
+    selectedValue === "Bing" ||
+    selectedValue === "DuckDuckGo" ||
+    selectedValue === "Yandex"
+  ) {
+    $("#searchBar").attr("placeholder", "Search with " + selectedValue);
+    searchQuery = "https://" + selectedValue + ".com/?q=";
+  } else {
+    $("#searchBar").attr("placeholder", "Search with Google");
+    searchQuery = "https://google.com/search?q=";
+  }
 });
 
 //if background selection changes
 $("#wallpaper").on("change", function () {
-    // get the selected option
-    var selectedOption = $(this).find("option:selected");
-    // get the value of the selected option
-    var selectedValue = selectedOption.val();
-    // console.log(selectedValue);
-    localStorage.setItem("wallpaper", selectedValue);
-    $("#custombgselector").hide();
-    $("#custombgimg").hide();
-    $("#day").hide();
-    $("#night").hide();
-    $("#sunset").hide();
-    $("#bgimg").hide();
-    if (selectedValue === "dynamic") {
-        $("#bgimg").show();
-    } else if (selectedValue === "day") {
-        $("#day").show();
-    } else if (selectedValue === "night") {
-        $("#night").show();
-    } else if (selectedValue === "sunset") {
-        $("#sunset").show();
-    } else if (selectedValue === "custom") {
-        $("#custombgselector").show();
-        $("#custombgimg").show();
-    }
+  // get the selected option
+  var selectedOption = $(this).find("option:selected");
+  // get the value of the selected option
+  var selectedValue = selectedOption.val();
+  // console.log(selectedValue);
+  localStorage.setItem("wallpaper", selectedValue);
+  $("#custombgselector").hide();
+  $("#custombgimg").hide();
+  $("#day").hide();
+  $("#night").hide();
+  $("#sunset").hide();
+  $("#bgimg").hide();
+  if (selectedValue === "dynamic") {
+    $("#bgimg").show();
+  } else if (selectedValue === "day") {
+    $("#day").show();
+  } else if (selectedValue === "night") {
+    $("#night").show();
+  } else if (selectedValue === "sunset") {
+    $("#sunset").show();
+  } else if (selectedValue === "custom") {
+    $("#custombgselector").show();
+    $("#custombgimg").show();
+  }
 });
 
 //if custombg selection changes
 $("#custombg").on("change", function () {
-    //upload file to localstorage
-    var file = $("#custombg")[0].files[0];
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        localStorage.setItem("custombg", e.target.result);
-        document.getElementById("custombgimg").src = e.target.result;
-    };
-    reader.readAsDataURL(file);
+  //upload file to localstorage
+  var file = $("#custombg")[0].files[0];
+  var reader = new FileReader();
+  reader.onload = function (e) {
+    localStorage.setItem("custombg", e.target.result);
+    document.getElementById("custombgimg").src = e.target.result;
+  };
+  reader.readAsDataURL(file);
 });
 
 $("#imageOpacitySpan").text(localStorageImageOpacity);
@@ -367,87 +1007,81 @@ $("#fontWeightSlider").val(localStorageFontWeight);
 //set css to local storage
 
 document.documentElement.style.setProperty(
-    "--image-opacity",
-    localStorageImageOpacity / 100
+  "--image-opacity",
+  localStorageImageOpacity / 100
 );
 document.documentElement.style.setProperty(
-    "--bg-opacity",
-    localStorageBgOpacity / 100
+  "--bg-opacity",
+  localStorageBgOpacity / 100
 );
 document.documentElement.style.setProperty(
-    "--font-size",
-    localStorageFontSize / 10 + "rem"
+  "--font-size",
+  localStorageFontSize / 10 + "rem"
 );
 document.documentElement.style.setProperty(
-    "--font-weight",
-    localStorageFontWeight
+  "--font-weight",
+  localStorageFontWeight
 );
-document.documentElement.style.setProperty(
-    "--bg-effect",
-    localStorageBgEffect
-);
+document.documentElement.style.setProperty("--bg-effect", localStorageBgEffect);
 
 // if enter is pressed
 $("#searchBar").keypress(function (e) {
-    if (e.which === 13) {
-        // console.log("amogus");
-        // search with duckduckgo
-        var query = $("#searchBar").val();
-        if (query.length > 0) {
-            window.location.href = searchQuery + query;
-        }
+  if (e.which === 13) {
+    // console.log("amogus");
+    // search with duckduckgo
+    var query = $("#searchBar").val();
+    if (query.length > 0) {
+      window.location.href = searchQuery + query;
     }
+  }
 });
 // when bgOpacitySlider is being interacted
 $("#bgOpacitySlider").on("input", function () {
-    $("#bgOpacitySpan").text($(this).val());
-    // set css variable --bg-opacity to slider value
-    //save slider to local storage
-    localStorage.setItem("bg-opacity", $(this).val());
-    document.documentElement.style.setProperty(
-        "--bg-opacity",
-        $(this).val() / 100
-    );
+  $("#bgOpacitySpan").text($(this).val());
+  // set css variable --bg-opacity to slider value
+  //save slider to local storage
+  localStorage.setItem("bg-opacity", $(this).val());
+  document.documentElement.style.setProperty(
+    "--bg-opacity",
+    $(this).val() / 100
+  );
 });
 // when imageOpacitySlider is being interacted
 $("#imageOpacitySlider").on("input", function () {
-    $("#imageOpacitySpan").text($(this).val());
-    //save slider to local storage
-    localStorage.setItem("image-opacity", $(this).val());
-    document.documentElement.style.setProperty(
-        "--image-opacity",
-        $(this).val() / 100
-    );
+  $("#imageOpacitySpan").text($(this).val());
+  //save slider to local storage
+  localStorage.setItem("image-opacity", $(this).val());
+  document.documentElement.style.setProperty(
+    "--image-opacity",
+    $(this).val() / 100
+  );
 });
 // when fontSizeSlider is being interacted
 $("#fontSizeSlider").on("input", function () {
-    $("#fontSizeSpan").text($(this).val());
-    //save slider to local storage
-    localStorage.setItem("font-size", $(this).val());
-    document.documentElement.style.setProperty(
-        "--font-size",
-        $(this).val() / 10 + "rem"
-    );
+  $("#fontSizeSpan").text($(this).val());
+  //save slider to local storage
+  localStorage.setItem("font-size", $(this).val());
+  document.documentElement.style.setProperty(
+    "--font-size",
+    $(this).val() / 10 + "rem"
+  );
 });
 // when fontWeightSlider is being interacted
 $("#fontWeightSlider").on("input", function () {
-    $("#fontWeightSpan").text($(this).val());
-    //save slider to local storage
-    localStorage.setItem("font-weight", $(this).val());
-    document.documentElement.style.setProperty(
-        "--font-weight",
-        $(this).val()
-    );
+  $("#fontWeightSpan").text($(this).val());
+  //save slider to local storage
+  localStorage.setItem("font-weight", $(this).val());
+  document.documentElement.style.setProperty("--font-weight", $(this).val());
 });
 
 // save todolist to local storage when edited
 $("#todolist").on("input", function () {
-    localStorage.setItem("todolist", $(this).val());
+  localStorage.setItem("todolist", $(this).val());
 });
 //get todolist from local storage
 var localStorageTodolist = localStorage.getItem("todolist");
 if (localStorageTodolist === null) {
-    localStorageTodolist = "Todo list (Click on me): ";
+  localStorageTodolist = "Todo list (Click on me): ";
 }
 $("#todolist").val(localStorageTodolist);
 //set todolist to textarea
@@ -457,84 +1091,84 @@ $("#todolist").blur();
 
 $("#datetoggle").click(toggleDate);
 function toggleDate() {
-    if ($("#datetoggle").is(":checked")) {
-        $("#date").show();
-        localStorage.setItem("date", "checked");
-    } else {
-        $("#date").hide();
-        localStorage.setItem("date", "false");
-    }
+  if ($("#datetoggle").is(":checked")) {
+    $("#date").show();
+    localStorage.setItem("date", "checked");
+  } else {
+    $("#date").hide();
+    localStorage.setItem("date", "false");
+  }
 }
 $("#searchbartoggle").click(toggleSearchBar);
 function toggleSearchBar() {
-    if ($("#searchbartoggle").is(":checked")) {
-        $("#searchBar").show();
-        localStorage.setItem("searchBar", "checked");
-    } else {
-        $("#searchBar").hide();
-        localStorage.setItem("searchBar", "false");
-    }
+  if ($("#searchbartoggle").is(":checked")) {
+    $("#searchBar").show();
+    localStorage.setItem("searchBar", "checked");
+  } else {
+    $("#searchBar").hide();
+    localStorage.setItem("searchBar", "false");
+  }
 }
 // if todotoggle is clicked
 $("#todotoggle").click(toggleTodo);
 function toggleTodo() {
-    console.log("toggleTodo");
-    if ($("#todotoggle").is(":checked")) {
-        $("#todo").show();
-        localStorage.setItem("todo", "checked");
-    } else {
-        $("#todo").hide();
-        localStorage.setItem("todo", "false");
-    }
+  console.log("toggleTodo");
+  if ($("#todotoggle").is(":checked")) {
+    $("#todo").show();
+    localStorage.setItem("todo", "checked");
+  } else {
+    $("#todo").hide();
+    localStorage.setItem("todo", "false");
+  }
 }
 $("#timetoggle").click(toggleTime);
 function toggleTime() {
-    if ($("#timetoggle").is(":checked")) {
-        $("#time").show();
-        localStorage.setItem("time", "checked");
-    } else {
-        $("#time").hide();
-        localStorage.setItem("time", "false");
-    }
+  if ($("#timetoggle").is(":checked")) {
+    $("#time").show();
+    localStorage.setItem("time", "checked");
+  } else {
+    $("#time").hide();
+    localStorage.setItem("time", "false");
+  }
 }
 $("#easytabstoggle").click(toggleEasyTabs);
 function toggleEasyTabs() {
-    if ($("#easytabstoggle").is(":checked")) {
-        $("#easyTabs").show();
-        localStorage.setItem("easyTabs", "checked");
-    } else {
-        $("#easyTabs").hide();
-        localStorage.setItem("easyTabs", "false");
-    }
+  if ($("#easytabstoggle").is(":checked")) {
+    $("#easyTabs").show();
+    localStorage.setItem("easyTabs", "checked");
+  } else {
+    $("#easyTabs").hide();
+    localStorage.setItem("easyTabs", "false");
+  }
 }
 $("#weathertoggle").click(toggleWeather);
 function toggleWeather() {
-    if ($("#weathertoggle").is(":checked")) {
-        $("#weather").show();
-        localStorage.setItem("weather", "checked");
-    } else {
-        $("#weather").hide();
-        localStorage.setItem("weather", "false");
-    }
+  if ($("#weathertoggle").is(":checked")) {
+    $("#weather").show();
+    localStorage.setItem("weather", "checked");
+  } else {
+    $("#weather").hide();
+    localStorage.setItem("weather", "false");
+  }
 }
 // when stripestoggle is clicked
 $("#stripestoggle").click(toggleStripes);
 function toggleStripes() {
-    if ($("#stripestoggle").is(":checked")) {
-        // change css variable bg-effect to "stripes"
-        document.documentElement.style.setProperty(
-            "--bg-effect",
-            "repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) 50px, rgba(0, 0, 0, 0.4) 50px, rgba(0, 0, 0, 0.4) 100px"
-        );
-        // save to local storage
-        localStorage.setItem(
-            "bg-effect",
-            "repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) 50px, rgba(0, 0, 0, 0.4) 50px, rgba(0, 0, 0, 0.4) 100px"
-        );
-    } else {
-        // change css variable bg-effect to "none"
-        document.documentElement.style.setProperty("--bg-effect", "none");
-        //save to local storage
-        localStorage.setItem("bg-effect", "none");
-    }
+  if ($("#stripestoggle").is(":checked")) {
+    // change css variable bg-effect to "stripes"
+    document.documentElement.style.setProperty(
+      "--bg-effect",
+      "repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) 50px, rgba(0, 0, 0, 0.4) 50px, rgba(0, 0, 0, 0.4) 100px"
+    );
+    // save to local storage
+    localStorage.setItem(
+      "bg-effect",
+      "repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) 50px, rgba(0, 0, 0, 0.4) 50px, rgba(0, 0, 0, 0.4) 100px"
+    );
+  } else {
+    // change css variable bg-effect to "none"
+    document.documentElement.style.setProperty("--bg-effect", "none");
+    //save to local storage
+    localStorage.setItem("bg-effect", "none");
+  }
 }

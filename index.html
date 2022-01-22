@@ -108,6 +108,10 @@
       font-size: var(--font-size-medium);
     }
 
+    .reallytinyimeanabsolutelymicroscopicyouwillneedamagnifyingglasstoseethis {
+      font-size: 0.5rem;
+    }
+
     /* search bar css */
     .search-bar {
       color: var(--text-color);
@@ -132,6 +136,16 @@
 
     .search-bar:focus {
       outline: 0px;
+    }
+
+    .flexboxlol {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      justify-content: center;
+    }
+    .flexboxlol div {
+      padding: 0 0.5rem;
     }
 
     .image {
@@ -186,7 +200,7 @@
     }
     #settings {
       overflow: auto;
-      width: 40%;
+      width: 50%;
       max-height: 70%;
     }
 
@@ -289,6 +303,14 @@
     </div>
     <div
       class="timebg"
+      id="timetable"
+      style="bottom: 1rem; right: 1rem; position: fixed"
+    >
+      <p>Timetable</p>
+      <p>Up next: <span id="nextSubject"></span></p>
+    </div>
+    <div
+      class="timebg"
       style="
         top: 1rem;
         right: 1rem;
@@ -318,6 +340,13 @@
 
     <div class="timebg center" id="settings" style="display: none">
       <h1 class="medium">Settings</h1>
+      <div>
+        Timetable:
+        <div
+          id="timetableInputHolder"
+          style="display: block; clear: both"
+        ></div>
+      </div>
 
       <!-- background selector -->
       <div style="display: flex; justify-content: center; align-items: center">
