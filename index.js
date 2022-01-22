@@ -548,6 +548,7 @@ const timetable = [
 
 function updateTimetable() {
   // remember to add week 1 week 2 bullshit
+  // if week 2 just add 7 to the day
   // get current time
   var currentTime = new Date();
   var nowStamp = hourMinuteToNumber(
@@ -558,7 +559,7 @@ function updateTimetable() {
   // get current day
   const currentDay = currentTime.getDay();
 
-  nowStamp = hourMinuteToNumber(13, 4, 2);
+  nowStamp = hourMinuteToNumber(12, 4, 2);
 
   if (currentDay == 0) {
     currentDay == 7;
