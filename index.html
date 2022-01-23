@@ -38,6 +38,7 @@
       --font-weight: 400;
       --font-size-large: calc(5 * var(--font-size));
       --font-size-medium: calc(1.5 * var(--font-size));
+      --font-size-small: calc(0.75 * var(--font-size));
       --font-size-tinyastronomical: calc(0.65 * var(--font-size));
     }
 
@@ -109,6 +110,10 @@
       font-size: var(--font-size-medium);
     }
 
+    .small {
+      font-size: var(--font-size-small);
+    }
+
     .reallytinyimeanabsolutelymicroscopicyouwillneedamagnifyingglasstoseethis {
       font-size: var(--font-size-tinyastronomical);
     }
@@ -156,6 +161,10 @@
       padding: 0 0.5rem;
     }
 
+    #easyTabsInputHolder {
+      padding-bottom: 2rem;
+    }
+
     .image {
       /* transition: ease-in-out 0.4s; */
       opacity: var(--image-opacity);
@@ -165,10 +174,31 @@
       width: 100%;
     }
 
+    .buttonFunky {
+      background-color: rgba(0, 0, 0, 0);
+      color: white;
+      width: 50%;
+      max-width: 50%;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    .buttonFunky:hover {
+      background-color: rgba(0, 0, 0, 1);
+      color: pink;
+    }
+
     .timebg {
       background-color: rgba(0, 0, 0, var(--bg-opacity));
       padding: 3rem;
       border-radius: 25px;
+    }
+
+    .addButton {
+      padding: 0.2rem 2rem 0.2rem 2rem;
+      border-radius: 5px;
     }
 
     .slider {
@@ -274,9 +304,7 @@
           autocomplete="off"
         />
       </div>
-      <div style="display: flex; justify-content: center" id="easyTabs">
-        
-      </div>
+      <div style="display: flex; justify-content: center" id="easyTabs"></div>
     </div>
     <div
       class="timebg"
@@ -314,7 +342,48 @@
         id="todolist"
       ></textarea>
     </div>
-
+    <div
+      class="center"
+      id="addEasyTabs"
+      style="
+        position: fixed;
+        width: 18%;
+        padding: 1.5rem;
+        background-color: rgb(25, 25, 30);
+        border-radius: 25px;
+        z-index: 100;
+      "
+    >
+      <p style="text-align: left; padding-bottom: 20px">Add a new bookmark</p>
+      <div style="display: block">
+        <p class="small" style="text-align: left; padding-bottom: 10px">Name</p>
+        <input
+          id="easytabsname"
+          type="text"
+          data-lpignore="true"
+          autocomplete="off"
+          data-form-type="other"
+          style="width: 100%"
+        />
+      </div>
+      <br />
+      <div style="display: block; padding-bottom: 40px">
+        <p class="small" style="text-align: left; padding-bottom: 10px">URL</p>
+        <input
+          id="easytabsurl"
+          type="text"
+          data-lpignore="true"
+          autocomplete="off"
+          data-form-type="other"
+          style="width: 100%"
+        />
+      </div>
+      <!-- two buttons, cancel and add -->
+      <div style="display: flex; justify-content: space-between">
+        <button class="buttonFunky" id="addEasyTabsCancel">Cancel</button>
+        <button class="buttonFunky" id="addEasyTabsAdd">Add</button>
+      </div>
+    </div>
     <div class="timebg center" id="settings" style="display: none">
       <h1 class="medium">Settings</h1>
       <div>
@@ -474,6 +543,15 @@
         id="fontWeightSlider"
         step="100"
       />
+      <div style="display: block">
+        <p class="medium">Easy Tabs Links</p>
+        <div id="easyTabsInputHolder" style="display: flex">
+          <div style="min-width: 25%" id="column1"></div>
+          <div style="min-width: 25%" id="column2"></div>
+          <div style="min-width: 25%" id="column3"></div>
+          <div style="min-width: 25%" id="column4"></div>
+        </div>
+      </div>
       <!-- input selection box change browsrs -->
       <div style="display: flex; justify-content: center; align-items: center">
         <p>Browser:</p>

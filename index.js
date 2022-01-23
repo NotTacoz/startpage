@@ -566,11 +566,12 @@ function updateTimetable() {
   // get week of the year
   const currentWeek = currentTime.getWeek() % 2;
 
-  if (currentWeek == 0) { // if currentweek is even
+  if (currentWeek == 0) {
+    // if currentweek is even
     currentDay += 7;
   }
 
-//   currentDay = 2;
+  //   currentDay = 2;
   //   nowStamp = hourMinuteToNumber(12, 4, 2);
 
   // if current day is sunday set currentDay to 7
@@ -637,13 +638,13 @@ function openSettingsTab() {
   // if timebg is hidden
   if ($("#timebg").css("display") == "none") {
     $("#timebg").show();
-    // $("#todo").show();
-    // $("#timetable").show();
+    $("#todo").show();
+    $("#timetable").show();
     $("#settings").hide();
   } else if ($("#timebg").css("display") == "block") {
     $("#timebg").hide();
-    // $("#todo").hide();
-    // $("#timetable").hide();
+    $("#todo").hide();
+    $("#timetable").hide();
     $("#settings").show();
   }
 }
@@ -857,8 +858,8 @@ if (browser === null) {
 if (localStorageBackground === null) {
   localStorageBackground = "dynamic";
 }
-if (localStorageTimetableDisplay === null ) {
-    localStorageTimetableDisplay = "checked";
+if (localStorageTimetableDisplay === null) {
+  localStorageTimetableDisplay = "checked";
 }
 
 if (localStorageBgEffect === "none") {
@@ -909,13 +910,12 @@ if (localStorageSearchBar === "checked") {
   $("#searchbartoggle").attr("checked", false);
 }
 if (localStorageTimetableDisplay === "checked") {
-    $("#timetable").show();
-    $("#timetabletoggle").attr("checked", true);
+  $("#timetable").show();
+  $("#timetabletoggle").attr("checked", true);
 } else {
-    $("#timetable").hide();
-    $("#timetabletoggle").attr("checked", false);
+  $("#timetable").hide();
+  $("#timetabletoggle").attr("checked", false);
 }
-
 
 $("#custombgselector").hide();
 $("#custombgimg").hide();
@@ -942,7 +942,6 @@ if (localStorageBackground === "dynamic") {
   // set custombgimg src to localStorage
   document.getElementById("custombgimg").src = localStorage.getItem("custombg");
 }
-
 
 var searchQuery = "";
 if (browser === "Google") {
@@ -1112,7 +1111,6 @@ $("#fontWeightSlider").on("input", function () {
 //     $("#timetable").toggle();
 // });
 
-
 // save todolist to local storage when edited
 $("#todolist").on("input", function () {
   localStorage.setItem("todolist", $(this).val());
@@ -1127,7 +1125,6 @@ $("#todolist").val(localStorageTodolist);
 $("#todolist").focus();
 //set todolist to textarea
 $("#todolist").blur();
-
 
 $("#datetoggle").click(toggleDate);
 function toggleDate() {
@@ -1193,13 +1190,13 @@ function toggleWeather() {
 }
 $("#timetabletoggle").click(toggleTimetable);
 function toggleTimetable() {
-    if ($("#timetabletoggle").is(":checked")) {
-        $("#timetable").show();
-        localStorage.setItem("timetableDisplay", "checked");
-    } else {
-        $("#timetable").hide();
-        localStorage.setItem("timetableDisplay", "false");
-    }
+  if ($("#timetabletoggle").is(":checked")) {
+    $("#timetable").show();
+    localStorage.setItem("timetableDisplay", "checked");
+  } else {
+    $("#timetable").hide();
+    localStorage.setItem("timetableDisplay", "false");
+  }
 }
 // when stripestoggle is clicked
 $("#stripestoggle").click(toggleStripes);
@@ -1223,72 +1220,235 @@ function toggleStripes() {
   }
 }
 
-
 // easytabs customisations LETS GOOOO
 
 const defaultTabs = [
-    {
-        type: "SOCIAL",
-        color: "rgb(255, 137, 255)",
-        content: {
-            "discord": "https://discord.com/app",
-            "insta": "https://www.instagram.com/",
-            "twitter": "https://twitter.com/",
-            "reddit": "https://reddit.com/",
-        }
+  {
+    type: "SOCIAL",
+    color: "rgb(255, 137, 255)",
+    content: {
+      discord: "https://discord.com/app",
+      insta: "https://www.instagram.com/",
+      twitter: "https://twitter.com/",
+      reddit: "https://reddit.com/",
     },
-    {  
-        type: "GENERAL",
-        color: "rgb(255, 137, 137)",
-        content: {
-            "youtube": "https://www.youtube.com/",
-            "twitch": "https://www.twitch.tv/",
-            "gmail": "https://mail.google.com/",
-        }
+  },
+  {
+    type: "GENERAL",
+    color: "rgb(255, 137, 137)",
+    content: {
+      youtube: "https://www.youtube.com/",
+      twitch: "https://www.twitch.tv/",
+      gmail: "https://mail.google.com/",
     },
-    {
-        type: "SCHOOL",
-        color: "rgb(170, 255, 137)",
-        content: {
-            "connect": "https://connect.det.wa.edu.au/",
-            "outlook": "https://outlook.office.com/",
-            "math": "https://mathspace.co/student/",
-            "ep": "https://www.educationperfect.com/app/#/dashboard/",
-        }
+  },
+  {
+    type: "SCHOOL",
+    color: "rgb(170, 255, 137)",
+    content: {
+      connect: "https://connect.det.wa.edu.au/",
+      outlook: "https://outlook.office.com/",
+      math: "https://mathspace.co/student/",
+      ep: "https://www.educationperfect.com/app/#/dashboard/",
     },
-    {
-        type: "TECHS",
-        color: "rgb(137, 237, 255)",
-        content: {
-            "github": "https://github.com/",
-            "stack": "https://stackoverflow.com/",
-            "firedb": "https://firebase.google.com/",
-        }
+  },
+  {
+    type: "TECHS",
+    color: "rgb(137, 237, 255)",
+    content: {
+      github: "https://github.com/",
+      stack: "https://stackoverflow.com/",
+      firedb: "https://firebase.google.com/",
     },
-]
+  },
+];
 
-function updateEasyTabs() {
-    // create div and append to id easyTabs
-    $("#easyTabs").empty();
-    for (let i = 0; i < defaultTabs.length; i++) {
-        let tab = defaultTabs[i];
-        let tabDiv = $("<ul>");
-        tabDiv.addClass("easyTab");
-        // tabDiv.css("background-color", tab.color);
-        tabDiv.attr("id", tab.type);
-        tabDiv.append(`<li class="medium" style="color: ${tab.color}">${tab.type}</li>`);
-        for (let key in tab.content) {
-            tabDiv.append(`<li><a href="${tab.content[key]}">${key}</a><li>`);
-        }
-        $("#easyTabs").append(tabDiv);
+function updateEasyTabs(TabstoUpdate) {
+  // create div and append to id easyTabs
+  $("#easyTabs").empty();
+  for (let i = 0; i < TabstoUpdate.length; i++) {
+    let tab = TabstoUpdate[i];
+    let tabDiv = $("<ul>");
+    tabDiv.addClass("easyTab");
+    // tabDiv.css("background-color", tab.color);
+    tabDiv.attr("id", tab.type);
+    tabDiv.append(
+      `<li class="medium" style="color: ${tab.color}">${tab.type}</li>`
+    );
+    for (let key in tab.content) {
+      tabDiv.append(`<li><a href="${tab.content[key]}">${key}</a><li>`);
     }
-    // const ul = document.createElement("ul");
+    $("#easyTabs").append(tabDiv);
+  }
+  // const ul = document.createElement("ul");
 
-    
-    // // Append to body:
-    // document.getElementById("easyTabs").appendChild(ul);
-
+  // // Append to body:
+  // document.getElementById("easyTabs").appendChild(ul);
 }
 
-updateEasyTabs();
- // color: "rgb(255, 255, 137)",
+// color: "rgb(255, 255, 137)", // backup color
+
+// function to update settings
+function updateEasyTabsSettings(TabstoUpdate) {
+  // console.log("check");
+  // parse easyTabsArray
+  parsedEasyTabsArray = JSON.parse(localStorage.getItem("easyTabsArray"));
+  // for every div in easyTabsInputHolder
+
+  $("#easyTabsInputHolder")
+    .children()
+    .each(function (index, element) {
+      // get element id
+      let id = $(element).attr("id");
+
+      // remove content of id
+      $(element).empty();
+
+      // append ul to column1
+      let ul = document.createElement("ul");
+      ul.style.textAlign = "left";
+      // add TabstoUpdate[index].type to ul
+      ul.innerHTML = `<li class="medium" style="color: ${TabstoUpdate[index].color}">${TabstoUpdate[index].type}</li>`;
+      // add TabstoUpdate[index] to ul
+      for (let key in TabstoUpdate[index].content) {
+        let li = document.createElement("li");
+        // set alignitems to left
+        let a = document.createElement("p");
+        // a.href = TabstoUpdate[index].content[key];
+        a.innerHTML = key;
+
+        // add button in li
+        let button = document.createElement("button");
+        button.innerHTML = "X";
+        button.classList.add("deleteButton");
+        button.addEventListener("click", function () {
+          // delete key from TabstoUpdate[index].content
+          delete TabstoUpdate[index].content[key];
+          // update local storage
+          localStorage.setItem("easyTabsArray", JSON.stringify(TabstoUpdate));
+          // update easyTabs
+          updateEasyTabs(TabstoUpdate);
+          // update easyTabsSettings
+
+          updateEasyTabsSettings(TabstoUpdate);
+        });
+
+        // set button to block display, margin left auto, margin right 0
+        button.style.display = "block";
+        button.style.marginLeft = "auto";
+        button.style.marginRight = "0";
+
+        //set text align to left
+        a.style.textAlign = "left";
+        //set li to display: flex
+        li.style.display = "flex";
+
+        li.appendChild(a);
+        li.appendChild(button);
+
+        ul.appendChild(li);
+      }
+      document.getElementById(id).appendChild(ul);
+      $(element).append(ul);
+
+      // add button to ul
+      let button = document.createElement("button");
+      button.innerHTML = "Add";
+      button.classList.add("addButton");
+      // addid
+      button.id = "addButton" + index;
+      button.addEventListener("click", function () {
+        //
+      });
+      $(element).append(button);
+    });
+}
+
+// easyTabs localstorage shenanigans
+
+// get localstorage for easytabs
+let easyTabsArray = localStorage.getItem("easyTabsArray");
+if (easyTabsArray) {
+  //update easytabs json parse
+  easyTabsArray = JSON.parse(easyTabsArray);
+  updateEasyTabs(easyTabsArray);
+  updateEasyTabsSettings(easyTabsArray);
+} else {
+  // set easyTabsArray to default
+  localStorage.setItem("easyTabsArray", JSON.stringify(defaultTabs));
+  updateEasyTabs(defaultTabs);
+  updateEasyTabsSettings(defaultTabs);
+}
+
+// hide addEasyTabs
+$("#addEasyTabs").hide();
+
+// validateurl
+function validateURL(str) {
+  var pattern = new RegExp(
+    "^(https?:\\/\\/)?" + // protocol
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+      "(\\#[-a-z\\d_]*)?$",
+    "i"
+  ); // fragment locator
+  if (!!pattern.test(str)) {
+    // check if starts with http:// or https://, if not automatically include
+    if (
+      str.substring(0, 7) !== "http://" &&
+      str.substring(0, 8) !== "https://"
+    ) {
+      str = "http://" + str;
+    }
+  }
+  return [!!pattern.test(str), str];
+}
+
+// if any add buttons were pressed
+$("#easyTabsInputHolder").on("click", ".addButton", function () {
+  let id = $(this).attr("id");
+  let index = id.substring(id.length - 1);
+  let easyTabsArray = JSON.parse(localStorage.getItem("easyTabsArray"));
+  let content = easyTabsArray[index].content;
+
+  // console.log(content);
+
+  //show addEasyTabs
+  $("#addEasyTabs").show();
+
+  // addEasyTabsAdd and addEasyTabsCancel event listeners
+  $("#addEasyTabsAdd").on("click", function () {
+    // if easytabsname and easytabsurl are not empty
+    if ($("#easytabsname").val() && $("#easytabsurl").val()) {
+      // if easytabsurl is not a valid url
+      if (!validateURL($("#easytabsurl").val())[0]) {
+        // alert user
+        alert("Please enter a valid URL");
+      } else {
+        // console.log("epic");
+        // add easytabsname and easytabsurl to content
+        content[$("#easytabsname").val()] = validateURL(
+          $("#easytabsurl").val()
+        )[1];
+        // if easytabsurl is already stated in content
+
+        // update localstorage
+        localStorage.setItem("easyTabsArray", JSON.stringify(easyTabsArray));
+        // update easyTabs
+        updateEasyTabs(easyTabsArray);
+        // update easyTabsSettings
+        updateEasyTabsSettings(easyTabsArray);
+        // hide addEasyTabs
+        $("#addEasyTabs").hide();
+      }
+    } else {
+      alert("Please enter a name and url");
+    }
+  });
+  $("#addEasyTabsCancel").on("click", function () {
+    // close addEasyTabs
+    $("#addEasyTabs").hide();
+  });
+});
