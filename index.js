@@ -1,3 +1,8 @@
+Date.prototype.getWeek = function () {
+  var onejan = new Date(this.getFullYear(), 0, 1);
+  return Math.ceil(((this - onejan) / 86400000 + onejan.getDay() + 1) / 7);
+};
+
 function getWeatherData() {
   $(document).ready(async function () {
     var city = undefined;
@@ -558,6 +563,13 @@ function updateTimetable() {
   );
   // get current day
   var currentDay = currentTime.getDay();
+  // get week of the year
+  const currentWeek = currentTime.getWeek() % 2;
+
+  if (currentWeek == 0) { // if currentweek is even
+    currentDay += 7;
+  }
+
   currentDay = 2;
   //   nowStamp = hourMinuteToNumber(12, 4, 2);
 
