@@ -570,7 +570,7 @@ function updateTimetable() {
     currentDay += 7;
   }
 
-  currentDay = 2;
+//   currentDay = 2;
   //   nowStamp = hourMinuteToNumber(12, 4, 2);
 
   // if current day is sunday set currentDay to 7
