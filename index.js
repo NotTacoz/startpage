@@ -816,6 +816,7 @@ var localStorageFontSize = localStorage.getItem("font-size");
 var localStorageFontWeight = localStorage.getItem("font-weight");
 var browser = localStorage.getItem("browser");
 var localStorageBackground = localStorage.getItem("wallpaper");
+var localStorageTimetableDisplay = localStorage.getItem("timetableDisplay");
 
 if (localStorageBgEffect === null) {
   localStorageBgEffect = "none";
@@ -855,6 +856,9 @@ if (browser === null) {
 }
 if (localStorageBackground === null) {
   localStorageBackground = "dynamic";
+}
+if (localStorageTimetableDisplay === null ) {
+    localStorageTimetableDisplay = "checked";
 }
 
 if (localStorageBgEffect === "none") {
@@ -904,6 +908,14 @@ if (localStorageSearchBar === "checked") {
   $("#searchBar").hide();
   $("#searchbartoggle").attr("checked", false);
 }
+if (localStorageTimetableDisplay === "checked") {
+    $("#timetable").show();
+    $("#timetabletoggle").attr("checked", true);
+} else {
+    $("#timetable").hide();
+    $("#timetabletoggle").attr("checked", false);
+}
+
 
 $("#custombgselector").hide();
 $("#custombgimg").hide();
@@ -930,6 +942,7 @@ if (localStorageBackground === "dynamic") {
   // set custombgimg src to localStorage
   document.getElementById("custombgimg").src = localStorage.getItem("custombg");
 }
+
 
 var searchQuery = "";
 if (browser === "Google") {
@@ -1095,6 +1108,11 @@ $("#fontWeightSlider").on("input", function () {
   document.documentElement.style.setProperty("--font-weight", $(this).val());
 });
 
+// $("#timetabletoggle").on("click", function () {
+//     $("#timetable").toggle();
+// });
+
+
 // save todolist to local storage when edited
 $("#todolist").on("input", function () {
   localStorage.setItem("todolist", $(this).val());
@@ -1109,6 +1127,7 @@ $("#todolist").val(localStorageTodolist);
 $("#todolist").focus();
 //set todolist to textarea
 $("#todolist").blur();
+
 
 $("#datetoggle").click(toggleDate);
 function toggleDate() {
@@ -1172,6 +1191,16 @@ function toggleWeather() {
     localStorage.setItem("weather", "false");
   }
 }
+$("#timetabletoggle").click(toggleTimetable);
+function toggleTimetable() {
+    if ($("#timetabletoggle").is(":checked")) {
+        $("#timetable").show();
+        localStorage.setItem("timetableDisplay", "checked");
+    } else {
+        $("#timetable").hide();
+        localStorage.setItem("timetableDisplay", "false");
+    }
+}
 // when stripestoggle is clicked
 $("#stripestoggle").click(toggleStripes);
 function toggleStripes() {
@@ -1193,3 +1222,73 @@ function toggleStripes() {
     localStorage.setItem("bg-effect", "none");
   }
 }
+
+
+// easytabs customisations LETS GOOOO
+
+const defaultTabs = [
+    {
+        type: "SOCIAL",
+        color: "rgb(255, 137, 255)",
+        content: {
+            "discord": "https://discord.com/app",
+            "insta": "https://www.instagram.com/",
+            "twitter": "https://twitter.com/",
+            "reddit": "https://reddit.com/",
+        }
+    },
+    {  
+        type: "GENERAL",
+        color: "rgb(255, 137, 137)",
+        content: {
+            "youtube": "https://www.youtube.com/",
+            "twitch": "https://www.twitch.tv/",
+            "gmail": "https://mail.google.com/",
+        }
+    },
+    {
+        type: "SCHOOL",
+        color: "rgb(170, 255, 137)",
+        content: {
+            "connect": "https://connect.det.wa.edu.au/",
+            "outlook": "https://outlook.office.com/",
+            "math": "https://mathspace.co/student/",
+            "ep": "https://www.educationperfect.com/app/#/dashboard/",
+        }
+    },
+    {
+        type: "TECHS",
+        color: "rgb(137, 237, 255)",
+        content: {
+            "github": "https://github.com/",
+            "stack": "https://stackoverflow.com/",
+            "firedb": "https://firebase.google.com/",
+        }
+    },
+]
+
+function updateEasyTabs() {
+    // create div and append to id easyTabs
+    $("#easyTabs").empty();
+    for (let i = 0; i < defaultTabs.length; i++) {
+        let tab = defaultTabs[i];
+        let tabDiv = $("<ul>");
+        tabDiv.addClass("easyTab");
+        // tabDiv.css("background-color", tab.color);
+        tabDiv.attr("id", tab.type);
+        tabDiv.append(`<li class="medium" style="color: ${tab.color}">${tab.type}</li>`);
+        for (let key in tab.content) {
+            tabDiv.append(`<li><a href="${tab.content[key]}">${key}</a><li>`);
+        }
+        $("#easyTabs").append(tabDiv);
+    }
+    // const ul = document.createElement("ul");
+
+    
+    // // Append to body:
+    // document.getElementById("easyTabs").appendChild(ul);
+
+}
+
+updateEasyTabs();
+ // color: "rgb(255, 255, 137)",
