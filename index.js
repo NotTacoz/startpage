@@ -7,7 +7,7 @@ function getWeatherData() {
       })
       .then(function (myJson) {
         city = myJson.city;
-        console.log;
+        // console.log;
       })
       .catch(function (error) {
         console.log("Error: " + error);
@@ -557,13 +557,16 @@ function updateTimetable() {
     currentTime.getSeconds()
   );
   // get current day
-  const currentDay = currentTime.getDay();
+  var currentDay = currentTime.getDay();
+  currentDay = 2;
+  //   nowStamp = hourMinuteToNumber(12, 4, 2);
 
-  nowStamp = hourMinuteToNumber(12, 4, 2);
-
+  // if current day is sunday set currentDay to 7
   if (currentDay == 0) {
-    currentDay == 7;
+    currentDay = 7;
   }
+
+  //   console.log(currentDay);
 
   if (currentDay == 6 || currentDay == 7) {
     // weekend
@@ -583,42 +586,36 @@ function updateTimetable() {
       // append end to times
       ends.push(end);
     }
-    console.log(timetable, starts, ends);
+    // console.log(timetable, starts, ends);
     var closest = starts.reduce(function (prev, curr) {
       return Math.abs(curr - nowStamp) < Math.abs(prev - nowStamp)
         ? curr
         : prev;
     });
-    console.log(closest, ends.indexOf(closest) + 1);
+    // console.log(closest, ends.indexOf(closest) + 1);
     if (closest < nowStamp) {
       closest = ends[ends.indexOf(closest) + 1];
     }
     if (ends.indexOf(closest) >= 10) {
-      console.log(ends.indexOf(closest));
+      //   console.log(ends.indexOf(closest));
       document.getElementById("nextSubject").innerHTML = "Nothing! 🥳";
     } else {
       var subjectName = timetable[currentDay][starts.indexOf(closest)].name;
       var subjectStart = convertSeconds(closest - nowStamp);
       if (subjectStart[0] == "0") {
-        subjectStartString =
-          subjectStart[1] + " minutes " + subjectStart[2] + " seconds";
+        subjectStartString = subjectStart[1] + "m " + subjectStart[2] + "s";
         if (subjectStart[1] == "0") {
-          subjectStartString = subjectStart[2] + " seconds";
-        } else if (subjectStart[1] == "1") {
-          subjectStartString =
-            subjectStart[1] + " minute " + subjectStart[2] + " seconds";
+          subjectStartString = subjectStart[2] + "s";
         }
 
-        console.log(subjectStart, subjectStartString);
+        // console.log(subjectStart, subjectStartString);
 
         document.getElementById("nextSubject").innerHTML =
-          subjectName + " in " + subjectStartString;
+          subjectName + ", " + subjectStartString;
       }
     }
   }
 }
-
-updateTimetable();
 
 // if id settingsbtnimg is clicked, openSettingsTab
 $("#settingsbtnimg").click(openSettingsTab);
@@ -628,9 +625,13 @@ function openSettingsTab() {
   // if timebg is hidden
   if ($("#timebg").css("display") == "none") {
     $("#timebg").show();
+    // $("#todo").show();
+    // $("#timetable").show();
     $("#settings").hide();
   } else if ($("#timebg").css("display") == "block") {
     $("#timebg").hide();
+    // $("#todo").hide();
+    // $("#timetable").hide();
     $("#settings").show();
   }
 }
@@ -722,8 +723,10 @@ function updateTime() {
 }
 updateTime(); // immeditatelly runs the function, so that there is no lag
 getWeatherData();
+updateTimetable();
 setInterval(updateTime, 1000);
 setInterval(getWeatherData, 900000); // 15 minutes
+setInterval(updateTimetable, 250);
 
 var r = document.querySelector(":root");
 r.style.setProperty("--blue", "lightblue");
@@ -734,13 +737,17 @@ for (var i = 0; i < elements.length; i++) {
 }
 
 for (weekID of ["A", "B"]) {
+  let dayTitle = document.createElement("div");
+  dayTitle.classList.add("evenperfecter");
+  dayTitle.innerHTML = `Week ${weekID}`;
+  document.getElementById("timetableInputHolder").appendChild(dayTitle);
   for (day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]) {
     let dayTitle = document.createElement("div");
-    dayTitle.classList.add("evenperfecter");
+    // dayTitle.classList.add("medium");
     dayTitle.innerHTML = `${
       ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"][day]
     } ${weekID}`;
-    document.getElementById("timetableInputHolder").appendChild(dayTitle);
+    // document.getElementById("timetableInputHolder").appendChild(dayTitle); // removed because it was causing the timetable to be too big
     let theflexbox = document.createElement("div");
     theflexbox.classList.add("flexboxlol");
     for (period of [1, 2, 3, 4, 5, 6]) {
@@ -766,7 +773,8 @@ for (weekID of ["A", "B"]) {
       inputHolder.appendChild(label);
       inputHolder.appendChild(input);
       input.classList.add(
-        "reallytinyimeanabsolutelymicroscopicyouwillneedamagnifyingglasstoseethis"
+        "reallytinyimeanabsolutelymicroscopicyouwillneedamagnifyingglasstoseethis",
+        "timetableInput"
       );
       theflexbox.appendChild(inputHolder);
     }
@@ -1113,7 +1121,7 @@ function toggleSearchBar() {
 // if todotoggle is clicked
 $("#todotoggle").click(toggleTodo);
 function toggleTodo() {
-  console.log("toggleTodo");
+  //   console.log("toggleTodo");
   if ($("#todotoggle").is(":checked")) {
     $("#todo").show();
     localStorage.setItem("todo", "checked");

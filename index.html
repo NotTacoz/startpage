@@ -38,6 +38,7 @@
       --font-weight: 400;
       --font-size-large: calc(5 * var(--font-size));
       --font-size-medium: calc(1.5 * var(--font-size));
+      --font-size-tinyastronomical: calc(0.65 * var(--font-size));
     }
 
     * {
@@ -109,7 +110,14 @@
     }
 
     .reallytinyimeanabsolutelymicroscopicyouwillneedamagnifyingglasstoseethis {
-      font-size: 0.5rem;
+      font-size: var(--font-size-tinyastronomical);
+    }
+
+    .timetableInput {
+      border-radius: 5px;
+      border: none;
+      padding: 0.1rem;
+      /* background-color: rgba(256, 256, 256, 1); */
     }
 
     /* search bar css */
@@ -200,7 +208,7 @@
     }
     #settings {
       overflow: auto;
-      width: 50%;
+      width: 60%;
       max-height: 70%;
     }
 
