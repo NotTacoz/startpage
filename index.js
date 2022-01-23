@@ -3,6 +3,9 @@ Date.prototype.getWeek = function () {
   return Math.ceil(((this - onejan) / 86400000 + onejan.getDay() + 1) / 7);
 };
 
+// hide addEasyTabs
+$("#addEasyTabs").hide();
+
 function getWeatherData() {
   $(document).ready(async function () {
     var city = undefined;
@@ -641,6 +644,7 @@ function openSettingsTab() {
     $("#todo").show();
     $("#timetable").show();
     $("#settings").hide();
+    $("#addEasyTabs").hide();
   } else if ($("#timebg").css("display") == "block") {
     $("#timebg").hide();
     $("#todo").hide();
@@ -1118,7 +1122,7 @@ $("#todolist").on("input", function () {
 //get todolist from local storage
 var localStorageTodolist = localStorage.getItem("todolist");
 if (localStorageTodolist === null) {
-  localStorageTodolist = "Todo list (Click on me): ";
+  localStorageTodolist = "Notes (Click on me!): ";
 }
 $("#todolist").val(localStorageTodolist);
 //set todolist to textarea
@@ -1380,8 +1384,7 @@ if (easyTabsArray) {
   updateEasyTabsSettings(defaultTabs);
 }
 
-// hide addEasyTabs
-$("#addEasyTabs").hide();
+
 
 // validateurl
 function validateURL(str) {
