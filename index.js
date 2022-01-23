@@ -1427,21 +1427,27 @@ $("#easyTabsInputHolder").on("click", ".addButton", function () {
         // alert user
         alert("Please enter a valid URL");
       } else {
-        // console.log("epic");
-        // add easytabsname and easytabsurl to content
-        content[$("#easytabsname").val()] = validateURL(
-          $("#easytabsurl").val()
-        )[1];
-        // if easytabsurl is already stated in content
+        // if name is longer than 16 characters
+        if ($("#easytabsname").val().length > 10) {
+          // alert user
+          alert("Please enter a name shorter than 16 characters");
+        } else {
+          // console.log("epic");
+          // add easytabsname and easytabsurl to content
+          content[$("#easytabsname").val()] = validateURL(
+            $("#easytabsurl").val()
+          )[1];
+          // if easytabsurl is already stated in content
 
-        // update localstorage
-        localStorage.setItem("easyTabsArray", JSON.stringify(easyTabsArray));
-        // update easyTabs
-        updateEasyTabs(easyTabsArray);
-        // update easyTabsSettings
-        updateEasyTabsSettings(easyTabsArray);
-        // hide addEasyTabs
-        $("#addEasyTabs").hide();
+          // update localstorage
+          localStorage.setItem("easyTabsArray", JSON.stringify(easyTabsArray));
+          // update easyTabs
+          updateEasyTabs(easyTabsArray);
+          // update easyTabsSettings
+          updateEasyTabsSettings(easyTabsArray);
+          // hide addEasyTabs
+          $("#addEasyTabs").hide();
+        }
       }
     } else {
       alert("Please enter a name and url");
