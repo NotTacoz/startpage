@@ -1513,3 +1513,6 @@ $("#easyTabsInputHolder").on("click", ".addButton", function () {
     $("#addEasyTabs").hide();
   });
 });
+
+// make addEasyTabs movable and draggable
+$("#addEasyTabs").draggable();

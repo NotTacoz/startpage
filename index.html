@@ -25,6 +25,7 @@
     <title>New Tab</title>
   </head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
@@ -59,7 +60,7 @@
       height: 1.2rem;
       left: 1rem;
     }
-    
+
     /* Hide default HTML checkbox */
     .switch input {
       opacity: 0;
@@ -189,6 +190,7 @@
     }
 
     .buttonFunky:hover {
+      transition: ease-in 0.2s;
       background-color: rgba(0, 0, 0, 1);
       color: pink;
     }
@@ -351,13 +353,15 @@
       style="
         position: fixed;
         width: 18%;
-        padding: 1.5rem;
+        padding: 2rem;
         background-color: rgb(25, 25, 30);
         border-radius: 25px;
         z-index: 100;
       "
     >
-      <p style="text-align: left; padding-bottom: 20px">Add a new bookmark</p>
+      <p style="text-align: left; padding-bottom: 20px" id="">
+        Add a new bookmark
+      </p>
       <div style="display: block">
         <p class="small" style="text-align: left; padding-bottom: 10px">Name</p>
         <input
@@ -421,93 +425,146 @@
         <div id="custombgpreview"></div>
       </div>
 
-      <!-- toggle button -->
-      <div style="display: flex; justify-content: center; align-items: center">
-        <p>Stripes:</p>
-        <input
-          id="stripestoggle"
-          type="checkbox"
-          class="toggle switch"
-          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
-        />
+      <!-- style="padding: 0 40% 0 40%"> -->
+      <br />
+      <p class="medium">Toggles</p>
+      <div style="display: flex; justify-content: center">
+        <div class="column1" style="min-width: 33.33%; margin-left: 4rem">
+          <!-- toggle button for stripes -->
+          <div style="display: flex; align-items: center">
+            <p>Stripes:</p>
+            <input
+              id="stripestoggle"
+              type="checkbox"
+              class="toggle switch"
+              style="
+                margin-left: 0.5rem;
+                margin-bottom: -0.1rem;
+                margin-left: auto;
+                margin-right: 5rem;
+              "
+            />
+          </div>
+          <!-- toggle button to hide timetable -->
+          <div style="display: flex; align-items: center">
+            <p>Timetable:</p>
+            <input
+              id="timetabletoggle"
+              type="checkbox"
+              class="toggle switch"
+              checked
+              style="
+                margin-left: 0.5rem;
+                margin-bottom: -0.1rem;
+                margin-left: auto;
+                margin-right: 5rem;
+              "
+            />
+          </div>
+          <!-- toggle button to hide todo -->
+          <div style="display: flex; align-items: center">
+            <p>Todo:</p>
+            <input
+              id="todotoggle"
+              type="checkbox"
+              class="toggle switch"
+              checked
+              style="
+                margin-left: 0.5rem;
+                margin-bottom: -0.1rem;
+                margin-left: auto;
+                margin-right: 5rem;
+              "
+            />
+          </div>
+        </div>
+        <div class="column2" style="min-width: 33.33%">
+          <!-- toggle button to hide weather -->
+          <div style="display: flex; align-items: center">
+            <p>Weather:</p>
+            <input
+              id="weathertoggle"
+              type="checkbox"
+              class="toggle switch"
+              checked
+              style="
+                margin-left: 0.5rem;
+                margin-bottom: -0.1rem;
+                margin-left: auto;
+                margin-right: 5rem;
+              "
+            />
+          </div>
+          <!-- toggle button to hide date -->
+          <div style="display: flex; align-items: center">
+            <p>Date:</p>
+            <input
+              id="datetoggle"
+              type="checkbox"
+              class="toggle switch"
+              checked
+              style="
+                margin-left: 0.5rem;
+                margin-bottom: -0.1rem;
+                margin-left: auto;
+                margin-right: 5rem;
+              "
+            />
+          </div>
+          <!-- toggle button to hide time -->
+          <div style="display: flex; align-items: center">
+            <p>Time:</p>
+            <input
+              id="timetoggle"
+              type="checkbox"
+              class="toggle switch"
+              style="
+                margin-left: 0.5rem;
+                margin-bottom: -0.1rem;
+                margin-left: auto;
+                margin-right: 5rem;
+              "
+              checked
+            />
+          </div>
+        </div>
+        <div class="column3" style="min-width: 33.33%">
+          <!-- toggle button to hide easytabs -->
+          <div style="display: flex; align-items: center">
+            <p>EasyTabs:</p>
+            <input
+              id="easytabstoggle"
+              type="checkbox"
+              class="toggle switch"
+              style="
+                margin-left: 0.5rem;
+                margin-bottom: -0.1rem;
+                margin-left: auto;
+                margin-right: 5rem;
+              "
+              checked
+            />
+          </div>
+          <!-- toggle button to hide searchbar -->
+          <div style="display: flex; align-items: center">
+            <p>SearchBar:</p>
+            <input
+              id="searchbartoggle"
+              type="checkbox"
+              class="toggle switch"
+              style="
+                margin-left: 0.5rem;
+                margin-bottom: -0.1rem;
+                margin-left: auto;
+                margin-right: 5rem;
+              "
+              checked
+            />
+          </div>
+        </div>
       </div>
-      <!-- toggle button to hide timetable -->
-      <div style="display: flex; justify-content: center; align-items: center">
-        <p>Timetable:</p>
-        <input
-          id="timetabletoggle"
-          type="checkbox"
-          class="toggle switch"
-          checked
-          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
-        />
-      </div>
-      <!-- toggle button to hide todo -->
-      <div style="display: flex; justify-content: center; align-items: center">
-        <p>Todo:</p>
-        <input
-          id="todotoggle"
-          type="checkbox"
-          class="toggle switch"
-          checked
-          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
-        />
-      </div>
-      <!-- toggle button to hide weather -->
-      <div style="display: flex; justify-content: center; align-items: center">
-        <p>Weather:</p>
-        <input
-          id="weathertoggle"
-          type="checkbox"
-          class="toggle switch"
-          checked
-          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
-        />
-      </div>
-      <!-- toggle button to hide date -->
-      <div style="display: flex; justify-content: center; align-items: center">
-        <p>Date:</p>
-        <input
-          id="datetoggle"
-          type="checkbox"
-          class="toggle switch"
-          checked
-          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
-        />
-      </div>
-      <!-- toggle button to hide time -->
-      <div style="display: flex; justify-content: center; align-items: center">
-        <p>Time:</p>
-        <input
-          id="timetoggle"
-          type="checkbox"
-          class="toggle switch"
-          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
-          checked
-        />
-      </div>
-      <!-- toggle button to hide easytabs -->
-      <div style="display: flex; justify-content: center; align-items: center">
-        <p>EasyTabs:</p>
-        <input
-          id="easytabstoggle"
-          type="checkbox"
-          class="toggle switch"
-          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
-          checked
-        />
-      </div>
-      <!-- toggle button to hide searchbar -->
-      <div style="display: flex; justify-content: center; align-items: center">
-        <p>SearchBar:</p>
-        <input
-          id="searchbartoggle"
-          type="checkbox"
-          class="toggle switch"
-          style="margin-left: 0.5rem; margin-bottom: -0.1rem"
-          checked
-        />
-      </div>
+      <br />
+      <p class="medium">Sliders</p>
       <p>Background Image Opacity: <span id="imageOpacitySpan"></span></p>
       <!-- slider -->
       <input
