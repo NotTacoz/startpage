@@ -1295,6 +1295,28 @@ function updateEasyTabs(TabstoUpdate) {
 
 // color: "rgb(255, 255, 137)", // backup color
 
+function editEasyTab() {
+  // get the index of the tab to edit
+  let index = $(this).parent().parent().index();
+  // alert input
+  let input = prompt("Enter new tab name");
+  // if input is not empty
+  console.log(input);
+  if (input !== null && input !== "") {
+    // get easyTabsArray
+    let easyTabsArray = JSON.parse(localStorage.getItem("easyTabsArray"));
+    // find tab in easyTabsArray
+    // change tab name
+    // console.log(index);
+    easyTabsArray[index].type = input;
+    // update local storage
+    localStorage.setItem("easyTabsArray", JSON.stringify(easyTabsArray));
+    // update easyTabs
+    updateEasyTabs(easyTabsArray);
+    updateEasyTabsSettings(easyTabsArray)
+  }
+}
+
 // function to update settings
 function updateEasyTabsSettings(TabstoUpdate) {
   // console.log("check");
@@ -1316,6 +1338,16 @@ function updateEasyTabsSettings(TabstoUpdate) {
       ul.style.textAlign = "left";
       // add TabstoUpdate[index].type to ul
       ul.innerHTML = `<li class="medium" style="color: ${TabstoUpdate[index].color}">${TabstoUpdate[index].type}</li>`;
+      // add a button to edit the TabstoUpdate type
+      let editButton = document.createElement("button");
+      editButton.innerHTML = "Edit Title";
+      editButton.classList.add("editButton");
+      editButton.setAttribute("id", id);
+      editButton.addEventListener("click", editEasyTab);
+
+      // make edit button inline with ul
+      ul.appendChild(editButton);
+
       // add TabstoUpdate[index] to ul
       for (let key in TabstoUpdate[index].content) {
         let li = document.createElement("li");
