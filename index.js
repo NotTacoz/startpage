@@ -1054,7 +1054,7 @@ document.documentElement.style.setProperty(
   localStorageImageOpacity / 100
 );
 document.documentElement.style.setProperty(
-  "--image-blur", localStorageImageBlur / 100 + "rem"
+  "--image-blur", localStorageImageBlur / 150 + "rem"
 )
 document.documentElement.style.setProperty(
   "--bg-opacity",
