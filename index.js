@@ -1271,18 +1271,21 @@ function updateEasyTabs(TabstoUpdate) {
   // create div and append to id easyTabs
   $("#easyTabs").empty();
   for (let i = 0; i < TabstoUpdate.length; i++) {
-    let tab = TabstoUpdate[i];
-    let tabDiv = $("<ul>");
-    tabDiv.addClass("easyTab");
-    // tabDiv.css("background-color", tab.color);
-    tabDiv.attr("id", tab.type);
-    tabDiv.append(
-      `<li class="medium" style="color: ${tab.color}">${tab.type}</li>`
-    );
-    for (let key in tab.content) {
-      tabDiv.append(`<li><a href="${tab.content[key]}">${key}</a><li>`);
+    // if tab.content is not empty
+    if (Object.keys(TabstoUpdate[i].content).length !== 0) {
+      let tab = TabstoUpdate[i];
+      let tabDiv = $("<ul>");
+      tabDiv.addClass("easyTab");
+      // tabDiv.css("background-color", tab.color);
+      tabDiv.attr("id", tab.type);
+      tabDiv.append(
+        `<li class="medium" style="color: ${tab.color}">${tab.type}</li>`
+      );
+      for (let key in tab.content) {
+        tabDiv.append(`<li><a href="${tab.content[key]}">${key}</a><li>`);
+      }
+      $("#easyTabs").append(tabDiv);
     }
-    $("#easyTabs").append(tabDiv);
   }
   // const ul = document.createElement("ul");
 
@@ -1383,8 +1386,6 @@ if (easyTabsArray) {
   updateEasyTabs(defaultTabs);
   updateEasyTabsSettings(defaultTabs);
 }
-
-
 
 // validateurl
 function validateURL(str) {
