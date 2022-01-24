@@ -32,6 +32,7 @@
       --dark-bg: rgb(25, 25, 30);
       --text-color: white;
       --image-opacity: 0.5;
+      --image-blur: 0px;
       --bg-opacity: 0.4;
       --bg-effect: none;
       --font-size: 1rem;
@@ -89,9 +90,6 @@
 
     .settings:hover {
       opacity: 100%;
-    }
-
-    input {
     }
 
     .center {
@@ -171,7 +169,9 @@
     .image {
       /* transition: ease-in-out 0.4s; */
       opacity: var(--image-opacity);
-      z-index: -1;
+      filter: blur(var(--image-blur));
+      /* --webkit-filter: blur(--image-blur); */
+      z-index: -999;
       position: absolute;
       height: 100%;
       width: 100%;
@@ -518,6 +518,16 @@
         class="slider"
         id="imageOpacitySlider"
       />
+      <p>Background Image Blur: <span id="imageBlurSpan"></span></p>
+      <!-- slider -->
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value="0x"
+        class="slider"
+        id="imageBlurSlider"
+      />
       <p>Text Background Opacity: <span id="bgOpacitySpan"></span></p>
       <input
         type="range"
@@ -569,28 +579,28 @@
     </div>
 
     <img
-      src="img/day.jpg?format=webp"
+      src="img/day.jpg"
       alt="day.jpg"
       style="z-index: -99"
       id="bgimg"
       class="image"
     />
     <img
-      src="img/day.jpg?format=webp"
+      src="img/day.jpg"
       alt="day.jpg"
       style="z-index: -99"
       id="day"
       class="image"
     />
     <img
-      src="img/night.jpg?format=webp"
+      src="img/night.jpg"
       alt="night.jpg"
       style="z-index: -99"
       id="night"
       class="image"
     />
     <img
-      src="img/sunset.jpg?format=webp"
+      src="img/sunset.jpg"
       alt="night.jpg"
       style="z-index: -99"
       id="sunset"

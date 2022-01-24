@@ -809,6 +809,7 @@ for (weekID of ["A", "B"]) {
 
 // console.log(localStorage)
 var localStorageImageOpacity = localStorage.getItem("image-opacity");
+var localStorageImageBlur = localStorage.getItem("image-blur");
 var localStorageBgEffect = localStorage.getItem("bg-effect");
 var localStorageBgOpacity = localStorage.getItem("bg-opacity");
 var localStorageDate = localStorage.getItem("date");
@@ -828,6 +829,9 @@ if (localStorageBgEffect === null) {
 }
 if (localStorageImageOpacity === null) {
   localStorageImageOpacity = "50";
+}
+if (localStorageImageBlur === null) {
+  localStorageImageBlur = "0";
 }
 if (localStorageBgOpacity === null) {
   localStorageBgOpacity = "40";
@@ -1033,8 +1037,10 @@ $("#custombg").on("change", function () {
 });
 
 $("#imageOpacitySpan").text(localStorageImageOpacity);
+$("#imageBlurSpan").text(localStorageImageBlur);
 $("#bgOpacitySpan").text(localStorageBgOpacity);
 $("#imageOpacitySlider").val(localStorageImageOpacity);
+$("#imageBlurSlider").val(localStorageImageBlur);
 $("#bgOpacitySlider").val(localStorageBgOpacity);
 $("#fontSizeSpan").text(localStorageFontSize + "rem");
 $("#fontWeightSpan").text(localStorageFontWeight);
@@ -1047,6 +1053,9 @@ document.documentElement.style.setProperty(
   "--image-opacity",
   localStorageImageOpacity / 100
 );
+document.documentElement.style.setProperty(
+  "--image-blur", localStorageImageBlur / 100 + "rem"
+)
 document.documentElement.style.setProperty(
   "--bg-opacity",
   localStorageBgOpacity / 100
@@ -1091,6 +1100,16 @@ $("#imageOpacitySlider").on("input", function () {
   document.documentElement.style.setProperty(
     "--image-opacity",
     $(this).val() / 100
+  );
+});
+// when imageBlurSlider is being interacted
+$("#imageBlurSlider").on("input", function () {
+  $("#imageBlurSpan").text($(this).val());
+  //save slider to local storage
+  localStorage.setItem("image-blur", $(this).val());
+  document.documentElement.style.setProperty(
+    "--image-blur",
+    ($(this).val() / 100) + "rem"
   );
 });
 // when fontSizeSlider is being interacted
