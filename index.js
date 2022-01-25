@@ -608,11 +608,15 @@ function updateTimetable() {
         ? curr
         : prev;
     });
+    // console.log(nowStamp, closest);
+    // console.log(timetable)
+    // console.log(starts.indexOf(closest))
     // console.log(closest, ends.indexOf(closest) + 1);
     if (closest < nowStamp) {
       closest = ends[ends.indexOf(closest) + 1];
+      // console.log("a")
     }
-    if (ends.indexOf(closest) >= 10) {
+    if (ends.indexOf(closest) >= timetable[currentDay].length - 1) {
       //   console.log(ends.indexOf(closest));
       document.getElementById("nextSubject").innerHTML = "Nothing! 🥳";
     } else {
