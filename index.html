@@ -292,24 +292,26 @@
   </style>
 
   <body>
-    <div class="timebg center" id="timebg">
-      <div class="center">
-        <p class="medium" id="weather"></p>
-        <p class="large" id="time"></p>
-        <p class="medium" id="date"></p>
+    <div id="middleComponent">
+      <div class="timebg center" id="timebg">
+        <div class="center">
+          <p class="medium" id="weather"></p>
+          <p class="large" id="time"></p>
+          <p class="medium" id="date"></p>
+        </div>
+        <!-- duckduckgo search -->
+        <div class="center" id="" style="align-items: center">
+          <input
+            id="searchBar"
+            type="text"
+            class="search-bar"
+            placeholder="Search with DuckDuckGo"
+            autofocus
+            autocomplete="off"
+          />
+        </div>
+        <div style="display: flex; justify-content: center" id="easyTabs"></div>
       </div>
-      <!-- duckduckgo search -->
-      <div class="center" id="" style="align-items: center">
-        <input
-          id="searchBar"
-          type="text"
-          class="search-bar"
-          placeholder="Search with DuckDuckGo"
-          autofocus
-          autocomplete="off"
-        />
-      </div>
-      <div style="display: flex; justify-content: center" id="easyTabs"></div>
     </div>
     <div
       class="timebg"
@@ -681,3 +683,5 @@
     <script src="index.js"></script>
   </body>
 </html>
+
+{% raw %}{% seo %}{% endraw %}

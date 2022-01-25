@@ -636,15 +636,38 @@ function updateTimetable() {
 // if id settingsbtnimg is clicked, openSettingsTab
 $("#settingsbtnimg").click(openSettingsTab);
 
+function hideTimeBg() {
+  if (
+    (localStorage.getItem("weather") === "false") &&
+    (localStorage.getItem("date") === "false") &&
+    (localStorage.getItem("time") === "false") &&
+    (localStorage.getItem("easyTabs") === "false") &&
+    (localStorage.getItem("searchBar") === "false")
+  ) {
+    $("#middleComponent").hide();
+  } else {
+    $("#middleComponent").show();
+  }
+}
+
 function openSettingsTab() {
   // console.log("pog");
   // if timebg is hidden
   if ($("#timebg").css("display") == "none") {
     $("#timebg").show();
-    $("#todo").show();
-    $("#timetable").show();
     $("#settings").hide();
     $("#addEasyTabs").hide();
+    // if localStorageTodo's value is checked, show todo
+    if ((localStorage.getItem("todo")) === "checked") {
+      $("#todo").show();
+    } 
+    // if localStorageTimetableDisplay is checked, show timetable
+    if ((localStorage.getItem("timetableDisplay")) === "checked") {
+      $("#timetable").show();
+    }
+    // if weather, date, time, easytabs and searchbar are all disabled
+    hideTimeBg();
+      
   } else if ($("#timebg").css("display") == "block") {
     $("#timebg").hide();
     $("#todo").hide();
@@ -652,6 +675,8 @@ function openSettingsTab() {
     $("#settings").show();
   }
 }
+
+hideTimeBg(); // immediately hides timebg if all settings are disabled, otherwise an empty div will be shown at the start 
 
 function updateTime() {
   $(document).ready(function () {
