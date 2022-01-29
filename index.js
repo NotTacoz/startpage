@@ -584,7 +584,7 @@ function updateTimetable() {
 
   //   console.log(currentDay);
 
-  if (currentDay == 6 || currentDay == 7) {
+  if (currentDay == 6 || currentDay == 7 || currentDay == 13 || currentDay == 14) {
     // weekend
     document.getElementById("nextSubject").innerHTML = "Nothing! 🥳";
   } else {
