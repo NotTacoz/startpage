@@ -775,13 +775,23 @@ function updateTime() {
   });
 }
 updateTime(); // immeditatelly runs the function, so that there is no lag
-updateFunnyTime();
+
 getWeatherData();
 updateTimetable();
 setInterval(updateTime, 1000);
 setInterval(getWeatherData, 900000); // 15 minutes
-setInterval(updateFunnyTime, 250);
+
 setInterval(updateTimetable, 250);
+
+let timeUntil = new Date(2022, 0, 31, 8, 45, 0, 0);
+let now = new Date();
+
+if (now > timeUntil) {
+  $("#doomsdayCountdown").hide();
+} else {
+  updateFunnyTime();
+  setInterval(updateFunnyTime, 250);
+}
 
 var r = document.querySelector(":root");
 r.style.setProperty("--blue", "lightblue");
@@ -1571,7 +1581,7 @@ function updateFunnyTime() {
     (diff / 1000 / 60) % 60
   );
   let seconds = Math.floor((diff / 1000) % 60);
-  console.log(days,hours,minutes,diff)
+  // console.log(days,hours,minutes,diff)
   document.getElementById("funnyTime").innerHTML = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
 }
 
