@@ -584,7 +584,12 @@ function updateTimetable() {
 
   //   console.log(currentDay);
 
-  if (currentDay == 6 || currentDay == 7 || currentDay == 13 || currentDay == 14) {
+  if (
+    currentDay == 6 ||
+    currentDay == 7 ||
+    currentDay == 13 ||
+    currentDay == 14
+  ) {
     // weekend
     document.getElementById("nextSubject").innerHTML = "Nothing! 🥳";
   } else {
@@ -642,11 +647,11 @@ $("#settingsbtnimg").click(openSettingsTab);
 
 function hideTimeBg() {
   if (
-    (localStorage.getItem("weather") === "false") &&
-    (localStorage.getItem("date") === "false") &&
-    (localStorage.getItem("time") === "false") &&
-    (localStorage.getItem("easyTabs") === "false") &&
-    (localStorage.getItem("searchBar") === "false")
+    localStorage.getItem("weather") === "false" &&
+    localStorage.getItem("date") === "false" &&
+    localStorage.getItem("time") === "false" &&
+    localStorage.getItem("easyTabs") === "false" &&
+    localStorage.getItem("searchBar") === "false"
   ) {
     $("#middleComponent").hide();
   } else {
@@ -662,16 +667,18 @@ function openSettingsTab() {
     $("#settings").hide();
     $("#addEasyTabs").hide();
     // if localStorageTodo's value is checked, show todo
-    if ((localStorage.getItem("todo")) === "checked") {
+    if (localStorage.getItem("todo") === "checked") {
       $("#todo").show();
-    } 
+    }
     // if localStorageTimetableDisplay is checked, show timetable
-    if ((localStorage.getItem("timetableDisplay")) === "checked") {
+    if (
+      localStorage.getItem("timetableDisplay") === "checked" ||
+      localStorage.getItem("timetableDisplay") === null
+    ) {
       $("#timetable").show();
     }
     // if weather, date, time, easytabs and searchbar are all disabled
     hideTimeBg();
-      
   } else if ($("#timebg").css("display") == "block") {
     $("#timebg").hide();
     $("#todo").hide();
@@ -680,7 +687,7 @@ function openSettingsTab() {
   }
 }
 
-hideTimeBg(); // immediately hides timebg if all settings are disabled, otherwise an empty div will be shown at the start 
+hideTimeBg(); // immediately hides timebg if all settings are disabled, otherwise an empty div will be shown at the start
 
 function updateTime() {
   $(document).ready(function () {
@@ -768,10 +775,12 @@ function updateTime() {
   });
 }
 updateTime(); // immeditatelly runs the function, so that there is no lag
+updateFunnyTime();
 getWeatherData();
 updateTimetable();
 setInterval(updateTime, 1000);
 setInterval(getWeatherData, 900000); // 15 minutes
+setInterval(updateFunnyTime, 250);
 setInterval(updateTimetable, 250);
 
 var r = document.querySelector(":root");
@@ -1083,8 +1092,9 @@ document.documentElement.style.setProperty(
   localStorageImageOpacity / 100
 );
 document.documentElement.style.setProperty(
-  "--image-blur", localStorageImageBlur / 150 + "rem"
-)
+  "--image-blur",
+  localStorageImageBlur / 150 + "rem"
+);
 document.documentElement.style.setProperty(
   "--bg-opacity",
   localStorageBgOpacity / 100
@@ -1138,7 +1148,7 @@ $("#imageBlurSlider").on("input", function () {
   localStorage.setItem("image-blur", $(this).val());
   document.documentElement.style.setProperty(
     "--image-blur",
-    ($(this).val() / 100) + "rem"
+    $(this).val() / 100 + "rem"
   );
 });
 // when fontSizeSlider is being interacted
@@ -1361,7 +1371,7 @@ function editEasyTab() {
     localStorage.setItem("easyTabsArray", JSON.stringify(easyTabsArray));
     // update easyTabs
     updateEasyTabs(easyTabsArray);
-    updateEasyTabsSettings(easyTabsArray)
+    updateEasyTabsSettings(easyTabsArray);
   }
 }
 
@@ -1545,3 +1555,23 @@ $("#easyTabsInputHolder").on("click", ".addButton", function () {
 
 // make addEasyTabs movable and draggable
 $("#addEasyTabs").draggable();
+
+function updateFunnyTime() {
+  // get time until 31st Janurary 8:45am 2022
+  let timeUntil = new Date(2022, 0, 31, 8, 45, 0, 0);
+  // get current time
+  let now = new Date();
+  // get difference between current time and time until
+  let diff = timeUntil - now;
+  // update id funnyTime to diff
+  // format diff to DD/MM/YYYY HH:MM:SS
+  let days = Math.floor(diff / 1000 / 60 / 60 / 24);
+  let hours = Math.floor((diff / 1000 / 60 / 60) % 24);
+  let minutes = Math.floor(
+    (diff / 1000 / 60) % 60
+  );
+  let seconds = Math.floor((diff / 1000) % 60);
+  console.log(days,hours,minutes,diff)
+  document.getElementById("funnyTime").innerHTML = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+}
+
