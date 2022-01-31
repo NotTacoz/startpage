@@ -67,47 +67,47 @@ const timetable = [
     new Subject(
       "Advocacy",
       hourMinuteToNumber(8, 45),
-      hourMinuteToNumber(9, 00)
+      hourMinuteToNumber(8, 55)
     ),
     new Subject(
       getStorage("subMonA1", "Period 1"),
-      hourMinuteToNumber(9, 0),
-      hourMinuteToNumber(9, 55)
+      hourMinuteToNumber(8, 55),
+      hourMinuteToNumber(9, 50)
     ),
     new Subject(
       getStorage("subMonA2", "Period 2"),
-      hourMinuteToNumber(9, 55),
-      hourMinuteToNumber(10, 50)
+      hourMinuteToNumber(9, 50),
+      hourMinuteToNumber(10, 45)
     ),
     new Subject(
       "Recess",
-      hourMinuteToNumber(10, 50),
-      hourMinuteToNumber(11, 15)
+      hourMinuteToNumber(10, 45),
+      hourMinuteToNumber(11, 10)
     ),
     new Subject(
       getStorage("subMonA3", "Period 3"),
-      hourMinuteToNumber(11, 15),
-      hourMinuteToNumber(12, 10)
+      hourMinuteToNumber(11, 10),
+      hourMinuteToNumber(12, 05)
     ),
     new Subject(
       getStorage("subMonA4", "Period 4"),
-      hourMinuteToNumber(12, 10),
-      hourMinuteToNumber(13, 05)
+      hourMinuteToNumber(12, 05),
+      hourMinuteToNumber(13, 00)
     ),
     new Subject(
       "Lunch",
-      hourMinuteToNumber(13, 05),
-      hourMinuteToNumber(13, 40)
+      hourMinuteToNumber(13, 00),
+      hourMinuteToNumber(13, 35)
     ),
     new Subject(
       getStorage("subMonA5", "Period 5"),
-      hourMinuteToNumber(13, 40),
-      hourMinuteToNumber(14, 35)
+      hourMinuteToNumber(13, 35),
+      hourMinuteToNumber(14, 30)
     ),
     new Subject(
       getStorage("subMonA6", "Period 6"),
-      hourMinuteToNumber(14, 35),
-      hourMinuteToNumber(15, 30)
+      hourMinuteToNumber(14, 30),
+      hourMinuteToNumber(15, 25)
     ),
     new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
   ], // Monday
@@ -236,21 +236,21 @@ const timetable = [
     new Subject(
       "Advocacy",
       hourMinuteToNumber(11, 50),
-      hourMinuteToNumber(12, 30)
+      hourMinuteToNumber(12, 40)
     ),
     new Subject(
       "Lunch",
-      hourMinuteToNumber(12, 30),
-      hourMinuteToNumber(13, 10)
+      hourMinuteToNumber(12, 40),
+      hourMinuteToNumber(13, 20)
     ),
     new Subject(
       getStorage("subThuA5", "Period 5"),
-      hourMinuteToNumber(13, 10),
-      hourMinuteToNumber(14, 05)
+      hourMinuteToNumber(13, 20),
+      hourMinuteToNumber(14, 15)
     ),
     new Subject(
       getStorage("subThuA6", "Period 6"),
-      hourMinuteToNumber(14, 05),
+      hourMinuteToNumber(14, 15),
       hourMinuteToNumber(15, 00)
     ),
     new Subject("Home", hourMinuteToNumber(15, 00), hourMinuteToNumber(16, 00)),
@@ -262,44 +262,49 @@ const timetable = [
       hourMinuteToNumber(8, 45)
     ),
     new Subject(
+      "Advocacy",
+      hourMinuteToNumber(8, 45),
+      hourMinuteToNumber(8, 55)
+    ),
+    new Subject(
       getStorage("subFriA1", "Period 1"),
-      hourMinuteToNumber(9, 0),
-      hourMinuteToNumber(9, 55)
+      hourMinuteToNumber(8, 55),
+      hourMinuteToNumber(9, 50)
     ),
     new Subject(
       getStorage("subFriA2", "Period 2"),
-      hourMinuteToNumber(9, 55),
-      hourMinuteToNumber(10, 50)
+      hourMinuteToNumber(9, 50),
+      hourMinuteToNumber(10, 45)
     ),
     new Subject(
       "Recess",
-      hourMinuteToNumber(10, 50),
-      hourMinuteToNumber(11, 15)
+      hourMinuteToNumber(10, 45),
+      hourMinuteToNumber(11, 10)
     ),
     new Subject(
       getStorage("subFriA3", "Period 3"),
-      hourMinuteToNumber(11, 15),
-      hourMinuteToNumber(12, 10)
+      hourMinuteToNumber(11, 10),
+      hourMinuteToNumber(12, 05)
     ),
     new Subject(
       getStorage("subFriA4", "Period 4"),
-      hourMinuteToNumber(12, 10),
-      hourMinuteToNumber(13, 05)
+      hourMinuteToNumber(12, 05),
+      hourMinuteToNumber(13, 00)
     ),
     new Subject(
       "Lunch",
-      hourMinuteToNumber(13, 05),
-      hourMinuteToNumber(13, 40)
+      hourMinuteToNumber(13, 00),
+      hourMinuteToNumber(13, 35)
     ),
     new Subject(
       getStorage("subFriA5", "Period 5"),
-      hourMinuteToNumber(13, 40),
-      hourMinuteToNumber(14, 35)
+      hourMinuteToNumber(13, 35),
+      hourMinuteToNumber(14, 30)
     ),
     new Subject(
       getStorage("subFriA6", "Period 6"),
-      hourMinuteToNumber(14, 35),
-      hourMinuteToNumber(15, 30)
+      hourMinuteToNumber(14, 30),
+      hourMinuteToNumber(15, 25)
     ),
     new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
   ], // Friday
@@ -315,49 +320,49 @@ const timetable = [
     new Subject(
       "Advocacy",
       hourMinuteToNumber(8, 45),
-      hourMinuteToNumber(9, 00)
+      hourMinuteToNumber(8, 55)
     ),
     new Subject(
       getStorage("subMonB1", "Period 1"),
-      hourMinuteToNumber(9, 0),
-      hourMinuteToNumber(9, 55)
+      hourMinuteToNumber(8, 55),
+      hourMinuteToNumber(9, 50)
     ),
     new Subject(
       getStorage("subMonB2", "Period 2"),
-      hourMinuteToNumber(9, 55),
+      hourMinuteToNumber(9, 50),
       hourMinuteToNumber(10, 50)
     ),
     new Subject(
       "Recess",
       hourMinuteToNumber(10, 50),
-      hourMinuteToNumber(11, 15)
+      hourMinuteToNumber(11, 10)
     ),
     new Subject(
       getStorage("subMonB3", "Period 3"),
-      hourMinuteToNumber(11, 15),
-      hourMinuteToNumber(12, 10)
+      hourMinuteToNumber(11, 10),
+      hourMinuteToNumber(12, 05)
     ),
     new Subject(
       getStorage("subMonB4", "Period 4"),
-      hourMinuteToNumber(12, 10),
-      hourMinuteToNumber(13, 05)
+      hourMinuteToNumber(12, 05),
+      hourMinuteToNumber(13, 00)
     ),
     new Subject(
       "Lunch",
-      hourMinuteToNumber(13, 05),
-      hourMinuteToNumber(13, 40)
+      hourMinuteToNumber(13, 00),
+      hourMinuteToNumber(13, 35)
     ),
     new Subject(
       getStorage("subMonB5", "Period 5"),
-      hourMinuteToNumber(13, 40),
-      hourMinuteToNumber(14, 35)
+      hourMinuteToNumber(13, 35),
+      hourMinuteToNumber(14, 30)
     ),
     new Subject(
       getStorage("subMonB6", "Period 6"),
-      hourMinuteToNumber(14, 35),
-      hourMinuteToNumber(15, 30)
+      hourMinuteToNumber(14, 30),
+      hourMinuteToNumber(15, 25)
     ),
-    new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
+    new Subject("Home", hourMinuteToNumber(15, 25), hourMinuteToNumber(16, 00)),
   ], // Monday
   [
     new Subject(
@@ -484,24 +489,23 @@ const timetable = [
     new Subject(
       "Advocacy",
       hourMinuteToNumber(11, 50),
-      hourMinuteToNumber(12, 30)
+      hourMinuteToNumber(12, 40)
     ),
     new Subject(
       "Lunch",
-      hourMinuteToNumber(12, 30),
-      hourMinuteToNumber(13, 10)
+      hourMinuteToNumber(12, 40),
+      hourMinuteToNumber(13, 20)
     ),
     new Subject(
-      getStorage("subThuA5", "Period 5"),
-      hourMinuteToNumber(13, 10),
-      hourMinuteToNumber(14, 05)
+      getStorage("subThuB5", "Period 5"),
+      hourMinuteToNumber(13, 20),
+      hourMinuteToNumber(14, 15)
     ),
     new Subject(
-      getStorage("subThuA6", "Period 6"),
-      hourMinuteToNumber(14, 05),
-      hourMinuteToNumber(15, 00)
+      getStorage("subThuB6", "Period 6"),
+      hourMinuteToNumber(14, 15),
+      hourMinuteToNumber(15, 10)
     ),
-    new Subject("Home", hourMinuteToNumber(15, 00), hourMinuteToNumber(16, 00)),
   ], // Thursday
   [
     new Subject(
@@ -510,46 +514,47 @@ const timetable = [
       hourMinuteToNumber(8, 45)
     ),
     new Subject(
+      "Advocacy",
+      hourMinuteToNumber(8, 45),
+      hourMinuteToNumber(8, 55)
+    ),
+    new Subject(
       getStorage("subFriB1", "Period 1"),
-      hourMinuteToNumber(9, 0),
-      hourMinuteToNumber(9, 55)
+      hourMinuteToNumber(8, 55),
+      hourMinuteToNumber(9, 50)
     ),
     new Subject(
       getStorage("subFriB2", "Period 2"),
-      hourMinuteToNumber(9, 55),
-      hourMinuteToNumber(10, 50)
+      hourMinuteToNumber(9, 50),
+      hourMinuteToNumber(10, 45)
     ),
     new Subject(
       "Recess",
-      hourMinuteToNumber(10, 50),
-      hourMinuteToNumber(11, 15)
+      hourMinuteToNumber(10, 45),
+      hourMinuteToNumber(11, 10)
     ),
     new Subject(
       getStorage("subFriB3", "Period 3"),
-      hourMinuteToNumber(11, 15),
-      hourMinuteToNumber(12, 10)
+      hourMinuteToNumber(11, 10),
+      hourMinuteToNumber(12, 05)
     ),
     new Subject(
       getStorage("subFriB4", "Period 4"),
-      hourMinuteToNumber(12, 10),
-      hourMinuteToNumber(13, 05)
+      hourMinuteToNumber(12, 05),
+      hourMinuteToNumber(13, 0)
     ),
-    new Subject(
-      "Lunch",
-      hourMinuteToNumber(13, 05),
-      hourMinuteToNumber(13, 40)
-    ),
+    new Subject("Lunch", hourMinuteToNumber(13, 0), hourMinuteToNumber(13, 35)),
     new Subject(
       getStorage("subFriB5", "Period 5"),
-      hourMinuteToNumber(13, 40),
-      hourMinuteToNumber(14, 35)
+      hourMinuteToNumber(13, 35),
+      hourMinuteToNumber(14, 30)
     ),
     new Subject(
       getStorage("subFriB6", "Period 6"),
-      hourMinuteToNumber(14, 35),
-      hourMinuteToNumber(15, 30)
+      hourMinuteToNumber(14, 30),
+      hourMinuteToNumber(15, 25)
     ),
-    new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
+    new Subject("Home", hourMinuteToNumber(15, 25), hourMinuteToNumber(16, 00)),
   ], // Friday
   [], // Saturday
 ];
@@ -1577,11 +1582,10 @@ function updateFunnyTime() {
   // format diff to DD/MM/YYYY HH:MM:SS
   let days = Math.floor(diff / 1000 / 60 / 60 / 24);
   let hours = Math.floor((diff / 1000 / 60 / 60) % 24);
-  let minutes = Math.floor(
-    (diff / 1000 / 60) % 60
-  );
+  let minutes = Math.floor((diff / 1000 / 60) % 60);
   let seconds = Math.floor((diff / 1000) % 60);
   // console.log(days,hours,minutes,diff)
-  document.getElementById("funnyTime").innerHTML = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+  document.getElementById(
+    "funnyTime"
+  ).innerHTML = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
 }
-
