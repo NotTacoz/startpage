@@ -560,6 +560,8 @@ const timetable = [
 ];
 
 function updateTimetable() {
+  // hide currentSubjectParent
+  currentSubjectParent.style.display = "none";
   // remember to add week 1 week 2 bullshit
   // if week 2 just add 7 to the day
   // get current time
@@ -580,7 +582,7 @@ function updateTimetable() {
   }
 
   //   currentDay = 2;
-  //   nowStamp = hourMinuteToNumber(12, 4, 2);
+  // nowStamp = hourMinuteToNumber(12, 4, 2);
 
   // if current day is sunday set currentDay to 7
   if (currentDay == 0) {
@@ -628,8 +630,55 @@ function updateTimetable() {
     }
     if (ends.indexOf(closest) >= timetable[currentDay].length - 1) {
       //   console.log(ends.indexOf(closest));
-      document.getElementById("nextSubject").innerHTML = "Nothing! 🥳";
+      // get tomorrow's subjects
+      var tomorrow = [];
+      for (let j = 0; j < timetable[currentDay + 1].length; j++) {
+        // get timetable name
+        const name = timetable[currentDay + 1][j].name;
+        // append name to times
+        tomorrow.push(name);
+      }
+      // console.log(tomorrow[1, 2, 4, 5, 7, 8]);
+
+      //  remove Before School, Recess, Lunch and Home
+      tomorrow.splice(0, 1);
+      tomorrow.splice(-1, 1);
+      // remove index 5
+      tomorrow.splice(5, 1);
+      // remove index 3
+      tomorrow.splice(2, 1);
+
+      // currentSubjectParent hide
+      document.getElementById("currentSubjectParent").style.display = "none";
+
+      // set id upNext to Tomorrow, you have:
+      document.getElementById("upNext").innerHTML = "Tomorrow, you have:";
+
+      //set next subject to tommorow as a string with a line break ul li
+      document.getElementById("nextSubject").innerHTML = `<ul>
+      <li>- ${tomorrow[0]}</li>
+      <li>- ${tomorrow[1]}</li>
+      <li>- ${tomorrow[2]}</li>
+      <li>- ${tomorrow[3]}</li>
+      <li>- ${tomorrow[4]}</li>
+      <li>- ${tomorrow[5]}</li>
+      </ul>`;
+      // document.getElementById("nextSubject").innerHTML = "<br>" + tomorrow.join("<br>");
     } else {
+      // set id upNext to Up next:
+      document.getElementById("upNext").innerHTML = "Up next: ";
+      // show currentSubjectParent
+      document.getElementById("currentSubjectParent").style.display = "block";
+      // get current Subject
+      const currentSubject =
+        timetable[currentDay][starts.indexOf(closest) - 1].name;
+      // get current Subject start
+      const currentSubjectStart = convertSeconds(
+        timetable[currentDay][starts.indexOf(closest) - 1].start
+      );
+
+      document.getElementById("currentSubject").innerHTML = currentSubject;
+
       var subjectName = timetable[currentDay][starts.indexOf(closest)].name;
       var subjectStart = convertSeconds(closest - nowStamp);
       if (subjectStart[0] == "0") {
