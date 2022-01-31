@@ -643,9 +643,7 @@ function updateTimetable() {
       //  remove Before School, Recess, Lunch and Home
       tomorrow.splice(0, 1);
       tomorrow.splice(-1, 1);
-      // remove index 5
       tomorrow.splice(5, 1);
-      // remove index 3
       tomorrow.splice(2, 1);
 
       // currentSubjectParent hide
@@ -666,7 +664,7 @@ function updateTimetable() {
       // document.getElementById("nextSubject").innerHTML = "<br>" + tomorrow.join("<br>");
     } else {
       // set id upNext to Up next:
-      document.getElementById("upNext").innerHTML = "Up next: ";
+      document.getElementById("upNext").innerHTML = "Up next: <br>";
       // show currentSubjectParent
       document.getElementById("currentSubjectParent").style.display = "block";
       // get current Subject
@@ -681,6 +679,7 @@ function updateTimetable() {
 
       var subjectName = timetable[currentDay][starts.indexOf(closest)].name;
       var subjectStart = convertSeconds(closest - nowStamp);
+      var subjectStartString = "";
       if (subjectStart[0] == "0") {
         subjectStartString = subjectStart[1] + "m " + subjectStart[2] + "s";
         if (subjectStart[1] == "0") {
@@ -688,10 +687,43 @@ function updateTimetable() {
         }
 
         // console.log(subjectStart, subjectStartString);
-
-        document.getElementById("nextSubject").innerHTML =
-          subjectName + ", " + subjectStartString;
+      } else {
+        subjectStartString =
+          subjectStart[0] +
+          "h " +
+          subjectStart[1] +
+          "m" +
+          " " +
+          subjectStart[2] +
+          "s";
       }
+      var allSubjects = [];
+      for (let j = 0; j < timetable[currentDay].length; j++) {
+        // get timetable name
+        const name = timetable[currentDay][j].name;
+        // append name to times
+        allSubjects.push(name);
+      }
+      // console.log(tomorrow[1, 2, 4, 5, 7, 8]);
+
+      //  remove Before School, Recess, Lunch and Home
+      allSubjects.splice(0, 1);
+      allSubjects.splice(-1, 1);
+      allSubjects.splice(5, 1);
+      allSubjects.splice(2, 1);
+
+      document.getElementById("nextSubject").innerHTML =
+        "<ul><li>" + subjectName + ", " + subjectStartString + "</li></ul>";
+
+      // set nextsubject to all subjecs after next subject
+      document.getElementById("nextSubject").innerHTML +=
+        "After that:" + "<ul>" +
+        allSubjects
+          .slice(
+            starts.indexOf(closest),
+            6
+          ).join("<br>") + "</ul>";
+      
     }
   }
 }
@@ -804,13 +836,13 @@ function updateTime() {
     var bgimg = "";
     if (hours >= 7 && hours < 9) {
       bgimg = "img/sunset.jpg";
-    } else if (hours >= 9 && hours < 17) {
+    } else if (hours >= 5 && hours < 17) {
       bgimg = "img/day.jpg";
     } else if (hours >= 17 && hours < 18) {
       bgimg = "img/sunset.jpg";
     } else if (hours >= 18 && hours < 24) {
       bgimg = "img/night.jpg";
-    } else if (hours >= 0 && hours < 6) {
+    } else if (hours >= 0 && hours < 5) {
       bgimg = "img/night.jpg";
     }
     document.getElementById("bgimg").src = bgimg;
