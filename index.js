@@ -576,7 +576,16 @@ function updateTimetable() {
   // get week of the year
   const currentWeek = currentTime.getWeek() % 2;
 
-  if (currentWeek == 1) {
+  var correctWeek = 1
+
+  // if localStorage correctWeekKey exists
+  if (localStorage.getItem("correctWeekKey") !== null) {
+    // set correctWeek to correctWeekKey 
+    correctWeek = localStorage.getItem("correctWeekKey");
+  }
+
+  // if currentWeek is on weekB
+  if (currentWeek == correctWeek) {
     // if currentweek is even
     currentDay += 7;
   }
@@ -1682,3 +1691,26 @@ function updateFunnyTime() {
     "funnyTime"
   ).innerHTML = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
 }
+
+// on changeWeek click
+$("#changeWeek").on("click", function () {
+  // get correctWeekKey
+  let correctWeekKey = localStorage.getItem("correctWeekKey");
+  // if correctWeekKey is not set
+  if (!correctWeekKey) {
+    // set correctWeekKey to 0
+    correctWeekKey = 1;
+    localStorage.setItem("correctWeekKey", "0");
+  } else if (correctWeekKey === "0") {
+    // set correctWeekKey to 1
+    correctWeekKey = 1;
+    localStorage.setItem("correctWeekKey", "1");
+  } else {
+    // set correctWeekKey to 0
+    correctWeekKey = 0;
+    localStorage.setItem("correctWeekKey", "0");
+  }
+
+  // alert user
+  alert(`Week A and B has been switched`);
+});
