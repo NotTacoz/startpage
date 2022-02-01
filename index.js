@@ -641,10 +641,10 @@ function updateTimetable() {
       // console.log(tomorrow[1, 2, 4, 5, 7, 8]);
 
       //  remove Before School, Recess, Lunch and Home
-      tomorrow.splice(0, 1);
-      tomorrow.splice(-1, 1);
-      tomorrow.splice(5, 1);
-      tomorrow.splice(2, 1);
+      tomorrow.splice(tomorrow.indexOf("Before School"), 1);
+      tomorrow.splice(tomorrow.indexOf("Recess"), 1);
+      tomorrow.splice(tomorrow.indexOf("Lunch"), 1);
+      tomorrow.splice(tomorrow.indexOf("Home"), 1);
 
       // currentSubjectParent hide
       document.getElementById("currentSubjectParent").style.display = "none";
@@ -704,26 +704,36 @@ function updateTimetable() {
         // append name to times
         allSubjects.push(name);
       }
-      // console.log(tomorrow[1, 2, 4, 5, 7, 8]);
+
+      // find location of closest in allSubjects
+      var closestIndex = allSubjects.indexOf(subjectName);
+
+      // remove closestIndex and any before from allSubjects
+      // console.log(closestIndex)
+      allSubjects.splice(closestIndex, 1);
+      allSubjects.splice(0, closestIndex);
 
       //  remove Before School, Recess, Lunch and Home
-      allSubjects.splice(0, 1);
-      allSubjects.splice(-1, 1);
-      allSubjects.splice(5, 1);
-      allSubjects.splice(2, 1);
+      if (allSubjects.indexOf("Before School") != -1) {
+        allSubjects.splice(allSubjects.indexOf("Before School"), 1);
+      }
+      if (allSubjects.indexOf("Recess") != -1) {
+        allSubjects.splice(allSubjects.indexOf("Recess"), 1);
+      }
+      if (allSubjects.indexOf("Lunch") != -1) {
+        allSubjects.splice(allSubjects.indexOf("Lunch"), 1);
+      }
+      if (allSubjects.indexOf("Home") != -1) {
+        allSubjects.splice(allSubjects.indexOf("Home"), 1);
+      }
+
+      // console.log(allSubjects);
 
       document.getElementById("nextSubject").innerHTML =
         "<ul><li>" + subjectName + ", " + subjectStartString + "</li></ul>";
 
-      // set nextsubject to all subjecs after next subject
       document.getElementById("nextSubject").innerHTML +=
-        "After that:" + "<ul>" +
-        allSubjects
-          .slice(
-            starts.indexOf(closest),
-            6
-          ).join("<br>") + "</ul>";
-      
+        "After that:" + "<ul>" + allSubjects.join("<br>") + "</ul>";
     }
   }
 }
