@@ -732,8 +732,10 @@ function updateTimetable() {
       document.getElementById("nextSubject").innerHTML =
         "<ul><li>" + subjectName + ", " + subjectStartString + "</li></ul>";
 
-      document.getElementById("nextSubject").innerHTML +=
-        "After that:" + "<ul>" + allSubjects.join("<br>") + "</ul>";
+      if (allSubjects.length > 0) {
+        document.getElementById("nextSubject").innerHTML +=
+          "After that:" + "<ul>" + allSubjects.join("<br>") + "</ul>";
+      }
     }
   }
 }
