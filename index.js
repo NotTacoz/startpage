@@ -576,7 +576,7 @@ function updateTimetable() {
   // get week of the year
   const currentWeek = currentTime.getWeek() % 2;
 
-  if (currentWeek == 0) {
+  if (currentWeek == 1) {
     // if currentweek is even
     currentDay += 7;
   }
