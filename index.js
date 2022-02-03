@@ -576,11 +576,11 @@ function updateTimetable() {
   // get week of the year
   const currentWeek = currentTime.getWeek() % 2;
 
-  var correctWeek = 1
+  var correctWeek = 1;
 
   // if localStorage correctWeekKey exists
   if (localStorage.getItem("correctWeekKey") !== null) {
-    // set correctWeek to correctWeekKey 
+    // set correctWeek to correctWeekKey
     correctWeek = localStorage.getItem("correctWeekKey");
   }
 
@@ -661,14 +661,16 @@ function updateTimetable() {
       // set id upNext to Tomorrow, you have:
       document.getElementById("upNext").innerHTML = "Tomorrow, you have:";
 
-      //set next subject to tommorow as a string with a line break ul li
+      //set next subject to tommorow as a string with a line break ul li tommorow.join(<"li">)")
       document.getElementById("nextSubject").innerHTML = `<ul>
-      <li>- ${tomorrow[0]}</li>
-      <li>- ${tomorrow[1]}</li>
-      <li>- ${tomorrow[2]}</li>
-      <li>- ${tomorrow[3]}</li>
-      <li>- ${tomorrow[4]}</li>
-      <li>- ${tomorrow[5]}</li>
+      <li>${tomorrow[0]}</li>
+      <li>${tomorrow[1]}</li>
+      <li>${tomorrow[2]}</li>
+      <li>${tomorrow[3]}</li>
+      <li>${tomorrow[4]}</li>
+      <li>${tomorrow[5]}</li>
+      <li>${tomorrow[6]}</li>
+      
       </ul>`;
       // document.getElementById("nextSubject").innerHTML = "<br>" + tomorrow.join("<br>");
     } else {
