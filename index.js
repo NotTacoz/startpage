@@ -251,9 +251,9 @@ const timetable = [
     new Subject(
       getStorage("subThuA6", "Period 6"),
       hourMinuteToNumber(14, 15),
-      hourMinuteToNumber(15, 00)
+      hourMinuteToNumber(15, 10)
     ),
-    new Subject("Home", hourMinuteToNumber(15, 00), hourMinuteToNumber(16, 00)),
+    new Subject("Home", hourMinuteToNumber(15, 10), hourMinuteToNumber(16, 00)),
   ], // Thursday
   [
     new Subject(
@@ -506,6 +506,7 @@ const timetable = [
       hourMinuteToNumber(14, 15),
       hourMinuteToNumber(15, 10)
     ),
+    new Subject("Home", hourMinuteToNumber(15, 10), hourMinuteToNumber(16, 00)),
   ], // Thursday
   [
     new Subject(
@@ -595,21 +596,30 @@ function updateTimetable() {
     currentDay = 7;
   }
 
-  //   console.log(currentDay);
-
-  if (
-    currentDay == 6 ||
-    currentDay == 7 ||
-    currentDay == 13 ||
-    currentDay == 14
-  ) {
-    // weekend
+  if (currentDay == 6 || currentDay == 13) {
     document.getElementById("nextSubject").innerHTML = "Nothing! 🥳";
+  } else if (currentDay == 7 || currentDay == 14) {
+    var tomorrow = [];
+    var nextDay = currentDay + 1;
+    if (nextDay >= 14) {
+      nextDay = 1;
+    }
+    for (let j = 0; j < timetable[nextDay].length; j++) {
+      const name = timetable[nextDay][j].name;
+      tomorrow.push(name);
+    }
+    tomorrow.splice(tomorrow.indexOf("Before School"), 1);
+    tomorrow.splice(tomorrow.indexOf("Recess"), 1);
+    tomorrow.splice(tomorrow.indexOf("Lunch"), 1);
+    tomorrow.splice(tomorrow.indexOf("Home"), 1);
+
+    document.getElementById("currentSubjectParent").style.display = "none";
+    document.getElementById("upNext").innerHTML = "Tomorrow, you have:";
+    document.getElementById("nextSubject").innerHTML =
+      "<ul>" + tomorrow.join("<br>") + "</ul>";
   } else {
-    // weekday
     var starts = [];
     var ends = [];
-    // for every subject in day
     for (let j = 0; j < timetable[currentDay].length; j++) {
       // get start
       const start = timetable[currentDay][j].start;
@@ -626,52 +636,30 @@ function updateTimetable() {
         ? curr
         : prev;
     });
-    // console.log(nowStamp, closest);
-    // console.log(timetable)
-    // console.log(starts.indexOf(closest))
-    // console.log(closest, ends.indexOf(closest) + 1);
     if (closest < nowStamp) {
-      // round up closest
       closest = ends[ends.indexOf(closest) + 1];
     }
     if (ends.indexOf(closest) >= timetable[currentDay].length - 1) {
-      if (currentDay != 5 && currentDay != 10) {
-        //   console.log(ends.indexOf(closest));
-        // get tomorrow's subjects
-
+      if (currentDay != 5 && currentDay != 12) {
         var tomorrow = [];
-        for (let j = 0; j < timetable[currentDay + 1].length; j++) {
-          // get timetable name
-          const name = timetable[currentDay + 1][j].name;
-          // append name to times
+        var nextDay = currentDay + 1;
+        if (nextDay >= 14) { // do i even need this lmao
+          nextDay = 1;
+        }
+        for (let j = 0; j < timetable[nextDay].length; j++) {
+          const name = timetable[nextDay][j].name;
           tomorrow.push(name);
         }
-        // console.log(tomorrow[1, 2, 4, 5, 7, 8]);
 
-        //  remove Before School, Recess, Lunch and Home
         tomorrow.splice(tomorrow.indexOf("Before School"), 1);
         tomorrow.splice(tomorrow.indexOf("Recess"), 1);
         tomorrow.splice(tomorrow.indexOf("Lunch"), 1);
         tomorrow.splice(tomorrow.indexOf("Home"), 1);
 
-        // currentSubjectParent hide
         document.getElementById("currentSubjectParent").style.display = "none";
-
-        // set id upNext to Tomorrow, you have:
         document.getElementById("upNext").innerHTML = "Tomorrow, you have:";
-
-        //set next subject to tommorow as a string with a line break ul li tommorow.join(<"li">)")
-        document.getElementById("nextSubject").innerHTML = `<ul>
-      <li>${tomorrow[0]}</li>
-      <li>${tomorrow[1]}</li>
-      <li>${tomorrow[2]}</li>
-      <li>${tomorrow[3]}</li>
-      <li>${tomorrow[4]}</li>
-      <li>${tomorrow[5]}</li>
-      <li>${tomorrow[6]}</li>
-      
-      </ul>`;
-        // document.getElementById("nextSubject").innerHTML = "<br>" + tomorrow.join("<br>");
+        document.getElementById("nextSubject").innerHTML =
+          "<ul>" + tomorrow.join("<br>") + "</ul>";
       } else {
         document.getElementById("upNext").innerHTML = "Nothing! 🥳";
       }
