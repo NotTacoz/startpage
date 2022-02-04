@@ -3,7 +3,7 @@
 
 # How to Install (Main)
 1. Type in [chrome://extensions](chrome://extensions) or the browser you have's alternative
-2. Drag and drop the startpage.zip file into the browser (which can be found in [releases](https://github.com/NotTacoz/startpage/releases/tag/beta))
+2. Drag and drop the startpage.zip file into the browser (which can be found in [releases](https://github.com/NotTacoz/startpage/releases/tag/1.2))
 3. Enjoy!
 
 it is recommended that you install it by extension as it saves load time
