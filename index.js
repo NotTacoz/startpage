@@ -109,7 +109,7 @@ const timetable = [
       hourMinuteToNumber(14, 30),
       hourMinuteToNumber(15, 25)
     ),
-    new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
+    new Subject("Home", hourMinuteToNumber(15, 25), hourMinuteToNumber(16, 00)),
   ], // Monday
   [
     new Subject(
@@ -306,7 +306,7 @@ const timetable = [
       hourMinuteToNumber(14, 30),
       hourMinuteToNumber(15, 25)
     ),
-    new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
+    new Subject("Home", hourMinuteToNumber(15, 25), hourMinuteToNumber(16, 00)),
   ], // Friday
   [], // Saturday
 
@@ -591,7 +591,7 @@ function updateTimetable() {
   }
 
   //   currentDay = 2;
-  // nowStamp = hourMinuteToNumber(12, 4, 2);
+  nowStamp = hourMinuteToNumber(15, 4, 2);
 
   // if current day is sunday set currentDay to 7
   if (currentDay == 0) {
@@ -634,8 +634,8 @@ function updateTimetable() {
     // console.log(starts.indexOf(closest))
     // console.log(closest, ends.indexOf(closest) + 1);
     if (closest < nowStamp) {
-      // set nextSubject to nothing
-      document.getElementById("nextSubject").innerHTML = "Nothing! 🥳";
+      // set nextSubject to time until ends closest
+      
     }
     else if (ends.indexOf(closest) >= timetable[currentDay].length - 1) {
       //   console.log(ends.indexOf(closest));
