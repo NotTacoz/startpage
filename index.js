@@ -634,10 +634,10 @@ function updateTimetable() {
     // console.log(starts.indexOf(closest))
     // console.log(closest, ends.indexOf(closest) + 1);
     if (closest < nowStamp) {
-      closest = ends[ends.indexOf(closest) + 1];
-      // console.log("a")
+      // set nextSubject to nothing
+      document.getElementById("nextSubject").innerHTML = "Nothing! 🥳";
     }
-    if (ends.indexOf(closest) >= timetable[currentDay].length - 1) {
+    else if (ends.indexOf(closest) >= timetable[currentDay].length - 1) {
       //   console.log(ends.indexOf(closest));
       // get tomorrow's subjects
       var tomorrow = [];
@@ -857,9 +857,9 @@ function updateTime() {
 
     // update bgimg based on time
     var bgimg = "";
-    if (hours >= 7 && hours < 9) {
+    if (hours >= 5 && hours < 7) {
       bgimg = "img/sunset.jpg";
-    } else if (hours >= 5 && hours < 17) {
+    } else if (hours >= 7 && hours < 17) {
       bgimg = "img/day.jpg";
     } else if (hours >= 17 && hours < 18) {
       bgimg = "img/sunset.jpg";
