@@ -590,9 +590,6 @@ function updateTimetable() {
     currentDay += 7;
   }
 
-  //   currentDay = 2;
-  nowStamp = hourMinuteToNumber(15, 4, 2);
-
   // if current day is sunday set currentDay to 7
   if (currentDay == 0) {
     currentDay = 7;
@@ -634,35 +631,37 @@ function updateTimetable() {
     // console.log(starts.indexOf(closest))
     // console.log(closest, ends.indexOf(closest) + 1);
     if (closest < nowStamp) {
-      // set nextSubject to time until ends closest
-      
+      // round up closest
+      closest = ends[ends.indexOf(closest) + 1];
     }
-    else if (ends.indexOf(closest) >= timetable[currentDay].length - 1) {
-      //   console.log(ends.indexOf(closest));
-      // get tomorrow's subjects
-      var tomorrow = [];
-      for (let j = 0; j < timetable[currentDay + 1].length; j++) {
-        // get timetable name
-        const name = timetable[currentDay + 1][j].name;
-        // append name to times
-        tomorrow.push(name);
-      }
-      // console.log(tomorrow[1, 2, 4, 5, 7, 8]);
+    if (ends.indexOf(closest) >= timetable[currentDay].length - 1) {
+      if (currentDay != 5 && currentDay != 10) {
+        //   console.log(ends.indexOf(closest));
+        // get tomorrow's subjects
 
-      //  remove Before School, Recess, Lunch and Home
-      tomorrow.splice(tomorrow.indexOf("Before School"), 1);
-      tomorrow.splice(tomorrow.indexOf("Recess"), 1);
-      tomorrow.splice(tomorrow.indexOf("Lunch"), 1);
-      tomorrow.splice(tomorrow.indexOf("Home"), 1);
+        var tomorrow = [];
+        for (let j = 0; j < timetable[currentDay + 1].length; j++) {
+          // get timetable name
+          const name = timetable[currentDay + 1][j].name;
+          // append name to times
+          tomorrow.push(name);
+        }
+        // console.log(tomorrow[1, 2, 4, 5, 7, 8]);
 
-      // currentSubjectParent hide
-      document.getElementById("currentSubjectParent").style.display = "none";
+        //  remove Before School, Recess, Lunch and Home
+        tomorrow.splice(tomorrow.indexOf("Before School"), 1);
+        tomorrow.splice(tomorrow.indexOf("Recess"), 1);
+        tomorrow.splice(tomorrow.indexOf("Lunch"), 1);
+        tomorrow.splice(tomorrow.indexOf("Home"), 1);
 
-      // set id upNext to Tomorrow, you have:
-      document.getElementById("upNext").innerHTML = "Tomorrow, you have:";
+        // currentSubjectParent hide
+        document.getElementById("currentSubjectParent").style.display = "none";
 
-      //set next subject to tommorow as a string with a line break ul li tommorow.join(<"li">)")
-      document.getElementById("nextSubject").innerHTML = `<ul>
+        // set id upNext to Tomorrow, you have:
+        document.getElementById("upNext").innerHTML = "Tomorrow, you have:";
+
+        //set next subject to tommorow as a string with a line break ul li tommorow.join(<"li">)")
+        document.getElementById("nextSubject").innerHTML = `<ul>
       <li>${tomorrow[0]}</li>
       <li>${tomorrow[1]}</li>
       <li>${tomorrow[2]}</li>
@@ -672,7 +671,10 @@ function updateTimetable() {
       <li>${tomorrow[6]}</li>
       
       </ul>`;
-      // document.getElementById("nextSubject").innerHTML = "<br>" + tomorrow.join("<br>");
+        // document.getElementById("nextSubject").innerHTML = "<br>" + tomorrow.join("<br>");
+      } else {
+        document.getElementById("upNext").innerHTML = "Nothing! 🥳";
+      }
     } else {
       // set id upNext to Up next:
       document.getElementById("upNext").innerHTML = "Up next: <br>";
