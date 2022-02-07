@@ -576,6 +576,7 @@ function updateTimetable() {
     currentTime.getMinutes(),
     currentTime.getSeconds()
   );
+
   // get current day
   var currentDay = currentTime.getDay();
   // get week of the year
@@ -619,6 +620,7 @@ function updateTimetable() {
 
     //  if two exact same subjects are next to each other, remove one and edit one so it says double
     for (let i = 0; i < tomorrow.length; i++) {
+
       if (tomorrow[i] == tomorrow[i + 1]) {
         tomorrow.splice(i, 1);
         tomorrow[i] = tomorrow[i] + " (double)";
@@ -753,6 +755,12 @@ function updateTimetable() {
       if (allSubjects.indexOf(subjectName) != -1) {
         allSubjects.splice(allSubjects.indexOf(subjectName), 1);
         subjectName = subjectName + " (double)";
+      }
+      for (let i = 0; i < allSubjects.length; i++) {
+        if (allSubjects[i] == allSubjects[i + 1]) {
+          allSubjects.splice(i, 1);
+          allSubjects[i] = allSubjects[i] + " (double)";
+        }
       }
 
       // console.log(allSubjects);
