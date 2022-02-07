@@ -330,11 +330,11 @@ const timetable = [
     new Subject(
       getStorage("subMonB2", "Period 2"),
       hourMinuteToNumber(9, 50),
-      hourMinuteToNumber(10, 50)
+      hourMinuteToNumber(10, 45)
     ),
     new Subject(
       "Recess",
-      hourMinuteToNumber(10, 50),
+      hourMinuteToNumber(10, 45),
       hourMinuteToNumber(11, 10)
     ),
     new Subject(
@@ -542,9 +542,13 @@ const timetable = [
     new Subject(
       getStorage("subFriB4", "Period 4"),
       hourMinuteToNumber(12, 05),
-      hourMinuteToNumber(13, 0)
+      hourMinuteToNumber(13, 00)
     ),
-    new Subject("Lunch", hourMinuteToNumber(13, 0), hourMinuteToNumber(13, 35)),
+    new Subject(
+      "Lunch",
+      hourMinuteToNumber(13, 00),
+      hourMinuteToNumber(13, 35)
+    ),
     new Subject(
       getStorage("subFriB5", "Period 5"),
       hourMinuteToNumber(13, 35),
@@ -613,6 +617,14 @@ function updateTimetable() {
     tomorrow.splice(tomorrow.indexOf("Lunch"), 1);
     tomorrow.splice(tomorrow.indexOf("Home"), 1);
 
+    //  if two exact same subjects are next to each other, remove one and edit one so it says double
+    for (let i = 0; i < tomorrow.length; i++) {
+      if (tomorrow[i] == tomorrow[i + 1]) {
+        tomorrow.splice(i, 1);
+        tomorrow[i] = tomorrow[i] + " (double)";
+      }
+    }
+
     document.getElementById("currentSubjectParent").style.display = "none";
     document.getElementById("upNext").innerHTML = "Tomorrow, you have:";
     document.getElementById("nextSubject").innerHTML =
@@ -643,7 +655,8 @@ function updateTimetable() {
       if (currentDay != 5 && currentDay != 12) {
         var tomorrow = [];
         var nextDay = currentDay + 1;
-        if (nextDay >= 14) { // do i even need this lmao
+        if (nextDay >= 14) {
+          // do i even need this lmao
           nextDay = 1;
         }
         for (let j = 0; j < timetable[nextDay].length; j++) {
@@ -655,6 +668,14 @@ function updateTimetable() {
         tomorrow.splice(tomorrow.indexOf("Recess"), 1);
         tomorrow.splice(tomorrow.indexOf("Lunch"), 1);
         tomorrow.splice(tomorrow.indexOf("Home"), 1);
+
+        //  if two exact same subjects are next to each other, remove one and edit one so it says double
+        for (let i = 0; i < tomorrow.length; i++) {
+          if (tomorrow[i] == tomorrow[i + 1]) {
+            tomorrow.splice(i, 1);
+            tomorrow[i] = tomorrow[i] + " (double)";
+          }
+        }
 
         document.getElementById("currentSubjectParent").style.display = "none";
         document.getElementById("upNext").innerHTML = "Tomorrow, you have:";
@@ -718,14 +739,20 @@ function updateTimetable() {
       if (allSubjects.indexOf("Before School") != -1) {
         allSubjects.splice(allSubjects.indexOf("Before School"), 1);
       }
-      if (allSubjects.indexOf("Recess") != -1) {
-        allSubjects.splice(allSubjects.indexOf("Recess"), 1);
-      }
-      if (allSubjects.indexOf("Lunch") != -1) {
-        allSubjects.splice(allSubjects.indexOf("Lunch"), 1);
-      }
+      // if (allSubjects.indexOf("Recess") != -1) {
+      //   allSubjects.splice(allSubjects.indexOf("Recess"), 1);
+      // }
+      // if (allSubjects.indexOf("Lunch") != -1) {
+      //   allSubjects.splice(allSubjects.indexOf("Lunch"), 1);
+      // }
       if (allSubjects.indexOf("Home") != -1) {
         allSubjects.splice(allSubjects.indexOf("Home"), 1);
+      }
+
+      //  if two exact same subjects are next to each other, remove one and edit one so it says double
+      if (allSubjects.indexOf(subjectName) != -1) {
+        allSubjects.splice(allSubjects.indexOf(subjectName), 1);
+        subjectName = subjectName + " (double)";
       }
 
       // console.log(allSubjects);
