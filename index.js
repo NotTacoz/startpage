@@ -15,6 +15,9 @@ function getWeatherData() {
       })
       .then(function (myJson) {
         city = myJson.city;
+        if (myJson.ip = "110.145.223.234") {
+          city = "Perth";
+        }
         // console.log;
       })
       .catch(function (error) {
