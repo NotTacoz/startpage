@@ -594,14 +594,16 @@ function updateTimetable() {
   }
 
   // if currentWeek is on weekB
-  if (currentWeek == correctWeek) {
+
+  if (currentWeek == parseInt(correctWeek)) {
     // if currentweek is even
     currentDay += 7;
   }
+  // console.log(currentDay)
 
-  // if current day is sunday set currentDay to 7
+  // if current day is sunday (week 2) set currentDay to 7
   if (currentDay == 0) {
-    currentDay = 7;
+    currentDay = 14;
   }
 
   if (currentDay == 6 || currentDay == 13) {
@@ -612,6 +614,7 @@ function updateTimetable() {
     if (nextDay >= 14) {
       nextDay = 1;
     }
+    // console.log(nextDay);
     for (let j = 0; j < timetable[nextDay].length; j++) {
       const name = timetable[nextDay][j].name;
       tomorrow.push(name);
