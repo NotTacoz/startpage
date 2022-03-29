@@ -15,7 +15,7 @@ function getWeatherData() {
       })
       .then(function (myJson) {
         city = myJson.city;
-        if (myJson.ip = "110.145.223.234") {
+        if ((myJson.ip = "110.145.223.234")) {
           city = "Perth";
         }
         // console.log;
@@ -626,7 +626,6 @@ function updateTimetable() {
 
     //  if two exact same subjects are next to each other, remove one and edit one so it says double
     for (let i = 0; i < tomorrow.length; i++) {
-
       if (tomorrow[i] == tomorrow[i + 1]) {
         tomorrow.splice(i, 1);
         tomorrow[i] = tomorrow[i] + " (double)";
@@ -800,9 +799,15 @@ function hideTimeBg() {
 }
 
 function openSettingsTab() {
+  // add class called 'among' to set animation to animation: spin 1s 1 cubic-bezier(0.5, 0, 0.5, 1); for settingsbtnimg
+  $("#settingsbtnimg").removeClass("reverse-animate");
+  $("#settingsbtnimg").removeClass("animate");
+  $("#settingsbtnimg").width(); // trigger a DOM reflow
   // console.log("pog");
   // if timebg is hidden
   if ($("#timebg").css("display") == "none") {
+    
+    $("#settingsbtnimg").addClass("reverse-animate");
     $("#timebg").show();
     $("#settings").hide();
     $("#addEasyTabs").hide();
@@ -820,6 +825,7 @@ function openSettingsTab() {
     // if weather, date, time, easytabs and searchbar are all disabled
     hideTimeBg();
   } else if ($("#timebg").css("display") == "block") {
+    $("#settingsbtnimg").addClass("animate");
     $("#timebg").hide();
     $("#todo").hide();
     $("#timetable").hide();
