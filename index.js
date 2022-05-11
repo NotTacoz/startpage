@@ -806,7 +806,6 @@ function openSettingsTab() {
   // console.log("pog");
   // if timebg is hidden
   if ($("#timebg").css("display") == "none") {
-    
     $("#settingsbtnimg").addClass("reverse-animate");
     $("#timebg").show();
     $("#settings").hide();
@@ -890,8 +889,6 @@ function updateTime() {
       minutes = "0" + minutes;
     }
 
-    // console.log(hours);
-
     // update bgimg based on time
     var bgimg = "";
     if (hours >= 5 && hours < 7) {
@@ -900,7 +897,7 @@ function updateTime() {
       bgimg = "img/day.jpg";
     } else if (hours >= 17 && hours < 18) {
       bgimg = "img/sunset.jpg";
-    } else if (hours >= 18 && hours < 24) {
+    } else if (hours >= 18 && hours <= 24) {
       bgimg = "img/night.jpg";
     } else if (hours >= 0 && hours < 5) {
       bgimg = "img/night.jpg";
@@ -908,13 +905,24 @@ function updateTime() {
     document.getElementById("bgimg").src = bgimg;
 
     if (hours > 12) {
-      var AMPM = "PM";
+      if (hours == 24) {
+        var AMPM = "AM";
+      } else {
+        var AMPM = "PM";
+      }
       hours -= 12;
+    } else if (hours == 12) {
+      var AMPM = "PM";
+    }else if (hours == 0) {
+        var AMPM = "AM";
+        hours = hours + 12;
     } else {
       var AMPM = "AM";
     }
     var d_str = dayText + ", " + dateText + " " + monthText;
     var t_str = hours + ":" + minutes + " " + AMPM;
+
+    // console.log(t_str)
 
     $("#time").text(t_str);
     $("#date").text(d_str);
