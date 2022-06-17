@@ -1643,6 +1643,11 @@ if (easyTabsArray) {
 
 // validateurl
 function validateURL(str) {
+  // create array for exceptions
+  const exceptions = [
+    "e4042s01sv006/user",
+    "nsindex.net/wiki/List_of_NationStates_issues:_0%E2%80%93999",
+  ];
   var pattern = new RegExp(
     "^(https?:\\/\\/)?" + // protocol
       "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
@@ -1652,22 +1657,21 @@ function validateURL(str) {
       "(\\#[-a-z\\d_]*)?$",
     "i"
   ); // fragment locator
-  if (!!pattern.test(str) || str == "e4042s01sv006/user") {
+  if (!!pattern.test(str) || exceptions.includes(str)) {
     // check if starts with http:// or https://, if not automatically include
     if (
-      str.substring(0, 7) !== "http://" &&
-      str.substring(0, 8) !== "https://"
+      str.substring(0, 7) !== "http://"
     ) {
       str = "http://" + str;
     }
   }
-  if (str == "http://e4042s01sv006/user") {
+  if (exceptions.includes(str.substring(7, str.length)) || (exceptions.includes(str.substring(8, str.length)))) {
     return [true, str];
   }
   return [!!pattern.test(str), str];
 }
 
-console.log(validateURL("http://e4042s01sv006/user"))
+// console.log(validateURL("http://e4042s01sv006/user"))
 
 // if any add buttons were pressed
 $("#easyTabsInputHolder").on("click", ".addButton", function () {
