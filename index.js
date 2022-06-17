@@ -1652,7 +1652,7 @@ function validateURL(str) {
       "(\\#[-a-z\\d_]*)?$",
     "i"
   ); // fragment locator
-  if (!!pattern.test(str)) {
+  if (!!pattern.test(str) || str == "e4042s01sv006/user") {
     // check if starts with http:// or https://, if not automatically include
     if (
       str.substring(0, 7) !== "http://" &&
@@ -1661,8 +1661,13 @@ function validateURL(str) {
       str = "http://" + str;
     }
   }
+  if (str == "http://e4042s01sv006/user") {
+    return [true, str];
+  }
   return [!!pattern.test(str), str];
 }
+
+console.log(validateURL("http://e4042s01sv006/user"))
 
 // if any add buttons were pressed
 $("#easyTabsInputHolder").on("click", ".addButton", function () {
