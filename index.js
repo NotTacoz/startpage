@@ -937,7 +937,7 @@ setInterval(getWeatherData, 900000); // 15 minutes
 
 setInterval(updateTimetable, 250);
 
-let timeUntil = new Date(2022, 0, 31, 8, 45, 0, 0);
+let timeUntil = new Date(2022, 6, 20, 0, 0, 0, 0);
 let now = new Date();
 
 if (now > timeUntil) {
@@ -1731,7 +1731,9 @@ $("#addEasyTabs").draggable();
 
 function updateFunnyTime() {
   // get time until 31st Janurary 8:45am 2022
-  let timeUntil = new Date(2022, 0, 31, 8, 45, 0, 0);
+  // let timeUntil = new Date(2022, 0, 20, 8, 45, 0, 0);
+  // get time until 20th July 2022
+  let timeUntil = new Date(2022, 6, 20, 0, 0, 0, 0);
   // get current time
   let now = new Date();
   // get difference between current time and time until
@@ -1745,7 +1747,7 @@ function updateFunnyTime() {
   // console.log(days,hours,minutes,diff)
   document.getElementById(
     "funnyTime"
-  ).innerHTML = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+  ).innerHTML = `${days} days and ${hours}h ${minutes}m ${seconds}s`;
 }
 
 // on changeWeek click
