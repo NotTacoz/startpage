@@ -65,504 +65,231 @@ const timetable = [
     new Subject(
       "Before School",
       hourMinuteToNumber(0, 0),
-      hourMinuteToNumber(8, 45)
-    ),
-    new Subject(
-      "Advocacy",
-      hourMinuteToNumber(8, 45),
-      hourMinuteToNumber(8, 55)
+      hourMinuteToNumber(8, 50)
     ),
     new Subject(
       getStorage("subMonA1", "Period 1"),
-      hourMinuteToNumber(8, 55),
-      hourMinuteToNumber(9, 50)
+      hourMinuteToNumber(8, 50),
+      hourMinuteToNumber(9, 48)
     ),
     new Subject(
       getStorage("subMonA2", "Period 2"),
-      hourMinuteToNumber(9, 50),
-      hourMinuteToNumber(10, 45)
+      hourMinuteToNumber(9, 48),
+      hourMinuteToNumber(10, 46)
     ),
     new Subject(
       "Recess",
-      hourMinuteToNumber(10, 45),
-      hourMinuteToNumber(11, 10)
+      hourMinuteToNumber(10, 46),
+      hourMinuteToNumber(11, 08)
     ),
     new Subject(
       getStorage("subMonA3", "Period 3"),
-      hourMinuteToNumber(11, 10),
-      hourMinuteToNumber(12, 05)
+      hourMinuteToNumber(11, 08),
+      hourMinuteToNumber(12, 06)
     ),
     new Subject(
       getStorage("subMonA4", "Period 4"),
-      hourMinuteToNumber(12, 05),
-      hourMinuteToNumber(13, 00)
+      hourMinuteToNumber(12, 06),
+      hourMinuteToNumber(13, 04)
     ),
     new Subject(
       "Lunch",
-      hourMinuteToNumber(13, 00),
-      hourMinuteToNumber(13, 35)
+      hourMinuteToNumber(13, 04),
+      hourMinuteToNumber(13, 34)
     ),
     new Subject(
       getStorage("subMonA5", "Period 5"),
-      hourMinuteToNumber(13, 35),
-      hourMinuteToNumber(14, 30)
+      hourMinuteToNumber(13, 34),
+      hourMinuteToNumber(14, 32)
     ),
     new Subject(
       getStorage("subMonA6", "Period 6"),
-      hourMinuteToNumber(14, 30),
-      hourMinuteToNumber(15, 25)
+      hourMinuteToNumber(14, 32),
+      hourMinuteToNumber(15, 30)
     ),
-    new Subject("Home", hourMinuteToNumber(15, 25), hourMinuteToNumber(16, 00)),
+    new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
   ], // Monday
   [
     new Subject(
       "Before School",
       hourMinuteToNumber(0, 0),
-      hourMinuteToNumber(8, 45)
+      hourMinuteToNumber(8, 50)
     ),
     new Subject(
       getStorage("subTueA1", "Period 1"),
-      hourMinuteToNumber(8, 45),
-      hourMinuteToNumber(9, 40)
+      hourMinuteToNumber(8, 50),
+      hourMinuteToNumber(9, 48)
     ),
     new Subject(
       getStorage("subTueA2", "Period 2"),
-      hourMinuteToNumber(9, 40),
-      hourMinuteToNumber(10, 35)
+      hourMinuteToNumber(9, 48),
+      hourMinuteToNumber(10, 46)
     ),
     new Subject(
       "Recess",
-      hourMinuteToNumber(10, 35),
-      hourMinuteToNumber(10, 55)
+      hourMinuteToNumber(10, 46),
+      hourMinuteToNumber(11, 08)
     ),
     new Subject(
       getStorage("subTueA3", "Period 3"),
-      hourMinuteToNumber(10, 55),
-      hourMinuteToNumber(11, 50)
+      hourMinuteToNumber(11, 08),
+      hourMinuteToNumber(12, 06)
     ),
     new Subject(
-      getStorage("subTueA4", "Mod Time"),
-      hourMinuteToNumber(11, 50),
-      hourMinuteToNumber(12, 45)
+      getStorage("subTueA4", "Period 4"),
+      hourMinuteToNumber(12, 06),
+      hourMinuteToNumber(13, 04)
     ),
     new Subject(
       "Lunch",
-      hourMinuteToNumber(12, 45),
-      hourMinuteToNumber(13, 25)
+      hourMinuteToNumber(13, 04),
+      hourMinuteToNumber(13, 34)
     ),
     new Subject(
       getStorage("subTueA5", "Period 5"),
-      hourMinuteToNumber(13, 25),
-      hourMinuteToNumber(14, 20)
+      hourMinuteToNumber(13, 34),
+      hourMinuteToNumber(14, 32)
     ),
     new Subject(
       getStorage("subTueA6", "Period 6"),
-      hourMinuteToNumber(14, 20),
-      hourMinuteToNumber(15, 15)
+      hourMinuteToNumber(14, 32),
+      hourMinuteToNumber(15, 30)
     ),
-    new Subject("Home", hourMinuteToNumber(15, 15), hourMinuteToNumber(16, 00)),
+    new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
   ], // Tuesday
   [
     new Subject(
       "Before School",
       hourMinuteToNumber(0, 0),
-      hourMinuteToNumber(8, 45)
+      hourMinuteToNumber(8, 50)
     ),
     new Subject(
       getStorage("subWedA1", "Period 1"),
-      hourMinuteToNumber(8, 45),
-      hourMinuteToNumber(9, 40)
+      hourMinuteToNumber(8, 50),
+      hourMinuteToNumber(9, 48)
     ),
     new Subject(
       getStorage("subWedA2", "Period 2"),
-      hourMinuteToNumber(9, 40),
-      hourMinuteToNumber(10, 35)
+      hourMinuteToNumber(9, 48),
+      hourMinuteToNumber(10, 46)
     ),
     new Subject(
       "Recess",
-      hourMinuteToNumber(10, 35),
-      hourMinuteToNumber(10, 55)
+      hourMinuteToNumber(10, 46),
+      hourMinuteToNumber(11, 08)
     ),
     new Subject(
       getStorage("subWedA3", "Period 3"),
-      hourMinuteToNumber(10, 55),
-      hourMinuteToNumber(11, 50)
+      hourMinuteToNumber(11, 08),
+      hourMinuteToNumber(12, 06)
     ),
     new Subject(
       getStorage("subWedA4", "Period 4"),
-      hourMinuteToNumber(11, 50),
-      hourMinuteToNumber(12, 45)
+      hourMinuteToNumber(12, 06),
+      hourMinuteToNumber(13, 04)
     ),
     new Subject(
       "Lunch",
-      hourMinuteToNumber(12, 45),
-      hourMinuteToNumber(13, 25)
+      hourMinuteToNumber(13, 04),
+      hourMinuteToNumber(13, 34)
     ),
     new Subject(
       getStorage("subWedA5", "Period 5"),
-      hourMinuteToNumber(13, 25),
-      hourMinuteToNumber(14, 20)
+      hourMinuteToNumber(13, 34),
+      hourMinuteToNumber(14, 32)
     ),
-    new Subject(
-      getStorage("subWedA6", "Period 6"),
-      hourMinuteToNumber(14, 20),
-      hourMinuteToNumber(15, 15)
-    ),
-    new Subject("Home", hourMinuteToNumber(15, 15), hourMinuteToNumber(16, 00)),
+    new Subject("Home", hourMinuteToNumber(14, 32), hourMinuteToNumber(15, 00)),
   ], // Wednesday
   [
     new Subject(
       "Before School",
       hourMinuteToNumber(0, 0),
-      hourMinuteToNumber(8, 45)
+      hourMinuteToNumber(8, 50)
     ),
     new Subject(
       getStorage("subThuA1", "Period 1"),
-      hourMinuteToNumber(8, 45),
-      hourMinuteToNumber(9, 40)
+      hourMinuteToNumber(8, 50),
+      hourMinuteToNumber(9, 48)
     ),
     new Subject(
       getStorage("subThuA2", "Period 2"),
-      hourMinuteToNumber(9, 40),
-      hourMinuteToNumber(10, 35)
+      hourMinuteToNumber(9, 48),
+      hourMinuteToNumber(10, 46)
     ),
     new Subject(
       "Recess",
-      hourMinuteToNumber(10, 35),
-      hourMinuteToNumber(10, 55)
+      hourMinuteToNumber(10, 46),
+      hourMinuteToNumber(11, 08)
     ),
     new Subject(
       getStorage("subThuA3", "Period 3"),
-      hourMinuteToNumber(10, 55),
-      hourMinuteToNumber(11, 50)
+      hourMinuteToNumber(11, 08),
+      hourMinuteToNumber(12, 06)
     ),
     new Subject(
-      "Advocacy",
-      hourMinuteToNumber(11, 50),
-      hourMinuteToNumber(12, 40)
+      getStorage("subThuA4", "Period 4"),
+      hourMinuteToNumber(12, 06),
+      hourMinuteToNumber(13, 04)
     ),
     new Subject(
       "Lunch",
-      hourMinuteToNumber(12, 40),
-      hourMinuteToNumber(13, 20)
+      hourMinuteToNumber(13, 04),
+      hourMinuteToNumber(13, 34)
     ),
     new Subject(
       getStorage("subThuA5", "Period 5"),
-      hourMinuteToNumber(13, 20),
-      hourMinuteToNumber(14, 15)
+      hourMinuteToNumber(13, 34),
+      hourMinuteToNumber(14, 32)
     ),
     new Subject(
       getStorage("subThuA6", "Period 6"),
-      hourMinuteToNumber(14, 15),
-      hourMinuteToNumber(15, 10)
+      hourMinuteToNumber(14, 32),
+      hourMinuteToNumber(15, 30)
     ),
-    new Subject("Home", hourMinuteToNumber(15, 10), hourMinuteToNumber(16, 00)),
+    new Subject("Home", hourMinuteToNumber(15, 30), hourMinuteToNumber(16, 00)),
   ], // Thursday
   [
     new Subject(
       "Before School",
       hourMinuteToNumber(0, 0),
-      hourMinuteToNumber(8, 45)
-    ),
-    new Subject(
-      "Advocacy",
-      hourMinuteToNumber(8, 45),
-      hourMinuteToNumber(8, 55)
+      hourMinuteToNumber(8, 50)
     ),
     new Subject(
       getStorage("subFriA1", "Period 1"),
-      hourMinuteToNumber(8, 55),
-      hourMinuteToNumber(9, 50)
+      hourMinuteToNumber(8, 50),
+      hourMinuteToNumber(9, 48)
     ),
     new Subject(
       getStorage("subFriA2", "Period 2"),
-      hourMinuteToNumber(9, 50),
-      hourMinuteToNumber(10, 45)
+      hourMinuteToNumber(9, 48),
+      hourMinuteToNumber(10, 46)
     ),
     new Subject(
       "Recess",
-      hourMinuteToNumber(10, 45),
-      hourMinuteToNumber(11, 10)
+      hourMinuteToNumber(10, 46),
+      hourMinuteToNumber(11, 08)
     ),
     new Subject(
       getStorage("subFriA3", "Period 3"),
-      hourMinuteToNumber(11, 10),
-      hourMinuteToNumber(12, 05)
+      hourMinuteToNumber(11, 08),
+      hourMinuteToNumber(12, 06)
     ),
     new Subject(
       getStorage("subFriA4", "Period 4"),
-      hourMinuteToNumber(12, 05),
-      hourMinuteToNumber(13, 00)
+      hourMinuteToNumber(12, 06),
+      hourMinuteToNumber(13, 04)
     ),
     new Subject(
       "Lunch",
-      hourMinuteToNumber(13, 00),
-      hourMinuteToNumber(13, 35)
+      hourMinuteToNumber(13, 04),
+      hourMinuteToNumber(13, 34)
     ),
     new Subject(
       getStorage("subFriA5", "Period 5"),
-      hourMinuteToNumber(13, 35),
-      hourMinuteToNumber(14, 30)
+      hourMinuteToNumber(13, 34),
+      hourMinuteToNumber(14, 32)
     ),
-    new Subject(
-      getStorage("subFriA6", "Period 6"),
-      hourMinuteToNumber(14, 30),
-      hourMinuteToNumber(15, 25)
-    ),
-    new Subject("Home", hourMinuteToNumber(15, 25), hourMinuteToNumber(16, 00)),
-  ], // Friday
-  [], // Saturday
-
-  [], // Sunday
-  [
-    new Subject(
-      "Before School",
-      hourMinuteToNumber(0, 0),
-      hourMinuteToNumber(8, 45)
-    ),
-    new Subject(
-      "Advocacy",
-      hourMinuteToNumber(8, 45),
-      hourMinuteToNumber(8, 55)
-    ),
-    new Subject(
-      getStorage("subMonB1", "Period 1"),
-      hourMinuteToNumber(8, 55),
-      hourMinuteToNumber(9, 50)
-    ),
-    new Subject(
-      getStorage("subMonB2", "Period 2"),
-      hourMinuteToNumber(9, 50),
-      hourMinuteToNumber(10, 45)
-    ),
-    new Subject(
-      "Recess",
-      hourMinuteToNumber(10, 45),
-      hourMinuteToNumber(11, 10)
-    ),
-    new Subject(
-      getStorage("subMonB3", "Period 3"),
-      hourMinuteToNumber(11, 10),
-      hourMinuteToNumber(12, 05)
-    ),
-    new Subject(
-      getStorage("subMonB4", "Period 4"),
-      hourMinuteToNumber(12, 05),
-      hourMinuteToNumber(13, 00)
-    ),
-    new Subject(
-      "Lunch",
-      hourMinuteToNumber(13, 00),
-      hourMinuteToNumber(13, 35)
-    ),
-    new Subject(
-      getStorage("subMonB5", "Period 5"),
-      hourMinuteToNumber(13, 35),
-      hourMinuteToNumber(14, 30)
-    ),
-    new Subject(
-      getStorage("subMonB6", "Period 6"),
-      hourMinuteToNumber(14, 30),
-      hourMinuteToNumber(15, 25)
-    ),
-    new Subject("Home", hourMinuteToNumber(15, 25), hourMinuteToNumber(16, 00)),
-  ], // Monday
-  [
-    new Subject(
-      "Before School",
-      hourMinuteToNumber(0, 0),
-      hourMinuteToNumber(8, 45)
-    ),
-    new Subject(
-      getStorage("subTueB1", "Period 1"),
-      hourMinuteToNumber(8, 45),
-      hourMinuteToNumber(9, 40)
-    ),
-    new Subject(
-      getStorage("subTueB2", "Period 2"),
-      hourMinuteToNumber(9, 40),
-      hourMinuteToNumber(10, 35)
-    ),
-    new Subject(
-      "Recess",
-      hourMinuteToNumber(10, 35),
-      hourMinuteToNumber(10, 55)
-    ),
-    new Subject(
-      getStorage("subTueB3", "Period 3"),
-      hourMinuteToNumber(10, 55),
-      hourMinuteToNumber(11, 50)
-    ),
-    new Subject(
-      getStorage("subTueB4", "Mod Time"),
-      hourMinuteToNumber(11, 50),
-      hourMinuteToNumber(12, 45)
-    ),
-    new Subject(
-      "Lunch",
-      hourMinuteToNumber(12, 45),
-      hourMinuteToNumber(13, 25)
-    ),
-    new Subject(
-      getStorage("subTueB5", "Period 5"),
-      hourMinuteToNumber(13, 25),
-      hourMinuteToNumber(14, 20)
-    ),
-    new Subject(
-      getStorage("subTueB6", "Period 6"),
-      hourMinuteToNumber(14, 20),
-      hourMinuteToNumber(15, 15)
-    ),
-    new Subject("Home", hourMinuteToNumber(15, 15), hourMinuteToNumber(16, 00)),
-  ], // Tuesday
-  [
-    new Subject(
-      "Before School",
-      hourMinuteToNumber(0, 0),
-      hourMinuteToNumber(8, 45)
-    ),
-    new Subject(
-      getStorage("subWedB1", "Period 1"),
-      hourMinuteToNumber(8, 45),
-      hourMinuteToNumber(9, 40)
-    ),
-    new Subject(
-      getStorage("subWedB2", "Period 2"),
-      hourMinuteToNumber(9, 40),
-      hourMinuteToNumber(10, 35)
-    ),
-    new Subject(
-      "Recess",
-      hourMinuteToNumber(10, 35),
-      hourMinuteToNumber(10, 55)
-    ),
-    new Subject(
-      getStorage("subWedB3", "Period 3"),
-      hourMinuteToNumber(10, 55),
-      hourMinuteToNumber(11, 50)
-    ),
-    new Subject(
-      getStorage("subWedB4", "Period 4"),
-      hourMinuteToNumber(11, 50),
-      hourMinuteToNumber(12, 45)
-    ),
-    new Subject(
-      "Lunch",
-      hourMinuteToNumber(12, 45),
-      hourMinuteToNumber(13, 25)
-    ),
-    new Subject(
-      getStorage("subWedB5", "Period 5"),
-      hourMinuteToNumber(13, 25),
-      hourMinuteToNumber(14, 20)
-    ),
-    new Subject(
-      getStorage("subWedB6", "Period 6"),
-      hourMinuteToNumber(14, 20),
-      hourMinuteToNumber(15, 15)
-    ),
-    new Subject("Home", hourMinuteToNumber(15, 15), hourMinuteToNumber(16, 00)),
-  ], // Wednesday
-  [
-    new Subject(
-      "Before School",
-      hourMinuteToNumber(0, 0),
-      hourMinuteToNumber(8, 45)
-    ),
-    new Subject(
-      getStorage("subThuB1", "Period 1"),
-      hourMinuteToNumber(8, 45),
-      hourMinuteToNumber(9, 40)
-    ),
-    new Subject(
-      getStorage("subThuB2", "Period 2"),
-      hourMinuteToNumber(9, 40),
-      hourMinuteToNumber(10, 35)
-    ),
-    new Subject(
-      "Recess",
-      hourMinuteToNumber(10, 35),
-      hourMinuteToNumber(10, 55)
-    ),
-    new Subject(
-      getStorage("subThuB3", "Period 3"),
-      hourMinuteToNumber(10, 55),
-      hourMinuteToNumber(11, 50)
-    ),
-    new Subject(
-      "Advocacy",
-      hourMinuteToNumber(11, 50),
-      hourMinuteToNumber(12, 40)
-    ),
-    new Subject(
-      "Lunch",
-      hourMinuteToNumber(12, 40),
-      hourMinuteToNumber(13, 20)
-    ),
-    new Subject(
-      getStorage("subThuB5", "Period 5"),
-      hourMinuteToNumber(13, 20),
-      hourMinuteToNumber(14, 15)
-    ),
-    new Subject(
-      getStorage("subThuB6", "Period 6"),
-      hourMinuteToNumber(14, 15),
-      hourMinuteToNumber(15, 10)
-    ),
-    new Subject("Home", hourMinuteToNumber(15, 10), hourMinuteToNumber(16, 00)),
-  ], // Thursday
-  [
-    new Subject(
-      "Before School",
-      hourMinuteToNumber(0, 0),
-      hourMinuteToNumber(8, 45)
-    ),
-    new Subject(
-      "Advocacy",
-      hourMinuteToNumber(8, 45),
-      hourMinuteToNumber(8, 55)
-    ),
-    new Subject(
-      getStorage("subFriB1", "Period 1"),
-      hourMinuteToNumber(8, 55),
-      hourMinuteToNumber(9, 50)
-    ),
-    new Subject(
-      getStorage("subFriB2", "Period 2"),
-      hourMinuteToNumber(9, 50),
-      hourMinuteToNumber(10, 45)
-    ),
-    new Subject(
-      "Recess",
-      hourMinuteToNumber(10, 45),
-      hourMinuteToNumber(11, 10)
-    ),
-    new Subject(
-      getStorage("subFriB3", "Period 3"),
-      hourMinuteToNumber(11, 10),
-      hourMinuteToNumber(12, 05)
-    ),
-    new Subject(
-      getStorage("subFriB4", "Period 4"),
-      hourMinuteToNumber(12, 05),
-      hourMinuteToNumber(13, 00)
-    ),
-    new Subject(
-      "Lunch",
-      hourMinuteToNumber(13, 00),
-      hourMinuteToNumber(13, 35)
-    ),
-    new Subject(
-      getStorage("subFriB5", "Period 5"),
-      hourMinuteToNumber(13, 35),
-      hourMinuteToNumber(14, 30)
-    ),
-    new Subject(
-      getStorage("subFriB6", "Period 6"),
-      hourMinuteToNumber(14, 30),
-      hourMinuteToNumber(15, 25)
-    ),
-    new Subject("Home", hourMinuteToNumber(15, 25), hourMinuteToNumber(16, 00)),
+    new Subject("Home", hourMinuteToNumber(14, 32), hourMinuteToNumber(15, 00)),
   ], // Friday
   [], // Saturday
 ];
@@ -570,7 +297,7 @@ const timetable = [
 function updateTimetable() {
   // hide currentSubjectParent
   currentSubjectParent.style.display = "none";
-  // remember to add week 1 week 2 bullshit
+  // remember to add week 1 week 2 bullshit HAHAHAH ANO MORE OF THIS FUCKERY!!!H!JH!JH voila~
   // if week 2 just add 7 to the day
   // get current time
   var currentTime = new Date();
@@ -585,36 +312,12 @@ function updateTimetable() {
   // get week of the year
   const currentWeek = currentTime.getWeek() % 2;
 
-  var correctWeek = 1;
-
-  // if localStorage correctWeekKey exists
-  if (localStorage.getItem("correctWeekKey") !== null) {
-    // set correctWeek to correctWeekKey
-    correctWeek = localStorage.getItem("correctWeekKey");
-  }
-
-  // if currentWeek is on weekB
-
-  if (currentWeek == parseInt(correctWeek)) {
-    // if currentweek is even
-    currentDay += 7;
-  }
-  // console.log(currentDay)
-
-  // if current day is sunday (week 2) set currentDay to 7
-  if (currentDay == 0) {
-    currentDay = 14;
-  }
-
-  if (currentDay == 6 || currentDay == 13) {
+  if (currentDay == 6) {
     document.getElementById("nextSubject").innerHTML = "Nothing! 🥳";
-  } else if (currentDay == 7 || currentDay == 14) {
+  } else if (currentDay == 7) {
     var tomorrow = [];
     var nextDay = currentDay + 1;
-    if (nextDay >= 14) {
-      nextDay = 1;
-    }
-    // console.log(nextDay);
+
     for (let j = 0; j < timetable[nextDay].length; j++) {
       const name = timetable[nextDay][j].name;
       tomorrow.push(name);
@@ -639,6 +342,7 @@ function updateTimetable() {
   } else {
     var starts = [];
     var ends = [];
+    // console.log(currentDay)
     for (let j = 0; j < timetable[currentDay].length; j++) {
       // get start
       const start = timetable[currentDay][j].start;
@@ -955,20 +659,23 @@ for (var i = 0; i < elements.length; i++) {
   elements[i].setAttribute("draggable", "false");
 }
 
-for (weekID of ["A", "B"]) {
+for (weekID of ["A"]) {
   let dayTitle = document.createElement("div");
   dayTitle.classList.add("evenperfecter");
-  dayTitle.innerHTML = `Week ${weekID}`;
+  // dayTitle.innerHTML = `Week ${weekID}`;
   document.getElementById("timetableInputHolder").appendChild(dayTitle);
   for (day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]) {
     let dayTitle = document.createElement("div");
-    // dayTitle.classList.add("medium");
+    dayTitle.classList.add("sidebardiv");
     dayTitle.innerHTML = `${
-      ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"][day]
-    } ${weekID}`;
+      ["M", "T", "W", "T", "F"][day]
+    }`;
     // document.getElementById("timetableInputHolder").appendChild(dayTitle); // removed because it was causing the timetable to be too big
     let theflexbox = document.createElement("div");
     theflexbox.classList.add("flexboxlol");
+    theflexbox.innerHTML = `${
+      ["Mon", "Tue", "Wed", "Thu", "Fri"][day]
+    }`;
     for (period of [1, 2, 3, 4, 5, 6]) {
       let inputHolder = document.createElement("div");
       let label = document.createElement("label");
@@ -978,10 +685,15 @@ for (weekID of ["A", "B"]) {
         `sub${["Mon", "Tue", "Wed", "Thu", "Fri"][day]}${weekID}${period}`,
         `Period ${period}`
       );
-      if (day == 3 && period == 4) {
+      if (day == 2 && period == 4) {
         input.value = "Advocacy";
         input.disabled = true;
       }
+      if ((day == 2 || day == 4) && period == 6) {
+        input.value = "Sixth ";
+        input.disabled = true;
+      }
+      // if (day == )
       let val = `sub${
         ["Mon", "Tue", "Wed", "Thu", "Fri"][day]
       }${weekID}${period}`;
@@ -1750,25 +1462,3 @@ function updateFunnyTime() {
   ).innerHTML = `${days} days and ${hours}h ${minutes}m ${seconds}s`;
 }
 
-// on changeWeek click
-$("#changeWeek").on("click", function () {
-  // get correctWeekKey
-  let correctWeekKey = localStorage.getItem("correctWeekKey");
-  // if correctWeekKey is not set
-  if (!correctWeekKey) {
-    // set correctWeekKey to 0
-    correctWeekKey = 1;
-    localStorage.setItem("correctWeekKey", "0");
-  } else if (correctWeekKey === "0") {
-    // set correctWeekKey to 1
-    correctWeekKey = 1;
-    localStorage.setItem("correctWeekKey", "1");
-  } else {
-    // set correctWeekKey to 0
-    correctWeekKey = 0;
-    localStorage.setItem("correctWeekKey", "0");
-  }
-
-  // alert user
-  alert(`Week A and B has been switched`);
-});
