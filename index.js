@@ -311,10 +311,9 @@ function updateTimetable() {
   var currentDay = currentTime.getDay();
   // get week of the year
   const currentWeek = currentTime.getWeek() % 2;
-
   if (currentDay == 6) {
     document.getElementById("nextSubject").innerHTML = "Nothing! 🥳";
-  } else if (currentDay == 7) {
+  } else if (currentDay == 0) {
     var tomorrow = [];
     var nextDay = currentDay + 1;
 
@@ -342,7 +341,6 @@ function updateTimetable() {
   } else {
     var starts = [];
     var ends = [];
-    // console.log(currentDay)
     for (let j = 0; j < timetable[currentDay].length; j++) {
       // get start
       const start = timetable[currentDay][j].start;
