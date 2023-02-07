@@ -683,10 +683,6 @@ for (weekID of ["A"]) {
         `sub${["Mon", "Tue", "Wed", "Thu", "Fri"][day]}${weekID}${period}`,
         `Period ${period}`
       );
-      if (day == 2 && period == 4) {
-        input.value = "Advocacy";
-        input.disabled = true;
-      }
       if ((day == 2 || day == 4) && period == 6) {
         input.value = "Sixth ";
         input.disabled = true;
