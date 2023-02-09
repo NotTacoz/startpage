@@ -201,7 +201,8 @@
   }
 
   .search-bar::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-color);
+    opacity: 0.5;
   }
 
   .search-bar:focus {
@@ -365,7 +366,7 @@
       </div>
       <!-- duckduckgo search -->
       <div class="center" id="" style="align-items: center">
-        <input id="searchBar" type="text" class="search-bar" placeholder="Search with DuckDuckGo" autofocus
+        <input id="searchBar" type="text" class="search-bar" placeholder="Search with" autofocus
           autocomplete="off" />
       </div>
       <div style="display: flex; justify-content: center" id="easyTabs"></div>
@@ -438,6 +439,9 @@
         id="changeWeek">Switch A & B</button> -->
     </div>
 
+    <br>
+
+    <p class="medium">General</p>
     <!-- background selector -->
     <div style="display: flex; justify-content: center; align-items: center">
       <p>Background:</p>
@@ -448,6 +452,17 @@
         <option value="sunset">Sunset</option>
         <option value="custom">Custom</option>
       </select>
+    </div>
+    <!-- color theme picker -->
+    <div>
+      <p>Background Color Picker: <input type="color" id="colorpicker"></p>
+      <p>Text Color Picker: <input type="color" id="colorpicker2"></p>
+    </div>
+    
+    <!-- button to change AM/PM formats -->
+    <div id="switch-container">
+      Change time format (12h/24h):
+      <button id="switch-display"></button>
     </div>
 
     <!-- custom background -->
@@ -583,7 +598,7 @@
         <option value="DuckDuckGo">DuckDuckGo</option>
       </select>
     </div>
-    <p>made by Tacoz 2021</p>
+    <p>2023 tacoz v1.3.3 beta</p>
   </div>
 
   <img src="img/day.jpg" alt="day.jpg" style="z-index: -99" id="bgimg" class="image" />

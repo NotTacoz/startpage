@@ -3,6 +3,19 @@ Date.prototype.getWeek = function () {
   return Math.ceil(((this - onejan) / 86400000 + onejan.getDay() + 1) / 7);
 };
 
+// color picker code
+const colorPicker = document.getElementById("colorpicker"); //background
+colorPicker.addEventListener("input", function () {
+  document.documentElement.style.setProperty("--dark-bg", this.value);
+  localStorage.setItem("darkBgColor", this.value);
+});
+
+const colorPicker2 = document.getElementById("colorpicker2"); //text
+colorPicker2.addEventListener("input", function () {
+  document.documentElement.style.setProperty("--text-color", this.value);
+  localStorage.setItem("textColor", this.value);
+});
+
 // hide addEasyTabs
 $("#addEasyTabs").hide();
 
@@ -536,6 +549,18 @@ function openSettingsTab() {
 
 hideTimeBg(); // immediately hides timebg if all settings are disabled, otherwise an empty div will be shown at the start
 
+// 12 hour time
+
+if (!localStorage.getItem("timeFormat")) {
+  localStorage.setItem("timeFormat", "12");
+}
+
+// Get the current time format from local storage
+const currentTimeFormat = localStorage.getItem("timeFormat");
+
+// Get the element to display the time
+const timeDisplay = document.getElementById("time-display");
+
 function updateTime() {
   $(document).ready(function () {
     var currentTime = new Date();
@@ -606,23 +631,20 @@ function updateTime() {
     }
     document.getElementById("bgimg").src = bgimg;
 
-    if (hours > 12) {
-      if (hours == 24) {
-        var AMPM = "AM";
-      } else {
-        var AMPM = "PM";
-      }
-      hours -= 12;
-    } else if (hours == 12) {
-      var AMPM = "PM";
-    }else if (hours == 0) {
-        var AMPM = "AM";
-        hours = hours + 12;
+    let amPm = "AM";
+
+    if (currentTimeFormat === "12") {
+      amPm = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12 || 12;
     } else {
-      var AMPM = "AM";
+      amPm = "";
     }
+
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    hours = hours < 10 ? `${hours}` : hours;
+
     var d_str = dayText + ", " + dateText + " " + monthText;
-    var t_str = hours + ":" + minutes + " " + AMPM;
+    var t_str = hours + ":" + minutes + " " + amPm;
 
     // console.log(t_str)
 
@@ -631,6 +653,33 @@ function updateTime() {
   });
 }
 updateTime(); // immeditatelly runs the function, so that there is no lag
+
+// Function to switch between 12 hour and 24 hour mode
+function switchTimeFormat() {
+  if (currentTimeFormat === "12") {
+    localStorage.setItem("timeFormat", "24");
+  } else {
+    localStorage.setItem("timeFormat", "12");
+  }
+  updateTime();
+}
+
+// Get the element to display the switch
+const switchDisplay = document.getElementById("switch-display");
+
+// Function to update the switch display
+function updateSwitchDisplay() {
+  switchDisplay.innerText = currentTimeFormat === "12" ? "12 hour" : "24 hour";
+}
+
+// Call the updateSwitchDisplay function to initialize the switch display
+updateSwitchDisplay();
+
+// Add an event listener to the switch to call the switchTimeFormat function when it is clicked
+switchDisplay.addEventListener("click", function () {
+  switchTimeFormat();
+  updateSwitchDisplay();
+});
 
 getWeatherData();
 updateTimetable();
@@ -665,15 +714,11 @@ for (weekID of ["A"]) {
   for (day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]) {
     let dayTitle = document.createElement("div");
     dayTitle.classList.add("sidebardiv");
-    dayTitle.innerHTML = `${
-      ["M", "T", "W", "T", "F"][day]
-    }`;
+    dayTitle.innerHTML = `${["M", "T", "W", "T", "F"][day]}`;
     // document.getElementById("timetableInputHolder").appendChild(dayTitle); // removed because it was causing the timetable to be too big
     let theflexbox = document.createElement("div");
     theflexbox.classList.add("flexboxlol");
-    theflexbox.innerHTML = `${
-      ["Mon", "Tue", "Wed", "Thu", "Fri"][day]
-    }`;
+    theflexbox.innerHTML = `${["Mon", "Tue", "Wed", "Thu", "Fri"][day]}`;
     for (period of [1, 2, 3, 4, 5, 6]) {
       let inputHolder = document.createElement("div");
       let label = document.createElement("label");
@@ -731,6 +776,8 @@ var localStorageFontWeight = localStorage.getItem("font-weight");
 var browser = localStorage.getItem("browser");
 var localStorageBackground = localStorage.getItem("wallpaper");
 var localStorageTimetableDisplay = localStorage.getItem("timetableDisplay");
+var savedColor = localStorage.getItem("darkBgColor");
+var textColor = localStorage.getItem("textColor");
 
 if (localStorageBgEffect === null) {
   localStorageBgEffect = "none";
@@ -776,6 +823,18 @@ if (localStorageBackground === null) {
 }
 if (localStorageTimetableDisplay === null) {
   localStorageTimetableDisplay = "checked";
+}
+if (savedColor) {
+  colorPicker.value = savedColor;
+  document.documentElement.style.setProperty("--dark-bg", savedColor);
+} else {
+  colorPicker.value = "#19191e";
+}
+if (textColor) {
+  colorPicker2.value = textColor;
+  document.documentElement.style.setProperty("--text-color", textColor);
+} else {
+  colorPicker2.value = "#ffffff";
 }
 
 if (localStorageBgEffect === "none") {
@@ -1365,13 +1424,14 @@ function validateURL(str) {
   ); // fragment locator
   if (!!pattern.test(str) || exceptions.includes(str)) {
     // check if starts with http:// or https://, if not automatically include
-    if (
-      str.substring(0, 7) !== "http://"
-    ) {
+    if (str.substring(0, 7) !== "http://") {
       str = "http://" + str;
     }
   }
-  if (exceptions.includes(str.substring(7, str.length)) || (exceptions.includes(str.substring(8, str.length)))) {
+  if (
+    exceptions.includes(str.substring(7, str.length)) ||
+    exceptions.includes(str.substring(8, str.length))
+  ) {
     return [true, str];
   }
   return [!!pattern.test(str), str];
@@ -1455,4 +1515,3 @@ function updateFunnyTime() {
     "funnyTime"
   ).innerHTML = `${days} days and ${hours}h ${minutes}m ${seconds}s`;
 }
-
