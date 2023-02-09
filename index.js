@@ -640,7 +640,7 @@ function updateTime() {
       amPm = "";
     }
 
-    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    minutes = minutes < 10 ? `${minutes}` : minutes;
     hours = hours < 10 ? `${hours}` : hours;
 
     var d_str = dayText + ", " + dateText + " " + monthText;
