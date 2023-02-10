@@ -1304,6 +1304,10 @@ function editEasyTab() {
   }
 }
 
+
+
+
+
 // function to update settings
 function updateEasyTabsSettings(TabstoUpdate) {
   // console.log("check");
@@ -1324,7 +1328,8 @@ function updateEasyTabsSettings(TabstoUpdate) {
       let ul = document.createElement("ul");
       ul.style.textAlign = "left";
       // add TabstoUpdate[index].type to ul
-      ul.innerHTML = `<li class="medium" style="color: ${TabstoUpdate[index].color}">${TabstoUpdate[index].type}</li>`;
+      console.log(index)
+      ul.innerHTML = `<li class="medium" style="${defaultTabs[index].color}">${TabstoUpdate[index].type}</li>`;
       // add a button to edit the TabstoUpdate type
       let editButton = document.createElement("button");
       editButton.innerHTML = "Edit Title";
@@ -1332,8 +1337,16 @@ function updateEasyTabsSettings(TabstoUpdate) {
       editButton.setAttribute("id", id);
       editButton.addEventListener("click", editEasyTab);
 
+      // add a button to change the color of the tab
+      let colorPickerTabs = document.createElement("input");
+      colorPickerTabs.setAttribute("type", "color");
+      colorPickerTabs.setAttribute("id", "color" + id);
+
       // make edit button inline with ul
       ul.appendChild(editButton);
+
+      // append colorpicker
+      ul.appendChild(colorPickerTabs);
 
       // add TabstoUpdate[index] to ul
       for (let key in TabstoUpdate[index].content) {
@@ -1514,4 +1527,75 @@ function updateFunnyTime() {
   document.getElementById(
     "funnyTime"
   ).innerHTML = `${days} days and ${hours}h ${minutes}m ${seconds}s`;
+}
+
+const colorPickerc1 = document.getElementById("colorcolumn1"); // 1
+colorPickerc1.addEventListener("input", function () {
+  defaultTabs[0].color = this.value;
+  localStorage.setItem("column1c", this.value);
+
+  updateEasyTabs(defaultTabs);
+});
+
+const colorPickerc2 = document.getElementById("colorcolumn2"); // 2
+colorPickerc2.addEventListener("input", function () {
+  defaultTabs[1].color = this.value;
+  localStorage.setItem("column2c", this.value);
+
+  updateEasyTabs(defaultTabs);
+});
+
+const colorPickerc3 = document.getElementById("colorcolumn3"); // 3
+colorPickerc3.addEventListener("input", function () {
+  defaultTabs[2].color = this.value;
+  localStorage.setItem("column3c", this.value);
+
+  updateEasyTabs(defaultTabs);
+});
+
+const colorPickerc4 = document.getElementById("colorcolumn4"); // 4
+colorPickerc4.addEventListener("input", function () {
+  defaultTabs[3].color = this.value;
+  localStorage.setItem("column4c", this.value);
+
+  updateEasyTabs(defaultTabs);
+});
+
+var c1 = localStorage.getItem("column1c");
+var c2 = localStorage.getItem("column2c");
+var c3 = localStorage.getItem("column3c");
+var c4 = localStorage.getItem("column4c");
+var collist = []
+
+if (c1) {
+  colorPickerc1.value = c1;
+  defaultTabs[0].color = c1;
+  updateEasyTabs(defaultTabs)
+} else {
+  colorPickerc1.value = defaultTabs[0].color
+  collist.append(defaultTabs[0].color)
+}
+if (c2) {
+  colorPickerc2.value = c2;
+  defaultTabs[1].color = c2;
+  updateEasyTabs(defaultTabs)
+} else {
+  colorPickerc2.value = defaultTabs[1].color
+  collist.append(defaultTabs[1].color)
+}
+if (c3) {
+  colorPickerc3.value = c3;
+  defaultTabs[2].color = c3;
+  updateEasyTabs(defaultTabs)
+} else {
+  colorPickerc3.value = defaultTabs[2].color
+  ccollist.append(defaultTabs[2].color)
+}
+if (c4) {
+  colorPickerc4.value = c4;
+  defaultTabs[3].color = c4;
+  updateEasyTabs(defaultTabs)
+} else {
+  colorPickerc4.value = defaultTabs[3].color
+  collist.append(defaultTabs[3].color)
 }
