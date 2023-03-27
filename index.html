@@ -113,15 +113,37 @@
   }
 
   .settings {
-    opacity: 20%;
     width: 3rem;
-    bottom: 1rem;
-    left: 1rem;
-    position: fixed;
+    height: 3rem;
+    vertical-align: top;
+    margin: 0.7rem;
+    filter: drop-shadow(0 0 0.1rem black);
   }
 
-  .settings:hover {
+  .settingsBox {
+    background-color: rgba(0, 0, 0, 0);
+    bottom: 0rem;
+    left: 0rem;
+    position: fixed;
+    border-radius: 50%;
+    margin: 0.4rem;
+    height: min-content;
+    opacity: 60%;
+  }
+
+  /* .settings:hover {
+    
+  } */
+
+  .settingsBox:hover {
+    animation: fadeIn 0.2s;
+    background-color: rgba(255, 255, 255, 0.2);
     opacity: 100%;
+  }
+
+  @keyframes fadeIn {
+    0% { background-color: rgba(255, 255, 255, 0); }
+    100% { background-color: rgba(255, 255, 255, 0.2); }
   }
 
   /* .typing-demo { 
@@ -607,7 +629,10 @@
   <img src="img/sunset.jpg" alt="night.jpg" style="z-index: -99" id="sunset" class="image" />
   <img src="" alt="custom.jpg" style="z-index: -99" id="custombgimg" class="image" />
 
-  <img src="img/settings.png?format=webp" alt="settings.png" class="settings" id="settingsbtnimg" />
+  <div class="settingsBox">
+    <img src="img/settings.png?format=webp" alt="settings.png" class="settings" id="settingsbtnimg" />
+  </div>
+  
 
   <script src="index.js"></script>
 </body>

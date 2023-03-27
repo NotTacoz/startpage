@@ -661,6 +661,7 @@ function switchTimeFormat() {
   } else {
     localStorage.setItem("timeFormat", "12");
   }
+  alert("reload start page to update time");
   updateTime();
 }
 
