@@ -1289,14 +1289,15 @@ function editEasyTab() {
   // alert input
   let input = prompt("Enter new tab name");
   // if input is not empty
-  console.log(input);
   if (input !== null && input !== "") {
     // get easyTabsArray
     let easyTabsArray = JSON.parse(localStorage.getItem("easyTabsArray"));
     // find tab in easyTabsArray
     // change tab name
-    // console.log(index);
+
     easyTabsArray[index].type = input;
+    defaultTabs[index].type = input;
+    
     // update local storage
     localStorage.setItem("easyTabsArray", JSON.stringify(easyTabsArray));
     // update easyTabs
@@ -1304,10 +1305,6 @@ function editEasyTab() {
     updateEasyTabsSettings(easyTabsArray);
   }
 }
-
-
-
-
 
 // function to update settings
 function updateEasyTabsSettings(TabstoUpdate) {
@@ -1532,34 +1529,34 @@ function updateFunnyTime() {
 
 const colorPickerc1 = document.getElementById("colorcolumn1"); // 1
 colorPickerc1.addEventListener("input", function () {
-  defaultTabs[0].color = this.value;
+  easyTabsArray[0].color = this.value;
   localStorage.setItem("column1c", this.value);
 
-  updateEasyTabs(defaultTabs);
+  updateEasyTabs(easyTabsArray);
 });
 
 const colorPickerc2 = document.getElementById("colorcolumn2"); // 2
 colorPickerc2.addEventListener("input", function () {
-  defaultTabs[1].color = this.value;
+  easyTabsArray[1].color = this.value;
   localStorage.setItem("column2c", this.value);
 
-  updateEasyTabs(defaultTabs);
+  updateEasyTabs(easyTabsArray);
 });
 
 const colorPickerc3 = document.getElementById("colorcolumn3"); // 3
 colorPickerc3.addEventListener("input", function () {
-  defaultTabs[2].color = this.value;
+  easyTabsArray[2].color = this.value;
   localStorage.setItem("column3c", this.value);
 
-  updateEasyTabs(defaultTabs);
+  updateEasyTabs(easyTabsArray);
 });
 
 const colorPickerc4 = document.getElementById("colorcolumn4"); // 4
 colorPickerc4.addEventListener("input", function () {
-  defaultTabs[3].color = this.value;
+  easyTabsArray[3].color = this.value;
   localStorage.setItem("column4c", this.value);
 
-  updateEasyTabs(defaultTabs);
+  updateEasyTabs(easyTabsArray);
 });
 
 var c1 = localStorage.getItem("column1c");
@@ -1570,32 +1567,32 @@ var collist = []
 
 if (c1) {
   colorPickerc1.value = c1;
-  defaultTabs[0].color = c1;
-  updateEasyTabs(defaultTabs)
+  easyTabsArray[0].color = c1;
+  updateEasyTabs(easyTabsArray)
 } else {
   colorPickerc1.value = defaultTabs[0].color
   collist.append(defaultTabs[0].color)
 }
 if (c2) {
   colorPickerc2.value = c2;
-  defaultTabs[1].color = c2;
-  updateEasyTabs(defaultTabs)
+  easyTabsArray[1].color = c2;
+  updateEasyTabs(easyTabsArray)
 } else {
   colorPickerc2.value = defaultTabs[1].color
   collist.append(defaultTabs[1].color)
 }
 if (c3) {
   colorPickerc3.value = c3;
-  defaultTabs[2].color = c3;
-  updateEasyTabs(defaultTabs)
+  easyTabsArray[2].color = c3;
+  updateEasyTabs(easyTabsArray)
 } else {
   colorPickerc3.value = defaultTabs[2].color
   ccollist.append(defaultTabs[2].color)
 }
 if (c4) {
   colorPickerc4.value = c4;
-  defaultTabs[3].color = c4;
-  updateEasyTabs(defaultTabs)
+  easyTabsArray[3].color = c4;
+  updateEasyTabs(easyTabsArray)
 } else {
   colorPickerc4.value = defaultTabs[3].color
   collist.append(defaultTabs[3].color)
